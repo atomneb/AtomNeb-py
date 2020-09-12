@@ -14,6 +14,10 @@ AtomNeb Python Package
     :target: https://ci.appveyor.com/project/danehkar/atomneb-py
     :alt: Build Status
 
+.. image:: https://coveralls.io/repos/github/atomneb/AtomNeb-py/badge.svg?
+    :target: https://coveralls.io/github/atomneb/AtomNeb-py?branch=master
+    :alt: Coverage Status
+
 .. image:: https://img.shields.io/badge/license-GPL-blue.svg
     :target: https://github.com/atomneb/AtomNeb-py/blob/master/LICENSE
     :alt: GitHub license
