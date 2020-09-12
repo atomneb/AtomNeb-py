@@ -84,7 +84,6 @@ Dependent Python Packages
     - `NumPy <https://numpy.org/>`_
     - `pandas <https://pandas.pydata.org/>`_
     - `Astropy <https://www.astropy.org/>`_
-    - `regex <https://pypi.org/project/regex/>`_
     
 * To get this package with all the FITS file, you can simply use ``git`` command as follows::
 

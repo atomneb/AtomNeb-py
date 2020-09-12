@@ -16,10 +16,10 @@ from astropy.io.fits import getdata
 import numpy as np
 import pandas as pd
 
-try:
-    import regex as re
-except ImportError:
-    import re
+#try:
+#    import regex as re
+#except ImportError:
+#    import re
 
 __all__ = ["read_aij","read_aij_list","search_aij","read_aij_references","list_aij_references",
            "get_aij_reference_citation",
@@ -42,7 +42,6 @@ __all__ = ["read_aij","read_aij_list","search_aij","read_aij_references","list_a
            "read_aeff_o_ii_ssb17","read_aeff_o_ii_ssb17_list","search_aeff_o_ii_ssb17",
            "read_aeff_o_ii_ssb17_references","list_aeff_o_ii_ssb17_references",
            "get_aeff_o_ii_ssb17_reference_citation"]
-
 
 def read_aij(atom_aij_file, atom, ion, reference=None, level_num=None):
     """
@@ -120,7 +119,8 @@ def read_aij(atom_aij_file, atom, ion, reference=None, level_num=None):
     else:
         atom_ion_name = atom.lower() + '_' + ion.lower() + '_aij'
         aij_list=np.asarray(element_data_list.aij_data)
-        aij_res = [x for x in aij_list if re.search(atom_ion_name, x)]
+        #aij_res = [x for x in aij_list if re.search(atom_ion_name, x)]
+        aij_res = [x for x in aij_list if atom_ion_name in x]
         iii = np.where(aij_list == aij_res[0])[0]  #
         if len(iii) == 0:
             print('could not find the given element or ion')
@@ -248,7 +248,8 @@ def search_aij(atom_aij_file, atom, ion):
     element_data_list = read_aij_list(atom_aij_file)
     atom_ion_name = atom.lower() + '_' + ion.lower() + '_aij_'
     aij_list = np.asarray(element_data_list.aij_data)
-    aij_res = [x for x in aij_list if re.search(atom_ion_name, x)]
+    #aij_res = [x for x in aij_list if re.search(atom_ion_name, x)]
+    aij_res = [x for x in aij_list if atom_ion_name in x]
     if len(aij_res) == 0:
         print('could not find the given element or ion')
         return 0
@@ -362,7 +363,8 @@ def list_aij_references(atom_aij_file, atom, ion):
 
     atom_ion_name = atom.lower() + '_' + ion.lower() + '_aij_'
     aij_list = np.asarray(element_data_list.aij_data)
-    aij_res = [x for x in aij_list if re.search(atom_ion_name, x)]
+    #aij_res = [x for x in aij_list if re.search(atom_ion_name, x)]
+    aij_res = [x for x in aij_list if atom_ion_name in x]
     ii_length = len(aij_res)
     if ii_length == 0:
         print('could not find the given element or ion')
@@ -782,7 +784,8 @@ def read_omij(atom_omij_file, atom, ion, reference=None, level_num=None):
     else:
         atom_ion_name = atom.lower() + '_' + ion.lower() + '_omij'
         omij_list=np.asarray(element_data_list.omij_data)
-        omij_res = [x for x in omij_list if re.search(atom_ion_name, x)]
+        #omij_res = [x for x in omij_list if re.search(atom_ion_name, x)]
+        omij_res = [x for x in omij_list if atom_ion_name in x]
         iii = np.where(omij_list == omij_res[0])[0]  #
         if len(iii) == 0:
             print('could not find the given element or ion')
@@ -929,7 +932,8 @@ def search_omij(atom_omij_file, atom, ion):
     element_data_list = read_omij_list(atom_omij_file)
     atom_ion_name = atom.lower() + '_' + ion.lower() + '_omij_'
     omij_list = np.asarray(element_data_list.omij_data)
-    omij_res = [x for x in omij_list if re.search(atom_ion_name, x)]
+    #omij_res = [x for x in omij_list if re.search(atom_ion_name, x)]
+    omij_res = [x for x in omij_list if atom_ion_name in x]
     if len(omij_res) == 0:
         print('could not find the given element or ion')
         return 0
@@ -1042,7 +1046,8 @@ def list_omij_references(atom_omij_file, atom, ion):
     element_data_list = read_omij_list(atom_omij_file)
     atom_ion_name = atom.lower() + '_' + ion.lower() + '_omij_'
     omij_list = np.asarray(element_data_list.omij_data)
-    omij_res = [x for x in omij_list if re.search(atom_ion_name, x)]
+    #omij_res = [x for x in omij_list if re.search(atom_ion_name, x)]
+    omij_res = [x for x in omij_list if atom_ion_name in x]
     ii_length = len(omij_res)
     if ii_length == 0:
         print('could not find the given element or ion')
@@ -1252,7 +1257,8 @@ def read_aeff_collection(atom_rc_file, atom, ion, br=None, reference=None):
     else:
         atom_ion_name = atom.lower() + '_' + ion.lower() + prefix
         aeff_list=np.asarray(element_data_list.aeff_data)
-        aeff_res = [x for x in aeff_list if re.search(atom_ion_name, x)]
+        #aeff_res = [x for x in aeff_list if re.search(atom_ion_name, x)]
+        aeff_res = [x for x in aeff_list if atom_ion_name in x]
         iii = np.where(aeff_list == aeff_res[0])[0]  #
         if len(iii) == 0:
             print('could not find the given element or ion')
@@ -1505,7 +1511,8 @@ def search_aeff_collection(atom_rc_file, atom, ion, br=None):
     element_data_list = read_aeff_collection_list(atom_rc_file)
     atom_ion_name = atom.lower() + '_' + ion.lower() + prefix
     aeff_list = np.asarray(element_data_list.aeff_data)
-    aeff_res = [x for x in aeff_list if re.search(atom_ion_name, x)]
+    #aeff_res = [x for x in aeff_list if re.search(atom_ion_name, x)]
+    aeff_res = [x for x in aeff_list if atom_ion_name in x]
     if len(aeff_res) == 0:
         print('could not find the given element or ion')
         return 0
@@ -1626,7 +1633,8 @@ def list_aeff_collection_references(atom_rc_file, atom, ion, br=None):
         prefix = '_aeff'
     atom_ion_name = atom.lower() + '_' + ion.lower() + prefix
     aeff_list = np.asarray(element_data_list.aeff_data)
-    aeff_res = [x for x in aeff_list if re.search(atom_ion_name, x)]
+    #aeff_res = [x for x in aeff_list if re.search(atom_ion_name, x)]
+    aeff_res = [x for x in aeff_list if atom_ion_name in x]
     ii_length = len(aeff_res)
     if ii_length == 0:
         print('could not find the given element or ion')
@@ -1797,7 +1805,8 @@ def read_aeff_sh95(atom_rc_file, atom, ion, reference=None, case1=None):
         else:
             atom_ion_name = atom_ion_name + '_b'
         aeff_list = np.asarray(element_data_list.aeff_data)
-        aeff_res = [x for x in aeff_list if re.search(atom_ion_name, x)]
+        #aeff_res = [x for x in aeff_list if re.search(atom_ion_name, x)]
+        aeff_res = [x for x in aeff_list if atom_ion_name in x]
         iii = np.where(aeff_list == aeff_res[0])[0]  #
         if len(iii) == 0:
             print('could not find the given element or ion')
@@ -1920,7 +1929,8 @@ def search_aeff_sh95(atom_rc_file, atom, ion):
     element_data_list = read_aeff_sh95_list(atom_rc_file)
     atom_ion_name = atom.lower() + '_' + ion.lower() + '_aeff'
     aeff_list = np.asarray(element_data_list.aeff_data)
-    aeff_res = [x for x in aeff_list if re.search(atom_ion_name, x)]
+    #aeff_res = [x for x in aeff_list if re.search(atom_ion_name, x)]
+    aeff_res = [x for x in aeff_list if atom_ion_name in x]
     if len(aeff_res) == 0:
         print('could not find the given element or ion')
         return 0
@@ -2032,7 +2042,8 @@ def list_aeff_sh95_references(atom_rc_file, atom, ion):
     element_data_list = read_aeff_sh95_list(atom_rc_file)
     atom_ion_name = atom.lower() + '_' + ion.lower() + '_aeff'
     aeff_list = np.asarray(element_data_list.aeff_data)
-    aeff_res = [x for x in aeff_list if re.search(atom_ion_name, x)]
+    #aeff_res = [x for x in aeff_list if re.search(atom_ion_name, x)]
+    aeff_res = [x for x in aeff_list if atom_ion_name in x]
     ii_length = len(aeff_res)
     if ii_length == 0:
         print('could not find the given element or ion')
@@ -2205,7 +2216,8 @@ def read_aeff_ppb91(atom_rc_file, atom, ion, reference=None):
     else:
         atom_ion_name = atom.lower() + '_' + ion.lower() + '_aeff'
         aeff_list = np.asarray(element_data_list.aeff_data)
-        aeff_res = [x for x in aeff_list if re.search(atom_ion_name, x)]
+        #aeff_res = [x for x in aeff_list if re.search(atom_ion_name, x)]
+        aeff_res = [x for x in aeff_list if atom_ion_name in x]
         iii = np.where(aeff_list == aeff_res[0])[0]  #
         if len(iii) == 0:
             print('could not find the given element or ion')
@@ -2347,7 +2359,8 @@ def search_aeff_ppb91(atom_rc_file, atom, ion):
     element_data_list = read_aeff_ppb91_list(atom_rc_file)
     atom_ion_name = atom.lower() + '_' + ion.lower()  + '_aeff'
     aeff_list = np.asarray(element_data_list.aeff_data)
-    aeff_res = [x for x in aeff_list if re.search(atom_ion_name, x)]
+    #aeff_res = [x for x in aeff_list if re.search(atom_ion_name, x)]
+    aeff_res = [x for x in aeff_list if atom_ion_name in x]
     if len(aeff_res) == 0:
         print('could not find the given element or ion')
         return 0
@@ -2459,7 +2472,8 @@ def list_aeff_ppb91_references(atom_rc_file, atom, ion):
     element_data_list = read_aeff_ppb91_list(atom_rc_file)
     atom_ion_name = atom.lower() + '_' + ion.lower() + '_aeff'
     aeff_list = np.asarray(element_data_list.aeff_data)
-    aeff_res = [x for x in aeff_list if re.search(atom_ion_name, x)]
+    #aeff_res = [x for x in aeff_list if re.search(atom_ion_name, x)]
+    aeff_res = [x for x in aeff_list if atom_ion_name in x]
     ii_length = len(aeff_res)
     if ii_length == 0:
         print('could not find the given element or ion')
@@ -2632,7 +2646,8 @@ def read_aeff_he_i_pfsd12(atom_rc_file, atom, ion, wavelength=None, reference=No
         else:
             atom_ion_name = atom.lower() + '_' + ion.lower() + prefix + '_' + reference.upper()
         aeff_list=np.asarray(element_data_list.aeff_data)
-        aeff_res = [x for x in aeff_list if re.search(atom_ion_name, x)]
+        #aeff_res = [x for x in aeff_list if re.search(atom_ion_name, x)]
+        aeff_res = [x for x in aeff_list if atom_ion_name in x]
         iii = np.where(aeff_list == aeff_res[0])[0]  #
         if len(iii) == 0:
             print('could not find the given element or ion')
@@ -2771,7 +2786,8 @@ def search_aeff_he_i_pfsd12(atom_rc_file, atom, ion):
     element_data_list = read_aeff_he_i_pfsd12_list(atom_rc_file)
     atom_ion_name = atom.lower() + '_' + ion.lower() + '_aeff'
     aeff_list = np.asarray(element_data_list.aeff_data)
-    aeff_res = [x for x in aeff_list if re.search(atom_ion_name, x)]
+    #aeff_res = [x for x in aeff_list if re.search(atom_ion_name, x)]
+    aeff_res = [x for x in aeff_list if atom_ion_name in x]
     if len(aeff_res) == 0:
         print('could not find the given element or ion')
         return 0
@@ -2883,7 +2899,8 @@ def list_aeff_he_i_pfsd12_references(atom_rc_file, atom, ion):
     element_data_list = read_aeff_he_i_pfsd12_list(atom_rc_file)
     atom_ion_name = atom.lower() + '_' + ion.lower()+ '_aeff'
     aeff_list = np.asarray(element_data_list.aeff_data)
-    aeff_res = [x for x in aeff_list if re.search(atom_ion_name, x)]
+    #aeff_res = [x for x in aeff_list if re.search(atom_ion_name, x)]
+    aeff_res = [x for x in aeff_list if atom_ion_name in x]
     ii_length = len(aeff_res)
     if ii_length == 0:
         print('could not find the given element or ion')
@@ -3330,7 +3347,8 @@ def list_aeff_n_ii_fsl13_references(atom_rc_file, atom, ion):
 
     atom_ion_name = atom.lower() + '_' + ion.lower() + '_aeff'
     rc_list = np.asarray(rc_reference_data.reference)
-    rc_res = [x for x in rc_list if re.search(atom_ion_name, x)]
+    #rc_res = [x for x in rc_list if re.search(atom_ion_name, x)]
+    rc_res = [x for x in rc_list if atom_ion_name in x]
     ii_length = len(rc_res)
     if ii_length == 0:
         print('could not find the given element or ion')
@@ -3777,7 +3795,8 @@ def list_aeff_o_ii_ssb17_references(atom_rc_file, atom, ion):
 
     atom_ion_name = atom.lower() + '_' + ion.lower() + '_aeff'
     rc_list = np.asarray(rc_reference_data.reference)
-    rc_res = [x for x in rc_list if re.search(atom_ion_name, x)]
+    #rc_res = [x for x in rc_list if re.search(atom_ion_name, x)]
+    rc_res = [x for x in rc_list if atom_ion_name in x]
     ii_length = len(rc_res)
     if ii_length == 0:
         print('could not find the given element or ion')
@@ -3863,3 +3882,4 @@ def get_aeff_o_ii_ssb17_reference_citation(atom_rc_file, atom, ion, reference=No
     citation = np.asarray(element_data_reference.citation[ii])
 
     return citation
+
