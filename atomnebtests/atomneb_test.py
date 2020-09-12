@@ -1,4 +1,4 @@
-"""Tests for pyequib"""
+"""Tests for atomneb"""
 
 import atomneb
 import numpy as np
@@ -6,7 +6,7 @@ import os
 
 # Locate datasets
 base_dir = os.getcwd()
-data_dir = os.path.join('..','atomic-data', 'chianti52')
+data_dir = os.path.join('atomic-data', 'chianti52')
 atom_elj_file = os.path.join(base_dir,data_dir, 'AtomElj.fits')
 atom_omij_file = os.path.join(base_dir,data_dir, 'AtomOmij.fits')
 atom_aij_file = os.path.join(base_dir,data_dir, 'AtomAij.fits')
@@ -106,7 +106,7 @@ print(list_oiii_aij_reference)
 
 # Locate datasets
 base_dir = os.getcwd()
-data_dir = os.path.join('..','atomic-data', 'chianti60')
+data_dir = os.path.join('atomic-data', 'chianti60')
 atom_elj_file = os.path.join(base_dir,data_dir, 'AtomElj.fits')
 atom_omij_file = os.path.join(base_dir,data_dir, 'AtomOmij.fits')
 atom_aij_file = os.path.join(base_dir,data_dir, 'AtomAij.fits')
@@ -206,7 +206,7 @@ print(list_oiii_aij_reference)
 
 # Locate datasets
 base_dir = os.getcwd()
-data_dir = os.path.join('..','atomic-data', 'chianti70')
+data_dir = os.path.join('atomic-data', 'chianti70')
 atom_elj_file = os.path.join(base_dir,data_dir, 'AtomElj.fits')
 atom_omij_file = os.path.join(base_dir,data_dir, 'AtomOmij.fits')
 atom_aij_file = os.path.join(base_dir,data_dir, 'AtomAij.fits')
@@ -306,7 +306,7 @@ print(list_oiii_aij_reference)
 
 # Locate datasets
 base_dir = os.getcwd()
-data_dir = os.path.join('..','atomic-data', 'collection')
+data_dir = os.path.join('atomic-data', 'collection')
 atom_elj_file = os.path.join(base_dir,data_dir, 'AtomElj.fits')
 atom_omij_file = os.path.join(base_dir,data_dir, 'AtomOmij.fits')
 atom_aij_file = os.path.join(base_dir,data_dir, 'AtomAij.fits')
@@ -407,7 +407,7 @@ print(list_oiii_aij_reference)
 
 # Locate datasets
 base_dir = os.getcwd()
-data_dir = os.path.join('..','atomic-data-rc')
+data_dir = os.path.join('atomic-data-rc')
 atom_rc_file = os.path.join(base_dir,data_dir, 'rc_collection.fits')
 
 atom = 'c'
@@ -488,7 +488,7 @@ print(citation)
 
 # Locate datasets
 base_dir = os.getcwd()
-data_dir = os.path.join('..','atomic-data-rc')
+data_dir = os.path.join('atomic-data-rc')
 atom_rc_file = os.path.join(base_dir,data_dir, 'rc_PPB91.fits')
 
 atom = 'c'
@@ -527,7 +527,7 @@ print(citation)
 
 # Locate datasets
 base_dir = os.getcwd()
-data_dir = os.path.join('..','atomic-data-rc')
+data_dir = os.path.join('atomic-data-rc')
 atom_rc_file = os.path.join(base_dir,data_dir, 'rc_SH95.fits')
 
 atom = 'h'
@@ -562,7 +562,7 @@ print(citation)
 
 # Locate datasets
 base_dir = os.getcwd()
-data_dir = os.path.join('..','atomic-data-rc')
+data_dir = os.path.join('atomic-data-rc')
 atom_rc_file = os.path.join(base_dir,data_dir, 'rc_he_ii_PFSD12.fits')
 
 atom = 'he'
@@ -602,7 +602,7 @@ print(citation)
 
 # Locate datasets
 base_dir = os.getcwd()
-data_dir = os.path.join('..','atomic-data-rc')
+data_dir = os.path.join('atomic-data-rc')
 atom_rc_file = os.path.join(base_dir,data_dir, 'rc_n_iii_FSL13.fits')
 
 atom = 'n'
@@ -640,5 +640,4 @@ reference = 'FSL13'
 citation = atomneb.get_aeff_n_ii_fsl13_reference_citation(atom_rc_file, atom, ion)
 # print citations for Recombination Coefficients (Aeff) of N II
 print(citation)
-
 
