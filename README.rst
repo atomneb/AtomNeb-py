@@ -81,7 +81,10 @@ Dependent Python Packages
 
  This package requires the following packages:
 
-    - `The IDL Astronomy User's Library <https://idlastro.gsfc.nasa.gov/homepage.html>`_
+    - `NumPy <https://numpy.org/>`_
+    - `pandas <https://pandas.pydata.org/>`_
+    - `Astropy <https://www.astropy.org/>`_
+    - `regex <https://pypi.org/project/regex/>`_
     
 * To get this package with all the FITS file, you can simply use ``git`` command as follows::
 
@@ -92,8 +95,6 @@ Dependent Python Packages
         cd AtomNeb-py/atomic-data-rc/
         tar -xvf *.fits.tar.gz
 
-Installation
-============
 
 To install the last version, all you should need to do is
 
