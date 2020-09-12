@@ -15,7 +15,11 @@ This module contains functions for Atomic Data of Ionized Nebulae
 from astropy.io.fits import getdata
 import numpy as np
 import pandas as pd
-import re
+
+try:
+    import regex as re
+except ImportError:
+    import re
 
 __all__ = ["read_aij","read_aij_list","search_aij","read_aij_references","list_aij_references",
            "get_aij_reference_citation",
