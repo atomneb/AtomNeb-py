@@ -22,8 +22,8 @@ AtomNeb Python Package
     :target: https://github.com/atomneb/AtomNeb-py/blob/master/LICENSE
     :alt: GitHub license
 
-.. image:: https://img.shields.io/badge/python-2.7%2C%203.4%2C%203.5-blue.svg
-    :alt: Support Python versions 2.7, 3.4 and 3.5
+.. image:: https://img.shields.io/badge/python-2.7%2C%203.8-blue.svg
+    :alt: Support Python versions 2.7 and 3.8
 
 
 Description
