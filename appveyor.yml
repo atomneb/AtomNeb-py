@@ -1,0 +1,31 @@
+environment:
+  matrix:
+    - PYTHON_VERSION: 2.7
+      MINICONDA: C:\Miniconda
+    - PYTHON_VERSION: 3.6
+      MINICONDA: C:\Miniconda3
+      
+matrix:
+    fast_finish: true
+
+init:
+  - "ECHO %PYTHON_VERSION% %MINICONDA%"
+  
+platform:
+    - x64
+    
+install:
+  - "set PATH=%MINICONDA%;%MINICONDA%\\Scripts;%PATH%"
+  - conda config --set always_yes yes --set changeps1 no
+  - conda update -q conda
+  - conda info -a
+  - pip install numpy pandas re astropy nose
+  - "conda create -q -n test-environment python=%PYTHON_VERSION% numpy pandas re astropy nose"
+  - activate test-environment
+  - pip install coverage
+
+build_script:
+  - python setup.py install
+
+test_script:
+  - nosetests
