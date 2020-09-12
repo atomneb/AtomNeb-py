@@ -6,11 +6,19 @@
 import atomneb
 import numpy as np
 import os
+import tarfile
 
 # Locate datasets
 base_dir = os.getcwd()
 data_dir = os.path.join('..','atomic-data-rc')
 atom_rc_file = os.path.join(base_dir,data_dir, 'rc_o_iii_SSB17_orl_case_b.fits')
+
+# unpack rc_o_iii_SSB17_orl_case_b.tar.gz
+atom_rc_file_tar_gz = os.path.join(base_dir,data_dir, 'rc_o_iii_SSB17_orl_case_b.fits.tar.gz')
+atom_rc_path = os.path.join(base_dir,data_dir)
+tar = tarfile.open(atom_rc_file_tar_gz, "r:gz")
+tar.extractall(path=atom_rc_path)
+tar.close()
 
 atom = 'o'
 ion = 'iii' # O II
