@@ -115,7 +115,7 @@ The Documentation of the functions provides in detail in the *API Documentation*
     
         import atomneb
      
-    Also:
+    Also::
 
         import numpy as np
         import os
