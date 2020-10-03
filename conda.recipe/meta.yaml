@@ -1,51 +1,50 @@
+{% set name = "atomneb" %}
 {% set version = "0.2.1" %}
 
 package:
-  name: atomneb
+  name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/a/atomneb/atomneb-{{ version }}.tar.gz
-  md5: c7ec1c04b9119372fb95c6d41c6574eb
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/atomneb-{{ version }}.tar.gz
   sha256: f2261aa042ebea9a2ff30ecdfd89143d380f8577dbea81330ff724619b820431
 
 build:
-  noarch: python
   number: 0
-  script: python -m pip install --ignore-installed .
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv
 
 extra:
   channels:
     - conda-forge
 
 requirements:
-  build:
-    - python
+  host:
     - pip
+    - python >=3.8
+  run:
+    - astropy
     - numpy
     - pandas
-    - astropy
-
-  host:
-    - python >=3.8
-
-  run:
-    - python >=3.8
+    - python
 
 test:
   imports:
     - atomneb
+  commands:
+    - pip check
+  requires:
+    - pip
 
 about:
   home: https://github.com/atomneb/AtomNeb-py
   license: GPL
-  summary: 'AtomNeb'
-  description: |
-    atomneb: Python Package for Atomic Data of Ionized Nebulae.
+  summary: 'atomneb: Python Package for Atomic Data of Ionized Nebulae'
   dev_url: https://github.com/atomneb/AtomNeb-py
   doc_url: https://pypi.python.org/pypi/atomneb
-  doc_source_url: https://github.com/atomneb/AtomNeb-py/blob/master/README.rst
 
 extra:
+  recipe-maintainers:
+    - danehkar
   deploy:
     - anaconda-client
