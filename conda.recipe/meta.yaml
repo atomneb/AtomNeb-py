@@ -14,14 +14,13 @@ build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
 
-extra:
-  channels:
-    - conda-forge
-
 requirements:
   host:
     - pip
     - python >=3.8
+    - astropy
+    - numpy
+    - pandas
   run:
     - astropy
     - numpy
@@ -38,7 +37,8 @@ test:
 
 about:
   home: https://github.com/atomneb/AtomNeb-py
-  license: GPL
+  license: GPL-2.0-or-later
+  license_file: LICENSE
   summary: 'atomneb: Python Package for Atomic Data of Ionized Nebulae'
   dev_url: https://github.com/atomneb/AtomNeb-py
   doc_url: https://pypi.python.org/pypi/atomneb
@@ -46,5 +46,3 @@ about:
 extra:
   recipe-maintainers:
     - danehkar
-  deploy:
-    - anaconda-client
