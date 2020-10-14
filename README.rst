@@ -80,7 +80,7 @@ Installation
 ============
 
 Dependent Python Packages
-----------------------
+-------------------------
 
  This package requires the following packages:
 
