@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+sitemap: https://atomneb.github.io/AtomNeb-py/sitemap.xml
+
