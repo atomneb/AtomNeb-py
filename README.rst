@@ -31,7 +31,7 @@ AtomNeb Python Package
 
 
 Description
-============
+===========
 
 **AtomNeb-py** is a library written in Python for reading atomic data from *AtomNeb*, which is a database containing atomic data stored in the Flexible Image Transport System (FITS) file format for *collisionally excited lines* and *recombination lines* typically observed in spectra of ionized gaseous nebulae. The AtomNeb database were generated for use in `pyEQUIB <https://github.com/equib/pyEQUIB>`_, `proEQUIB <https://github.com/equib/proEQUIB>`_, and other nebular spectral analysis tools. 
 
