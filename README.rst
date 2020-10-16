@@ -68,9 +68,9 @@ The atomic datasets for recombination lines are as follows:
 
 * `PPB91 Collection <https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data-rc>`_, effective recombination coefficients for H, He, C, N, O, Ne ions from `Pequignot, Petitjean and Boisson (1991) <http://adsabs.harvard.edu/abs/1991A%26A...251..680P>`_.
 
-* `PFSD12 He I data <https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data-rc>`_, effective He I recombination coefficients from `Porter et al (2012) <http://adsabs.harvard.edu/abs/2012MNRAS.425L..28P>`_ and `(2013) <http://adsabs.harvard.edu/abs/2013MNRAS.433L..89P>`_.
+* `PFSD12 He I data <https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data-rc>`_, effective He I recombination coefficients from `Porter et al (2012) <http://adsabs.harvard.edu/abs/2012MNRAS.425L..28P>`_ and `(2013a) <http://adsabs.harvard.edu/abs/2013MNRAS.433L..89P>`_.
 
-* `FSL13 N II data <https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data-rc>`_, effective N II recombination coefficients (corrigendum) from `Fang, Storey and Liu (2011) <http://adsabs.harvard.edu/abs/2011A%26A...530A..18F>`_ and `(2013) <http://adsabs.harvard.edu/abs/2013A%26A...550C...2F>`_.
+* `FSL13 N II data <https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data-rc>`_, effective N II recombination coefficients (corrigendum) from `Fang, Storey and Liu (2011) <http://adsabs.harvard.edu/abs/2011A%26A...530A..18F>`_ and `(2013b) <http://adsabs.harvard.edu/abs/2013A%26A...550C...2F>`_.
 
 * `SSB17 O II data <https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data-rc>`_, effective O II recombination coefficients of 8889 recombination lines for Cases A, B, and C, and 2433 optical (3500-9000Å) recombination lines for Case B from `Storey, Sochi and Bastin (2017) <http://adsabs.harvard.edu/abs/2017MNRAS.470..379S>`_.
 
@@ -187,7 +187,7 @@ The Documentation of the functions provides in detail in the *API Documentation*
     
         import atomneb
      
-    Also:
+    Also::
 
         import numpy as np
         import os

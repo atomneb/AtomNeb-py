@@ -6,14 +6,35 @@
 Welcome to AtomNeb's documentation!
 ===================================
 
+* :ref:`user-docs`
+* :ref:`api-docs`
+
+.. _user-docs:
+
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+   :maxdepth: 3
+   :caption: User Documentation
    :name: mastertoc
 
-AtomNeb API functions
-=====================
-.. automodule:: atomneb
-   :members:
+   user/readme
+   user/installation
+   user/usage
+   user/reference
+   
+   
+.. _api-docs:
+
+.. toctree::
+   :maxdepth: 5
+   :caption: API Reference
+
+   api/atomneb.main
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
 
 
