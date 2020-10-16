@@ -1,0 +1,250 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Introduction &mdash; AtomNeb 0.2.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Installation" href="installation.html" />
+    <link rel="prev" title="Welcome to AtomNeb’s documentation!" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> AtomNeb
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">User Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#collisional-excitation-unit">Collisional Excitation Unit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#recombination-unit">Recombination Unit</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">References</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api/atomneb.main.html">atomneb.main package</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">AtomNeb</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Introduction</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/user/readme.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p><strong>atomneb</strong> is a library written in Python for reading atomic data from a database containing atomic data stored in the Flexible Image Transport System (FITS) file format for <em>collisionally excited lines</em> and <em>recombination lines</em> typically observed in spectra of ionized gaseous nebulae. The AtomNeb database were generated for use in <a class="reference external" href="https://github.com/equib/pyEQUIB">pyEQUIB</a>, <a class="reference external" href="https://github.com/equib/proEQUIB">proEQUIB</a>, and other nebular spectral analysis tools.</p>
+<div class="section" id="collisional-excitation-unit">
+<h2>Collisional Excitation Unit<a class="headerlink" href="#collisional-excitation-unit" title="Permalink to this headline">¶</a></h2>
+<p><em>AtomNeb for collisionally excited lines</em>  contains sets of <a class="reference external" href="https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data">atomic datasets</a>, which include energy levels (Ej), collision strengths (Ωij), and transition probabilities (Aij) of the most ions commonly observed in ionized nebulae.</p>
+<p>The atomic datasets for collisionally excited lines are as follows:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data/collection">Collection</a> from the <a class="reference external" href="https://www.nist.gov/pml/atomic-spectra-database">National Institute of Standards and Technology (NIST) Atomic Spectra Database</a>, the <a class="reference external" href="http://www.chiantidatabase.org/">CHIANTI atomic database</a>, and some improved atomic data from <a class="reference external" href="https://www.nublado.org/">Cloudy v13.04</a> and pyNeb v1.0. This collection was compiled according to the atomic data used in <a class="reference external" href="http://www.iac.es/proyecto/PyNeb/">pyNeb v1.0</a>.</p></li>
+<li><p><a class="reference external" href="https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data/chianti52">Chianti52</a> from the <a class="reference external" href="http://www.chiantidatabase.org/">CHIANTI atomic database</a> version 5.2. This dataset was compiled according to the atomic data used in <a class="reference external" href="https://github.com/mocassin/MOCASSIN-2.0">MOCASSIN</a>.</p></li>
+<li><p><a class="reference external" href="https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data/chianti60">Chianti60</a> from the <a class="reference external" href="http://www.chiantidatabase.org/">CHIANTI atomic database</a> version 6.0. This dataset was compiled according to the atomic data used in <a class="reference external" href="https://github.com/mocassin/MOCASSIN-2.0">MOCASSIN</a>.</p></li>
+<li><p><a class="reference external" href="https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data/chianti70">Chianti70</a> from the <a class="reference external" href="http://www.chiantidatabase.org/">CHIANTI atomic database</a> version 7.0. This dataset was compiled according to the atomic data used in <a class="reference external" href="https://github.com/mocassin/MOCASSIN-2.0">MOCASSIN</a>.</p></li>
+</ul>
+<p>Each dataset contains the following <a class="reference external" href="https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data/chianti70">atomic data FITS files</a>: <code class="docutils literal notranslate"><span class="pre">AtomElj.fits</span></code> for <em>Energy Levels</em> (Ej), <code class="docutils literal notranslate"><span class="pre">AtomOmij.fits</span></code> for <em>Collision Strengths</em> (Ωij), and <code class="docutils literal notranslate"><span class="pre">AtomAij.fits</span></code> for <em>Transition Probabilities</em> (Aij).</p>
+</div>
+<div class="section" id="recombination-unit">
+<h2>Recombination Unit<a class="headerlink" href="#recombination-unit" title="Permalink to this headline">¶</a></h2>
+<p><em>AtomNeb for recombination lines</em> contains sets of <a class="reference external" href="https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data-rc">effective recombination coefficients</a> (αeff) of recombination lines of H I, He I, He II, C I, C II, C III, C VI, N II, N III, N IV, N V, N VI, N VII, O II, O III, O IV, O V, O VI, O VIII, and Ne II ions typically observed in ionized nebulae, as well as Branching ratios (Br) of O II and N II lines.</p>
+<p>The atomic datasets for recombination lines are as follows:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data-rc">RC Collection</a>, effective recombination coefficients for C II (<a class="reference external" href="http://adsabs.harvard.edu/abs/2000A%26AS..142...85D">Davey et al. 2000</a>), N II (<a class="reference external" href="http://adsabs.harvard.edu/abs/1990ApJS...73..513E">Escalante and Victor 1990</a>), O II (<a class="reference external" href="http://adsabs.harvard.edu/abs/1994A%26A...282..999S">Storey 1994</a>; <a class="reference external" href="http://adsabs.harvard.edu/abs/1995MNRAS.272..369L">Liu et al. 1995</a>), and Ne II ions (<a class="reference external" href="http://adsabs.harvard.edu/abs/1998A%26AS..133..257K">Kisielius et al. 1998</a>), including Branching ratios (Br) for O II and N II ions. This collection was compiled according to the atomic data used in <a class="reference external" href="https://github.com/mocassin/MOCASSIN-2.0">MOCASSIN</a>.</p></li>
+<li><p><a class="reference external" href="https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data-rc">SH95 Collection</a>, hydrogenic ions for Z=1 to 8, namely H I, He II, Li III, Be IV, B V, C VI, N VII, and O VIII ions from <a class="reference external" href="http://adsabs.harvard.edu/abs/1995MNRAS.272...41S">Storey and Hummer (1995)</a>.</p></li>
+<li><p><a class="reference external" href="https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data-rc">PPB91 Collection</a>, effective recombination coefficients for H, He, C, N, O, Ne ions from <a class="reference external" href="http://adsabs.harvard.edu/abs/1991A%26A...251..680P">Pequignot, Petitjean and Boisson (1991)</a>.</p></li>
+<li><p><a class="reference external" href="https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data-rc">PFSD12 He I data</a>, effective He I recombination coefficients from <a class="reference external" href="http://adsabs.harvard.edu/abs/2012MNRAS.425L..28P">Porter et al (2012)</a> and <a class="reference external" href="http://adsabs.harvard.edu/abs/2013MNRAS.433L..89P">(2013a)</a>.</p></li>
+<li><p><a class="reference external" href="https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data-rc">FSL13 N II data</a>, effective N II recombination coefficients (corrigendum) from <a class="reference external" href="http://adsabs.harvard.edu/abs/2011A%26A...530A..18F">Fang, Storey and Liu (2011)</a> and <a class="reference external" href="http://adsabs.harvard.edu/abs/2013A%26A...550C...2F">(2013b)</a>.</p></li>
+<li><p><a class="reference external" href="https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data-rc">SSB17 O II data</a>, effective O II recombination coefficients of 8889 recombination lines for Cases A, B, and C, and 2433 optical (3500-9000Å) recombination lines for Case B from <a class="reference external" href="http://adsabs.harvard.edu/abs/2017MNRAS.470..379S">Storey, Sochi and Bastin (2017)</a>.</p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../index.html" class="btn btn-neutral float-left" title="Welcome to AtomNeb’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Ashkbiz Danehkar
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
