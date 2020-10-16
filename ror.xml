@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:ror="http://rorweb.com/0.1/" >
+<channel>
+  <title>ROR Sitemap for https://atomneb.github.io/AtomNeb-py/</title>
+  <link>https://atomneb.github.io/AtomNeb-py/</link>
+
+<item>
+     <link>https://atomneb.github.io/AtomNeb-py/</link>
+     <title>AtomNeb- Python Package for Atomic Data for Ionized Nebulae</title>
+     <description>AtomNeb - A collection of Python functions developed to provide atomic data for ionized nebulae - maintained by Ashkbiz Danehkar</description>
+     <ror:updatePeriod></ror:updatePeriod>
+     <ror:sortOrder>0</ror:sortOrder>
+     <ror:resourceOf>sitemap</ror:resourceOf>
+</item>
+<item>
+     <link>https://atomneb.github.io/AtomNeb-py/doc/</link>
+     <title>Welcome to AtomNeb’s documentation! &amp;mdash; AtomNeb 0.2.0 documentation</title>
+     <description>Welcome to AtomNeb’s documentation! &amp;mdash; AtomNeb 0.2.0 documentation</description>
+     <ror:updatePeriod></ror:updatePeriod>
+     <ror:sortOrder>1</ror:sortOrder>
+     <ror:resourceOf>sitemap</ror:resourceOf>
+</item>
+<item>
+     <link>https://atomneb.github.io/AtomNeb-py/doc/user/readme.html</link>
+     <title>Introduction &amp;mdash; AtomNeb 0.2.0 documentation</title>
+     <description>Introduction &amp;mdash; AtomNeb 0.2.0 documentation</description>
+     <ror:updatePeriod></ror:updatePeriod>
+     <ror:sortOrder>2</ror:sortOrder>
+     <ror:resourceOf>sitemap</ror:resourceOf>
+</item>
+<item>
+     <link>https://atomneb.github.io/AtomNeb-py/doc/user/installation.html</link>
+     <title>Installation &amp;mdash; AtomNeb 0.2.0 documentation</title>
+     <description>Installation &amp;mdash; AtomNeb 0.2.0 documentation</description>
+     <ror:updatePeriod></ror:updatePeriod>
+     <ror:sortOrder>2</ror:sortOrder>
+     <ror:resourceOf>sitemap</ror:resourceOf>
+</item>
+<item>
+     <link>https://atomneb.github.io/AtomNeb-py/doc/user/usage.html</link>
+     <title>Usage &amp;mdash; AtomNeb 0.2.0 documentation</title>
+     <description>Usage &amp;mdash; AtomNeb 0.2.0 documentation</description>
+     <ror:updatePeriod></ror:updatePeriod>
+     <ror:sortOrder>2</ror:sortOrder>
+     <ror:resourceOf>sitemap</ror:resourceOf>
+</item>
+<item>
+     <link>https://atomneb.github.io/AtomNeb-py/doc/user/reference.html</link>
+     <title>References &amp;mdash; AtomNeb 0.2.0 documentation</title>
+     <description>References &amp;mdash; AtomNeb 0.2.0 documentation</description>
+     <ror:updatePeriod></ror:updatePeriod>
+     <ror:sortOrder>2</ror:sortOrder>
+     <ror:resourceOf>sitemap</ror:resourceOf>
+</item>
+<item>
+     <link>https://atomneb.github.io/AtomNeb-py/doc/api/atomneb.main.html</link>
+     <title>atomneb.main package &amp;mdash; AtomNeb 0.2.0 documentation</title>
+     <description>atomneb.main package &amp;mdash; AtomNeb 0.2.0 documentation</description>
+     <ror:updatePeriod></ror:updatePeriod>
+     <ror:sortOrder>2</ror:sortOrder>
+     <ror:resourceOf>sitemap</ror:resourceOf>
+</item>
+<item>
+     <link>https://atomneb.github.io/AtomNeb-py/doc/genindex.html</link>
+     <title>Index &amp;mdash; AtomNeb 0.2.0 documentation</title>
+     <description>Index &amp;mdash; AtomNeb 0.2.0 documentation</description>
+     <ror:updatePeriod></ror:updatePeriod>
+     <ror:sortOrder>2</ror:sortOrder>
+     <ror:resourceOf>sitemap</ror:resourceOf>
+</item>
+<item>
+     <link>https://atomneb.github.io/AtomNeb-py/doc/py-modindex.html</link>
+     <title>Python Module Index &amp;mdash; AtomNeb 0.2.0 documentation</title>
+     <description>Python Module Index &amp;mdash; AtomNeb 0.2.0 documentation</description>
+     <ror:updatePeriod></ror:updatePeriod>
+     <ror:sortOrder>2</ror:sortOrder>
+     <ror:resourceOf>sitemap</ror:resourceOf>
+</item>
+<item>
+     <link>https://atomneb.github.io/AtomNeb-py/doc/search.html</link>
+     <title>Search &amp;mdash; AtomNeb 0.2.0 documentation</title>
+     <description>Search &amp;mdash; AtomNeb 0.2.0 documentation</description>
+     <ror:updatePeriod></ror:updatePeriod>
+     <ror:sortOrder>2</ror:sortOrder>
+     <ror:resourceOf>sitemap</ror:resourceOf>
+</item>
+<item>
+     <link>https://atomneb.github.io/AtomNeb-py/doc/index.html</link>
+     <title>Welcome to AtomNeb’s documentation! &amp;mdash; AtomNeb 0.2.0 documentation</title>
+     <description>Welcome to AtomNeb’s documentation! &amp;mdash; AtomNeb 0.2.0 documentation</description>
+     <ror:updatePeriod></ror:updatePeriod>
+     <ror:sortOrder>3</ror:sortOrder>
+     <ror:resourceOf>sitemap</ror:resourceOf>
+</item>
+<item>
+     <link>https://atomneb.github.io/AtomNeb-py/doc/_modules/atomneb.html</link>
+     <title>atomneb &amp;mdash; AtomNeb 0.2.0 documentation</title>
+     <description>atomneb &amp;mdash; AtomNeb 0.2.0 documentation</description>
+     <ror:updatePeriod></ror:updatePeriod>
+     <ror:sortOrder>3</ror:sortOrder>
+     <ror:resourceOf>sitemap</ror:resourceOf>
+</item>
+<item>
+     <link>https://atomneb.github.io/AtomNeb-py/doc/_modules/index.html</link>
+     <title>Overview: module code &amp;mdash; AtomNeb 0.2.0 documentation</title>
+     <description>Overview: module code &amp;mdash; AtomNeb 0.2.0 documentation</description>
+     <ror:updatePeriod></ror:updatePeriod>
+     <ror:sortOrder>4</ror:sortOrder>
+     <ror:resourceOf>sitemap</ror:resourceOf>
+</item>
+</channel>
+</rss>
+  
