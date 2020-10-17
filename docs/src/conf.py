@@ -72,6 +72,7 @@ exclude_patterns = []
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
 
+autodoc_mock_imports = ['astropy', 'numpy', 'pandas']
 
 # -- Options for HTML output -------------------------------------------------
 
