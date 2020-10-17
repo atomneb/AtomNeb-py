@@ -335,3 +335,14 @@ References
 
 * Danehkar, A. (2019). AtomNeb: IDL Library for Atomic Data of Ionized Nebulae. *J. Open Source Softw.*, **4**, 898. doi:`10.21105/joss.00898 <https://doi.org/10.21105/joss.00898>`_
 
+
+Learn More
+==========
+
+==================  =============================================
+**Documentation**   https://atomneb-py.readthedocs.io/
+**Repository**      https://github.com/atomneb/AtomNeb-py
+**Issues & Ideas**  https://github.com/atomneb/AtomNeb-py/issues
+**Conda-Forge**     https://anaconda.org/conda-forge/atomneb
+**PyPI**            https://pypi.org/project/atomneb/
+==================  =============================================
