@@ -26,6 +26,10 @@ AtomNeb Python Package
     :target: https://anaconda.org/conda-forge/atomneb
     :alt: Anaconda Cloud
     
+.. image:: https://readthedocs.org/projects/atomneb-py/badge/?version=latest
+    :target: https://atomneb-py.readthedocs.io/en/latest/?badge=latest
+    :alt: Documentation Status
+    
 .. image:: https://img.shields.io/badge/python-2.7%2C%203.8-blue.svg
     :alt: Support Python versions 2.7 and 3.8
 
