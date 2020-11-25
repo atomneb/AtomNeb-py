@@ -383,4 +383,6 @@ Learn More
 **Issues & Ideas**  https://github.com/atomneb/AtomNeb-py/issues
 **Conda-Forge**     https://anaconda.org/conda-forge/atomneb
 **PyPI**            https://pypi.org/project/atomneb/
+**DOI**             `10.21105/joss.02797 <https://doi.org/10.21105/joss.02797>`_
+**Archive**         `10.5281/zenodo.4287566 <https://doi.org/10.5281/zenodo.4287566>`_
 ==================  =============================================
