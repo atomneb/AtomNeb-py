@@ -32,7 +32,14 @@ AtomNeb Python Package
     
 .. image:: https://img.shields.io/badge/python-2.7%2C%203.8-blue.svg
     :alt: Support Python versions 2.7 and 3.8
+    
+.. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.4287566.svg
+    :target: https://doi.org/10.5281/zenodo.4287566
+    :alt: Zenodo
 
+.. image:: http://joss.theoj.org/papers/10.21105/joss.02797/status.svg
+    :target: https://doi.org/10.21105/joss.02797
+    :alt: JOSS
 
 Description
 ===========
@@ -333,8 +340,39 @@ For more information on how to use the API functions from the AtomNeb Python pac
 References
 ==========
 
+* Danehkar, A. (2020). AtomNeb Python Package, an addendum to AtomNeb: IDL Library for Atomic Data of Ionized Nebulae. *J. Open Source Softw.*, **5**, 2797. doi:`10.21105/joss.02797 <https://doi.org/10.21105/joss.02797>`_.
+
 * Danehkar, A. (2019). AtomNeb: IDL Library for Atomic Data of Ionized Nebulae. *J. Open Source Softw.*, **4**, 898. doi:`10.21105/joss.00898 <https://doi.org/10.21105/joss.00898>`_
 
+
+Citation
+========
+
+Using **AtomNeb** in a scholarly publication? Please cite these papers:
+
+.. code-block:: bibtex
+
+   @article{Danehkar2020,
+     author = {{Danehkar}, Ashkbiz},
+     title = {AtomNeb Python Package, an addendum to AtomNeb: IDL Library for Atomic Data of Ionized Nebulae},
+     journal = {Journal of Open Source Software},
+     volume = {5},
+     number = {55},
+     pages = {2797},
+     year = {2020},
+     doi = {10.21105/joss.02797}
+   }
+
+   @article{Danehkar2019,
+     author = {{Danehkar}, Ashkbiz},
+     title = {AtomNeb: IDL Library for Atomic Data of Ionized Nebulae},
+     journal = {Journal of Open Source Software},
+     volume = {4},
+     number = {35},
+     pages = {898},
+     year = {2019},
+     doi = {10.21105/joss.00898}
+   }
 
 Learn More
 ==========
