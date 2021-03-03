@@ -26,12 +26,23 @@ AtomNeb Python Package
     :target: https://anaconda.org/conda-forge/atomneb
     :alt: Anaconda Cloud
     
+.. image:: https://readthedocs.org/projects/atomneb-py/badge/?version=latest
+    :target: https://atomneb-py.readthedocs.io/en/latest/?badge=latest
+    :alt: Documentation Status
+    
 .. image:: https://img.shields.io/badge/python-2.7%2C%203.8-blue.svg
     :alt: Support Python versions 2.7 and 3.8
+    
+.. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.4287566.svg
+    :target: https://doi.org/10.5281/zenodo.4287566
+    :alt: Zenodo
 
+.. image:: http://joss.theoj.org/papers/10.21105/joss.02797/status.svg
+    :target: https://doi.org/10.21105/joss.02797
+    :alt: JOSS
 
 Description
-============
+===========
 
 **AtomNeb-py** is a library written in Python for reading atomic data from *AtomNeb*, which is a database containing atomic data stored in the Flexible Image Transport System (FITS) file format for *collisionally excited lines* and *recombination lines* typically observed in spectra of ionized gaseous nebulae. The AtomNeb database were generated for use in `pyEQUIB <https://github.com/equib/pyEQUIB>`_, `proEQUIB <https://github.com/equib/proEQUIB>`_, and other nebular spectral analysis tools. 
 
@@ -88,8 +99,8 @@ Dependent Python Packages
     - `NumPy <https://numpy.org/>`_
     - `Astropy <https://www.astropy.org/>`_
 
-The previous version package depended on `pandas <https://pandas.pydata.org/>`_, but all the data structures were changed from pandas.DataFrame to those defined by `NumPy <https://numpy.org/>`_ that speed up the data access and computations and reduce the memory usage.
-
+The previous version relied on `pandas <https://pandas.pydata.org/>`_, but all the data structures were changed from pandas.DataFrame to those defined by `NumPy <https://numpy.org/>`_ that speed up the computations and reduce the memory usage.
+    
 * To get this package with all the FITS file, you can simply use ``git`` command as follows::
 
         git clone https://github.com/atomneb/AtomNeb-py
@@ -331,5 +342,49 @@ For more information on how to use the API functions from the AtomNeb Python pac
 References
 ==========
 
-* Danehkar, A. (2019). AtomNeb: IDL Library for Atomic Data of Ionized Nebulae. *J. Open Source Softw.*, **4**, 898. doi:`10.21105/joss.00898 <https://doi.org/10.21105/joss.00898>`_
+* Danehkar, A. (2020). AtomNeb Python Package, an addendum to AtomNeb: IDL Library for Atomic Data of Ionized Nebulae. *J. Open Source Softw.*, **5**, 2797. doi:`10.21105/joss.02797 <https://doi.org/10.21105/joss.02797>`_ ads:`2020JOSS....5.2797D <https://ui.adsabs.harvard.edu/abs/2020JOSS....5.2797D>`_.
 
+* Danehkar, A. (2019). AtomNeb: IDL Library for Atomic Data of Ionized Nebulae. *J. Open Source Softw.*, **4**, 898. doi:`10.21105/joss.00898 <https://doi.org/10.21105/joss.00898>`_ ads:`2019JOSS....4..898D <https://ui.adsabs.harvard.edu/abs/2019JOSS....4..898D>`_.
+
+
+Citation
+========
+
+Using **AtomNeb** in a scholarly publication? Please cite these papers:
+
+.. code-block:: bibtex
+
+   @article{Danehkar2020,
+     author = {{Danehkar}, Ashkbiz},
+     title = {AtomNeb Python Package, an addendum to AtomNeb: IDL Library for Atomic Data of Ionized Nebulae},
+     journal = {Journal of Open Source Software},
+     volume = {5},
+     number = {55},
+     pages = {2797},
+     year = {2020},
+     doi = {10.21105/joss.02797}
+   }
+
+   @article{Danehkar2019,
+     author = {{Danehkar}, Ashkbiz},
+     title = {AtomNeb: IDL Library for Atomic Data of Ionized Nebulae},
+     journal = {Journal of Open Source Software},
+     volume = {4},
+     number = {35},
+     pages = {898},
+     year = {2019},
+     doi = {10.21105/joss.00898}
+   }
+
+Learn More
+==========
+
+==================  =============================================
+**Documentation**   https://atomneb-py.readthedocs.io/
+**Repository**      https://github.com/atomneb/AtomNeb-py
+**Issues & Ideas**  https://github.com/atomneb/AtomNeb-py/issues
+**Conda-Forge**     https://anaconda.org/conda-forge/atomneb
+**PyPI**            https://pypi.org/project/atomneb/
+**DOI**             `10.21105/joss.02797 <https://doi.org/10.21105/joss.02797>`_
+**Archive**         `10.5281/zenodo.4287566 <https://doi.org/10.5281/zenodo.4287566>`_
+==================  =============================================
