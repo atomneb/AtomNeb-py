@@ -18,54 +18,54 @@ atom = 'c'
 ion = 'iii' # C II
 # read Recombination Coefficients (Aeff) of C II
 cii_rc_data = atomneb.read_aeff_collection(atom_rc_file, atom, ion)
-n_line = len(cii_rc_data.wavelength)
+n_line = len(cii_rc_data['wavelength'])
 # print information needed for Recombination Coefficients (Aeff) of C II
 for i in range(0, n_line):
-  print(cii_rc_data.wavelength[i], cii_rc_data.a[i], cii_rc_data.b[i], cii_rc_data.c[i], cii_rc_data.d[i], cii_rc_data.f[i])
+  print(cii_rc_data['wavelength'][i], cii_rc_data['a'][i], cii_rc_data['b'][i], cii_rc_data['c'][i], cii_rc_data['d'][i], cii_rc_data['f'][i])
 
 atom = 'n'
 ion = 'iii' # N II
 # read Recombination Coefficients (Aeff) of N II
 nii_rc_data = atomneb.read_aeff_collection(atom_rc_file, atom, ion)
 nii_rc_data_br = atomneb.read_aeff_collection(atom_rc_file, atom, ion, br=True)
-n_line = len(nii_rc_data.a)
+n_line = len(nii_rc_data['a'])
 # print information needed for Recombination Coefficients (Aeff) of N II
 for i in range(0, n_line):
-  print(nii_rc_data.a[i], nii_rc_data.b[i], nii_rc_data.c[i])
-n_line = len(nii_rc_data_br.wavelength)
+  print(nii_rc_data['a'][i], nii_rc_data['b'][i], nii_rc_data['c'][i])
+n_line = len(nii_rc_data_br['wavelength'])
 # print forBranching ratios (Br) of N II
 for i in range(0, n_line):
-  print(nii_rc_data_br.wavelength[i], nii_rc_data_br.br[i],
-        nii_rc_data_br.g1[i], nii_rc_data_br.g2[i],
-        nii_rc_data_br.mult1[i], nii_rc_data_br.lowerterm[i], nii_rc_data_br.upperterm[i])
+  print(nii_rc_data_br['wavelength'][i], nii_rc_data_br['br'][i],
+        nii_rc_data_br['g1'][i], nii_rc_data_br['g2'][i],
+        nii_rc_data_br['mult1'][i], nii_rc_data_br['lowerterm'][i], nii_rc_data_br['upperterm'][i])
 
 atom = 'o'
 ion = 'iii' # O II
 # read Recombination Coefficients (Aeff) of O II
 oii_rc_data = atomneb.read_aeff_collection(atom_rc_file, atom, ion)
 oii_rc_data_br = atomneb.read_aeff_collection(atom_rc_file, atom, ion, br=True)
-n_line = len(oii_rc_data.a2)
+n_line = len(oii_rc_data['a2'])
 # print information needed for Recombination Coefficients (Aeff) of O II
 for i in range(0, n_line):
-  print(oii_rc_data.term[i], oii_rc_data.case1[i],
-        oii_rc_data.a2[i], oii_rc_data.a4[i], oii_rc_data.a5[i], oii_rc_data.a6[i],
-        oii_rc_data.b[i], oii_rc_data.c[i], oii_rc_data.d[i])
-n_line = len(oii_rc_data_br.wavelength)
+  print(oii_rc_data['term'][i], oii_rc_data['case1'][i],
+        oii_rc_data['a2'][i], oii_rc_data['a4'][i], oii_rc_data['a5'][i], oii_rc_data['a6'][i],
+        oii_rc_data['b'][i], oii_rc_data['c'][i], oii_rc_data['d'][i])
+n_line = len(oii_rc_data_br['wavelength'])
 # print forBranching ratios (Br) of O II
 for i in range(0, n_line):
-  print(oii_rc_data_br.wavelength[i], oii_rc_data_br.br_a[i], oii_rc_data_br.br_b[i], oii_rc_data_br.br_c[i],
-        oii_rc_data_br.g1[i], oii_rc_data_br.g2[i], oii_rc_data_br.mult1[i],
-        oii_rc_data_br.lowerterm[i], oii_rc_data_br.upperterm[i])
+  print(oii_rc_data_br['wavelength'][i], oii_rc_data_br['br_a'][i], oii_rc_data_br['br_b'][i], oii_rc_data_br['br_c'][i],
+        oii_rc_data_br['g1'][i], oii_rc_data_br['g2'][i], oii_rc_data_br['mult1'][i],
+        oii_rc_data_br['lowerterm'][i], oii_rc_data_br['upperterm'][i])
 
 atom = 'ne'
 ion = 'iii' # Ne II
 # read Recombination Coefficients (Aeff) of Ne II
 neii_rc_data = atomneb.read_aeff_collection(atom_rc_file, atom, ion)
-n_line = len(neii_rc_data.wavelength)
+n_line = len(neii_rc_data['wavelength'])
 # print information needed for Recombination Coefficients (Aeff) of Ne II
 for i in range(0, n_line):
-  print(neii_rc_data.wavelength[i],
-        neii_rc_data.a[i], neii_rc_data.b[i], neii_rc_data.c[i], neii_rc_data.d[i], neii_rc_data.f[i], neii_rc_data.br[i])
+  print(neii_rc_data['wavelength'][i],
+        neii_rc_data['a'][i], neii_rc_data['b'][i], neii_rc_data['c'][i], neii_rc_data['d'][i], neii_rc_data['f'][i], neii_rc_data['br'][i])
 
 atom = 'c'
 ion = 'iii' # C III

@@ -26,23 +26,12 @@ AtomNeb Python Package
     :target: https://anaconda.org/conda-forge/atomneb
     :alt: Anaconda Cloud
     
-.. image:: https://readthedocs.org/projects/atomneb-py/badge/?version=latest
-    :target: https://atomneb-py.readthedocs.io/en/latest/?badge=latest
-    :alt: Documentation Status
-    
 .. image:: https://img.shields.io/badge/python-2.7%2C%203.8-blue.svg
     :alt: Support Python versions 2.7 and 3.8
-    
-.. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.4287566.svg
-    :target: https://doi.org/10.5281/zenodo.4287566
-    :alt: Zenodo
 
-.. image:: http://joss.theoj.org/papers/10.21105/joss.02797/status.svg
-    :target: https://doi.org/10.21105/joss.02797
-    :alt: JOSS
 
 Description
-===========
+============
 
 **AtomNeb-py** is a library written in Python for reading atomic data from *AtomNeb*, which is a database containing atomic data stored in the Flexible Image Transport System (FITS) file format for *collisionally excited lines* and *recombination lines* typically observed in spectra of ionized gaseous nebulae. The AtomNeb database were generated for use in `pyEQUIB <https://github.com/equib/pyEQUIB>`_, `proEQUIB <https://github.com/equib/proEQUIB>`_, and other nebular spectral analysis tools. 
 
@@ -62,6 +51,7 @@ The atomic datasets for collisionally excited lines are as follows:
 
 * `Chianti70 <https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data/chianti70>`_ from the `CHIANTI atomic database <http://www.chiantidatabase.org/>`_ version 7.0. This dataset was compiled according to the atomic data used in `MOCASSIN <https://github.com/mocassin/MOCASSIN-2.0>`_.
 
+* `Chianti90 <https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data/chianti90>`_ from the `CHIANTI atomic database <http://www.chiantidatabase.org/>`_ version 9.0. This dataset was compiled according to the atomic data used in `NEAT <https://github.com/rwesson/NEAT>`_.
 
 Each dataset contains the following `atomic data FITS files <https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data/chianti70>`_: ``AtomElj.fits`` for *Energy Levels* (Ej), ``AtomOmij.fits`` for *Collision Strengths* (Ωij), and ``AtomAij.fits`` for *Transition Probabilities* (Aij).
 
@@ -79,9 +69,9 @@ The atomic datasets for recombination lines are as follows:
 
 * `PPB91 Collection <https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data-rc>`_, effective recombination coefficients for H, He, C, N, O, Ne ions from `Pequignot, Petitjean and Boisson (1991) <http://adsabs.harvard.edu/abs/1991A%26A...251..680P>`_.
 
-* `PFSD12 He I data <https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data-rc>`_, effective He I recombination coefficients from `Porter et al (2012) <http://adsabs.harvard.edu/abs/2012MNRAS.425L..28P>`_ and `(2013a) <http://adsabs.harvard.edu/abs/2013MNRAS.433L..89P>`_.
+* `PFSD12 He I data <https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data-rc>`_, effective He I recombination coefficients from `Porter et al (2012) <http://adsabs.harvard.edu/abs/2012MNRAS.425L..28P>`_ and `(2013) <http://adsabs.harvard.edu/abs/2013MNRAS.433L..89P>`_.
 
-* `FSL13 N II data <https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data-rc>`_, effective N II recombination coefficients (corrigendum) from `Fang, Storey and Liu (2011) <http://adsabs.harvard.edu/abs/2011A%26A...530A..18F>`_ and `(2013b) <http://adsabs.harvard.edu/abs/2013A%26A...550C...2F>`_.
+* `FSL13 N II data <https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data-rc>`_, effective N II recombination coefficients (corrigendum) from `Fang, Storey and Liu (2011) <http://adsabs.harvard.edu/abs/2011A%26A...530A..18F>`_ and `(2013) <http://adsabs.harvard.edu/abs/2013A%26A...550C...2F>`_.
 
 * `SSB17 O II data <https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data-rc>`_, effective O II recombination coefficients of 8889 recombination lines for Cases A, B, and C, and 2433 optical (3500-9000Å) recombination lines for Case B from `Storey, Sochi and Bastin (2017) <http://adsabs.harvard.edu/abs/2017MNRAS.470..379S>`_.
 
@@ -91,14 +81,15 @@ Installation
 ============
 
 Dependent Python Packages
--------------------------
+----------------------
 
  This package requires the following packages:
 
     - `NumPy <https://numpy.org/>`_
-    - `pandas <https://pandas.pydata.org/>`_
     - `Astropy <https://www.astropy.org/>`_
-    
+
+The previous version package depended on `pandas <https://pandas.pydata.org/>`_, but all the data structures were changed from pandas.DataFrame to those defined by `NumPy <https://numpy.org/>`_ that speed up the data access and computations and reduce the memory usage.
+
 * To get this package with all the FITS file, you can simply use ``git`` command as follows::
 
         git clone https://github.com/atomneb/AtomNeb-py
@@ -157,8 +148,8 @@ The Documentation of the functions provides in detail in the *API Documentation*
         atom='o'
         ion='iii'
         oiii_elj_data = atomneb.read_elj(atom_elj_file, atom, ion, level_num=6)
-        print(np.asarray(oiii_elj_data.j_v))
-        print(np.asarray(oiii_elj_data.ej))
+        print(oiii_elj_data['j_v'])
+        print(oiii_elj_data['ej'])
     
       which gives::
     
@@ -170,9 +161,9 @@ The Documentation of the functions provides in detail in the *API Documentation*
         atom='o'
         ion='iii'
         oiii_omij_data = atomneb.read_omij(atom_omij_file, atom, ion)
-        print(np.asarray(oiii_omij_data.level1))
-        print(np.asarray(oiii_omij_data.level2))
-        print(np.asarray(oiii_omij_data.strength)[0])
+        print(oiii_omij_data['level1'])
+        print(oiii_omij_data['level2'])
+        print(oiii_omij_data['strength'][0])
     
       which gives::
         
@@ -185,7 +176,7 @@ The Documentation of the functions provides in detail in the *API Documentation*
         atom='o'
         ion='iii'
         oiii_aij_data = atomneb.read_aij(atom_aij_file, atom, ion)
-        pprint(oiii_aij_data.aij)
+        print(oiii_aij_data['aij'][0])
     
       which gives::
         
@@ -198,7 +189,7 @@ The Documentation of the functions provides in detail in the *API Documentation*
     
         import atomneb
      
-    Also::
+    Also:
 
         import numpy as np
         import os
@@ -211,11 +202,11 @@ The Documentation of the functions provides in detail in the *API Documentation*
         atom='c'
         ion='iii'
         cii_rc_data = atomneb.read_aeff_collection(atom_rc_file, atom, ion)
-        n_line = len(cii_rc_data.wavelength)
+        n_line = len(cii_rc_data['wavelength'])
         for i in range(0, n_line):
-             print(cii_rc_data.wavelength[i], cii_rc_data.a[i], 
-                   cii_rc_data.b[i], cii_rc_data.c[i], 
-                   cii_rc_data.d[i], cii_rc_data.f[i])
+             print(cii_rc_data['wavelength'][i], cii_rc_data['a'][i], 
+                   cii_rc_data['b'][i], cii_rc_data['c'][i], 
+                   cii_rc_data['d'][i], cii_rc_data['f'][i])
         
       which gives::
     
@@ -230,7 +221,7 @@ The Documentation of the functions provides in detail in the *API Documentation*
         atom='h'
         ion='ii'
         hi_rc_data = atomneb.read_aeff_sh95(atom_rc_file, atom, ion)
-        print(hi_rc_data.aeff[0])
+        print(hi_rc_data['aeff'][0])
         
       which gives::
     
@@ -243,11 +234,11 @@ The Documentation of the functions provides in detail in the *API Documentation*
         atom='c'
         ion='iii'
         cii_rc_data = atomneb.read_aeff_ppb91(atom_rc_file, atom, ion)
-        n_line = len(cii_rc_data.wavelength)
+        n_line = len(cii_rc_data['wavelength'])
         for i in range(0, n_line):
-           print(cii_rc_data.ion[i], cii_rc_data.case1[i], cii_rc_data.wavelength[i],
-                 cii_rc_data.a[i], cii_rc_data.b[i], cii_rc_data.c[i],
-                 cii_rc_data.d[i], cii_rc_data.br[i], cii_rc_data.q[i], cii_rc_data.y[i])
+           print(cii_rc_data['ion'][i], cii_rc_data['case1'][i], cii_rc_data['wavelength'][i],
+                 cii_rc_data['a'][i], cii_rc_data['b'][i], cii_rc_data['c'][i],
+                 cii_rc_data['d'][i], cii_rc_data['br'][i], cii_rc_data['q'][i], cii_rc_data['y'][i])
            
       which gives::
     
@@ -262,7 +253,7 @@ The Documentation of the functions provides in detail in the *API Documentation*
         ion='ii'
         hei_rc_data = atomneb.read_aeff_he_i_pfsd12(atom_rc_file, atom, ion)
         hei_rc_data_wave = atomneb.read_aeff_he_i_pfsd12(atom_rc_file, atom, ion, wavelength=True)
-        print(hei_rc_data.aeff[0])
+        print(hei_rc_data['aeff'][0])
            
       which gives::
     
@@ -278,9 +269,9 @@ The Documentation of the functions provides in detail in the *API Documentation*
         nii_rc_data = atomneb.read_aeff_n_ii_fsl13(atom_rc_file, atom, ion, wavelength_range)
         nii_rc_data_wave = atomneb.read_aeff_n_ii_fsl13(atom_rc_file, atom, ion, wavelength_range, wavelength=True)
         print(nii_rc_data.aeff[0])
-        n_line = len(nii_rc_data_wave.wavelength)
+        n_line = len(hei_rc_data_wave['wavelength'])
         for i in range(0, n_line):
-           print(nii_rc_data_wave.wavelength[i], nii_rc_data_wave.tr[i], nii_rc_data_wave.trans[i])
+           print(nii_rc_data_wave['wavelength'][i], nii_rc_data_wave['tr'][i], nii_rc_data_wave['trans'][i])
         
       which gives::
     
@@ -314,7 +305,7 @@ The Documentation of the functions provides in detail in the *API Documentation*
         wavelength_range=[5320.0, 5330.0] 
         oii_rc_data = atomneb.read_aeff_o_ii_ssb17(atom_rc_file, atom, ion, case1, wavelength_range)
         oii_rc_data_wave = atomneb.read_aeff_o_ii_ssb17(atom_rc_file, atom, ion, case1, wavelength_range, wavelength=True)
-        print(oii_rc_data.aeff[0])
+        print(oii_rc_data['aeff'][0])
         n_line = len(oii_rc_data_wave.wavelength)
         for i in range(0, n_line):
            print(oii_rc_data_wave.wavelength[i], oii_rc_data_wave.lower_term[i], oii_rc_data_wave.upper_term[i])
@@ -340,49 +331,5 @@ For more information on how to use the API functions from the AtomNeb Python pac
 References
 ==========
 
-* Danehkar, A. (2020). AtomNeb Python Package, an addendum to AtomNeb: IDL Library for Atomic Data of Ionized Nebulae. *J. Open Source Softw.*, **5**, 2797. doi:`10.21105/joss.02797 <https://doi.org/10.21105/joss.02797>`_ ads:`2020JOSS....5.2797D <https://ui.adsabs.harvard.edu/abs/2020JOSS....5.2797D>`_.
+* Danehkar, A. (2019). AtomNeb: IDL Library for Atomic Data of Ionized Nebulae. *J. Open Source Softw.*, **4**, 898. doi:`10.21105/joss.00898 <https://doi.org/10.21105/joss.00898>`_
 
-* Danehkar, A. (2019). AtomNeb: IDL Library for Atomic Data of Ionized Nebulae. *J. Open Source Softw.*, **4**, 898. doi:`10.21105/joss.00898 <https://doi.org/10.21105/joss.00898>`_ ads:`2019JOSS....4..898D <https://ui.adsabs.harvard.edu/abs/2019JOSS....4..898D>`_.
-
-
-Citation
-========
-
-Using **AtomNeb** in a scholarly publication? Please cite these papers:
-
-.. code-block:: bibtex
-
-   @article{Danehkar2020,
-     author = {{Danehkar}, Ashkbiz},
-     title = {AtomNeb Python Package, an addendum to AtomNeb: IDL Library for Atomic Data of Ionized Nebulae},
-     journal = {Journal of Open Source Software},
-     volume = {5},
-     number = {55},
-     pages = {2797},
-     year = {2020},
-     doi = {10.21105/joss.02797}
-   }
-
-   @article{Danehkar2019,
-     author = {{Danehkar}, Ashkbiz},
-     title = {AtomNeb: IDL Library for Atomic Data of Ionized Nebulae},
-     journal = {Journal of Open Source Software},
-     volume = {4},
-     number = {35},
-     pages = {898},
-     year = {2019},
-     doi = {10.21105/joss.00898}
-   }
-
-Learn More
-==========
-
-==================  =============================================
-**Documentation**   https://atomneb-py.readthedocs.io/
-**Repository**      https://github.com/atomneb/AtomNeb-py
-**Issues & Ideas**  https://github.com/atomneb/AtomNeb-py/issues
-**Conda-Forge**     https://anaconda.org/conda-forge/atomneb
-**PyPI**            https://pypi.org/project/atomneb/
-**DOI**             `10.21105/joss.02797 <https://doi.org/10.21105/joss.02797>`_
-**Archive**         `10.5281/zenodo.4287566 <https://doi.org/10.5281/zenodo.4287566>`_
-==================  =============================================

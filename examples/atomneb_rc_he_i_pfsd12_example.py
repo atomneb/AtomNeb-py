@@ -18,10 +18,10 @@ ion = 'ii' # He I
 hei_rc_data = atomneb.read_aeff_he_i_pfsd12(atom_rc_file, atom, ion)
 hei_rc_data_wave = atomneb.read_aeff_he_i_pfsd12(atom_rc_file, atom, ion, wavelength=True)
 # print information needed for Recombination Coefficients (Aeff) of He I
-print(hei_rc_data.aeff[0])
-n_line = len(hei_rc_data_wave.wavelength)
+print(hei_rc_data['aeff'][0])
+n_line = len(hei_rc_data_wave['wavelength'])
 for i in range(0, n_line):
-   print(hei_rc_data_wave.wavelength[i], hei_rc_data_wave.lowerterm[i], hei_rc_data_wave.upperterm[i])
+   print(hei_rc_data_wave['wavelength'][i], hei_rc_data_wave['lowerterm'][i], hei_rc_data_wave['upperterm'][i])
 
 atom = 'he'
 ion = 'ii' # He I

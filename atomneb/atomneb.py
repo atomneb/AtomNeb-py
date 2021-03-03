@@ -14,7 +14,7 @@ This module contains functions for Atomic Data of Ionized Nebulae
 #from astropy.table import Table
 from astropy.io.fits import getdata
 import numpy as np
-import pandas as pd
+#import pandas as pd
 
 #try:
 #    import regex as re
@@ -60,7 +60,7 @@ def read_aij(atom_aij_file, atom, ion, reference=None, level_num=None):
          >> ion='iii'
          >> reference='FFT04'
          >> oiii_aij_data = atomneb.read_aij(atom_aij_file, atom, ion, reference)
-         >> print(oiii_aij_data.aij)
+         >> print(oiii_aij_data['aij'][0])
             0.0000000   2.5960000e-05   3.0300000e-11   2.3220000e-06       0.0000000    0.0021910000
             0.0000000       0.0000000   9.6320000e-05    0.0069510000      0.22550000       230.80000
             0.0000000       0.0000000       0.0000000     0.020290000   0.00069980000       576.50000
@@ -90,14 +90,15 @@ def read_aij(atom_aij_file, atom, ion, reference=None, level_num=None):
     element_data_list = read_aij_list(atom_aij_file)
     if (reference is not None) == 1:
         atom_ion_name = atom.lower() + '_' + ion.lower() + '_aij_' + reference.upper()
-        aij_list = np.asarray(element_data_list.aij_data)
+        #aij_list = np.asarray(element_data_list.aij_data)
+        aij_list = element_data_list['aij_data']
         ii = np.where(aij_list== atom_ion_name)[0]  #
         if len(ii) == 0:
             print ('could not find the given element or ion')
             return 0
     else:
         atom_ion_name = atom.lower() + '_' + ion.lower() + '_aij'
-        aij_list=np.asarray(element_data_list.aij_data)
+        aij_list=element_data_list['aij_data']
         #aij_res = [x for x in aij_list if re.search(atom_ion_name, x)]
         aij_res = [x for x in aij_list if atom_ion_name in x]
         iii = np.where(aij_list == aij_res[0])[0]  #
@@ -105,21 +106,23 @@ def read_aij(atom_aij_file, atom, ion, reference=None, level_num=None):
             print('could not find the given element or ion')
             return 0
         ii = min(iii)
-    extension = np.asarray(element_data_list.extension)[ii]
+    extension = element_data_list['extension'][ii]
 
     aij, header1 = getdata(atom_aij_file, int(extension), header=True)
     n_level = len(aij)
     #aij_temp=np.zeros((n_level,n_level))
     #aij_template = {'aij': aij_temp }
-    aij_template={'aij':np.zeros((n_level,n_level))}
+    #aij_template={'aij':np.zeros((n_level,n_level))}
+    aij_template = [('aij', np.dtype('('+str(n_level)+','+str(n_level)+')f8'))]
     if (level_num is not None) == 1:
         if level_num <= n_level:
             level_length = level_num
     else:
         level_length = n_level
-    aij_data = pd.concat([pd.DataFrame(v) for k, v in aij_template.items()], axis=1, keys=list(aij_template.keys()))
+    #aij_data = pd.concat([pd.DataFrame(v) for k, v in aij_template.items()], axis=1, keys=list(aij_template.keys()))
     #aij_data = pd.DataFrame(data=aij_template, index=np.arange(1))
-    aij_data.aij = aij
+    aij_data = np.zeros((np.int(1)), dtype=aij_template)
+    aij_data['aij'][0] = aij
     return aij_data
 
 def read_aij_list(atom_aij_file):
@@ -134,17 +137,19 @@ def read_aij_list(atom_aij_file):
      :type Atom_Aij_file: str         
 
     """
-    element_template = {'aij_data': '', 'extension': 0 }
+    #element_template = {'aij_data': '', 'extension': 0 }
+    element_template = [('aij_data', '<U20'), ('extension', np.int)]
     data, hdr = getdata(atom_aij_file, 1, header=True)
     aij_data=data.AIJ_DATA
     extension = data.EXTENSION
     element_length = len(aij_data)
 
-    element_data = pd.DataFrame(data=element_template, index=np.arange(element_length))
+    #element_data = pd.DataFrame(data=element_template, index=np.arange(element_length))
+    element_data = np.zeros((np.int(element_length)), dtype=element_template)
     #aij_data=aij_data.strip
     aij_data=np.char.strip(aij_data)
-    element_data.aij_data=aij_data
-    element_data.extension = extension
+    element_data['aij_data']=aij_data
+    element_data['extension'] = extension
     return element_data
 
 def search_aij(atom_aij_file, atom, ion):
@@ -181,7 +186,7 @@ def search_aij(atom_aij_file, atom, ion):
     """
     element_data_list = read_aij_list(atom_aij_file)
     atom_ion_name = atom.lower() + '_' + ion.lower() + '_aij_'
-    aij_list = np.asarray(element_data_list.aij_data)
+    aij_list = element_data_list['aij_data']
     #aij_res = [x for x in aij_list if re.search(atom_ion_name, x)]
     aij_res = [x for x in aij_list if atom_ion_name in x]
     if len(aij_res) == 0:
@@ -202,18 +207,25 @@ def read_aij_references(atom_aij_file):
      :type Atom_Aij_file: str  
 
     """
-    reference_template = {'reference': '', 'citation': 0}
+    #reference_template = {'reference': '', 'citation': 0}
+    reference_template = [('reference', '<U20'), ('citation', '<U128')]
+    
     data, hdr = getdata(atom_aij_file, 2, header=True)
     reference = data.ATOMICDATA
     citation = data.REFERENCE
     reference_length = len(reference)
 
-    reference_data = pd.DataFrame(data=reference_template, index=np.arange(reference_length))
+    #reference_data = pd.DataFrame(data=reference_template, index=np.arange(reference_length))
+    reference_data = np.zeros((np.int(reference_length)), dtype=reference_template)
     # aij_data=aij_data.strip
     reference = np.char.strip(reference)
     citation = np.char.strip(citation)
-    reference_data.reference = reference
-    reference_data.citation = citation
+    reference_data['reference'] = reference
+    for i in range(0,np.int(reference_length)):
+        if isinstance(citation[i], np.bytes_):
+            reference_data['citation'][i] = citation[i].decode('cp1252') #.encode('utf-8')
+        else:
+            reference_data['citation'][i] = citation[i]
     return reference_data
 
 def list_aij_references(atom_aij_file, atom, ion):
@@ -251,7 +263,7 @@ def list_aij_references(atom_aij_file, atom, ion):
     element_data_list = read_aij_list(atom_aij_file)
 
     atom_ion_name = atom.lower() + '_' + ion.lower() + '_aij_'
-    aij_list = np.asarray(element_data_list.aij_data)
+    aij_list = element_data_list['aij_data']
     #aij_res = [x for x in aij_list if re.search(atom_ion_name, x)]
     aij_res = [x for x in aij_list if atom_ion_name in x]
     ii_length = len(aij_res)
@@ -301,13 +313,13 @@ def get_aij_reference_citation(atom_aij_file, atom, ion, reference):
      :type reference: str  
     """
     element_data_reference = read_aij_references(atom_aij_file)
-    reference_list = np.asarray(element_data_reference.reference)
+    reference_list = element_data_reference['reference']
     atom_ion_name = atom.lower() + '_' + ion.lower() + '_aij_' + reference.upper()
     ii = np.where(reference_list == atom_ion_name)[0]  #
     if len(ii) == 0:
         print('could not find the given reference')
         return 0
-    citation = np.asarray(element_data_reference.citation[ii])
+    citation = element_data_reference['citation'][ii]
 
     return citation
 
@@ -327,9 +339,9 @@ def read_elj(atom_elj_file, atom, ion, level_num=None):
          >> atom='o'
          >> ion='iii'
          >> oiii_elj_data=atomneb.read_elj(atom_elj_file, atom, ion, level_num=6)
-         >> print(np.asarray(oiii_elj_data.j_v))
+         >> print(oiii_elj_data['j_v'])
             0.00000      1.00000      2.00000      2.00000      0.00000      2.00000
-         >> print(np.asarray(oiii_elj_data.ej))
+         >> print(oiii_elj_data['ej'])
             0.0000000       113.17800       306.17400       20273.270       43185.740       60324.790
                     
      :return: This function returns the elj_data:{ Configuration:'', Term:'', J:'', J_v:0.0, Ej:0.0, Reference:''}.
@@ -352,15 +364,15 @@ def read_elj(atom_elj_file, atom, ion, level_num=None):
     element_data_list = read_elj_list(atom_elj_file)
 
     atom_ion_name = atom.lower() + '_' + ion.lower() + '_elj'
-    elj_list = np.asarray(element_data_list.elj_data)
+    elj_list = element_data_list['elj_data']
     ii = np.where(elj_list == atom_ion_name)[0]  #
     if len(ii) == 0:
         print('could not find the given element or ion')
         return 0
-    extension = np.asarray(element_data_list.extension)[ii]
-
-    # level_template={Configuration:'', Term:'', J:'', J_v: float(0.0), Ej:double(0.0), Reference:''}
-    level_template = {'configuration':'', 'term':'', 'j':'', 'j_v': float(0.0), 'ej':float(0.0), 'reference':''}
+    extension = element_data_list['extension'][ii]
+    
+    #level_template = {'configuration':'', 'term':'', 'j':'', 'j_v': float(0.0), 'ej':float(0.0), 'reference':''}
+    level_template = [('configuration', '<U30'), ('term', '<U15'), ('j', '<U10'), ('j_v', np.double), ('ej', np.double), ('reference', '<U20')]
 
     data, header1 = getdata(atom_elj_file, int(extension), header=True)
     configuration=data.CONFIGURATION
@@ -374,18 +386,25 @@ def read_elj(atom_elj_file, atom, ion, level_num=None):
         if level_num <= level_length:
             level_length = level_num
 
-    level_data = pd.DataFrame(data=level_template, index=np.arange(level_length))
+    #level_data = pd.DataFrame(data=level_template, index=np.arange(level_length))
+    level_data = np.zeros((np.int(level_length)), dtype=level_template)
     term=np.char.strip(term)
     j_s=np.char.strip(j_s)
     reference=np.char.strip(reference)
 
     for i in range(0, level_length):
-        level_data.loc[i, 'configuration'] = configuration[i]
-        level_data.loc[i, 'term'] = term[i]
-        level_data.loc[i, 'j_s'] = j_s[i]
-        level_data.loc[i, 'j_v'] = j_v[i]
-        level_data.loc[i, 'ej'] = ej[i]
-        level_data.loc[i, 'reference'] = reference[i]
+        level_data['configuration'][i] = configuration[i]
+        level_data['term'][i] = term[i]
+        level_data['j'][i] = j_s[i]
+        level_data['j_v'][i] = j_v[i]
+        level_data['ej'][i] = ej[i]
+        level_data['reference'][i] = reference[i]
+        #level_data.loc[i, 'configuration'] = configuration[i]
+        #level_data.loc[i, 'term'] = term[i]
+        #level_data.loc[i, 'j_s'] = j_s[i]
+        #level_data.loc[i, 'j_v'] = j_v[i]
+        #level_data.loc[i, 'ej'] = ej[i]
+        #level_data.loc[i, 'reference'] = reference[i]
 
     return level_data
 
@@ -401,18 +420,26 @@ def read_elj_list(atom_elj_file):
      :type atom_elj_file: str  
      
     """
-    element_template = {'elj_data': '', 'extension': 0 }
+    #element_template = {'elj_data': '', 'extension': 0 }
+    element_template = [('elj_data', '<U20'), ('extension', np.int)]
     data, hdr = getdata(atom_elj_file, 1, header=True)
     elj_data=data.EJ_DATA
     extension = data.EXTENSION
     element_length = len(elj_data)
 
-    element_data = pd.DataFrame(data=element_template, index=np.arange(element_length))
+    #element_data = pd.DataFrame(data=element_template, index=np.arange(element_length))
+    element_data = np.zeros((np.int(element_length)), dtype=element_template)
     #aij_data=aij_data.strip
     elj_data=np.char.strip(elj_data)
-    element_data.elj_data=elj_data
-    element_data.extension = extension
+    element_data['elj_data']=elj_data
+    element_data['extension'] = extension
     return element_data
+
+#def enforce_unicode(x):
+#	# enforce all chars in unicode
+#    if isinstance(x, str):
+#        v = v.decode('utf8')
+ #   return unicode(x) 
 
 def read_elj_references(atom_elj_file):
     """
@@ -426,19 +453,24 @@ def read_elj_references(atom_elj_file):
      :type atom_elj_file: str  
      
     """
-    reference_template = {'reference': '', 'citation': 0}
+    #reference_template = {'reference': '', 'citation': 0}
+    reference_template = [('reference', '<U20'), ('citation', '<U128')]
     data, hdr = getdata(atom_elj_file, 2, header=True)
     reference = data.ATOMICDATA
     citation = data.REFERENCE
     reference_length = len(reference)
 
-    reference_data = pd.DataFrame(data=reference_template, index=np.arange(reference_length))
-
-
+    #reference_data = pd.DataFrame(data=reference_template, index=np.arange(reference_length))
+    reference_data = np.zeros((np.int(reference_length)), dtype=reference_template)
+    
     reference = np.char.strip(reference)
     citation = np.char.strip(citation)
-    reference_data.reference = reference
-    reference_data.citation = citation
+    reference_data['reference'] = reference
+    for i in range(0,np.int(reference_length)):
+        if isinstance(citation[i], np.bytes_):
+            reference_data['citation'][i] = citation[i].decode('cp1252') #.encode('utf-8')
+        else:
+            reference_data['citation'][i] = citation[i]
     return reference_data
 
 def get_elj_reference_citation(atom_elj_file, reference):
@@ -470,12 +502,12 @@ def get_elj_reference_citation(atom_elj_file, reference):
 
     """
     element_data_reference = read_elj_references(atom_elj_file)
-    reference_list = np.asarray(element_data_reference.reference)
+    reference_list = element_data_reference['reference']
     ii = np.where(reference_list == reference)[0]  #
     if len(ii) == 0:
         print('could not find the given reference')
         return 0
-    citation = np.asarray(element_data_reference.citation[ii])
+    citation = element_data_reference['citation'][ii]
 
     return citation
 
@@ -496,11 +528,11 @@ def read_omij(atom_omij_file, atom, ion, reference=None, level_num=None):
          >> ion='iii'
          >> reference='SSB14'
          >> oiii_omij_data=atomneb.read_omij(atom_omij_file, atom, ion, reference=reference)
-         >> print(np.asarray(oiii_omij_data.level1))
+         >> print(oiii_omij_data['level1'])
             0       1       1       1       1       2       2       2       3       3       4
-         >> print(np.asarray(oiii_omij_data.level2))
+         >> print(oiii_omij_data['level1'])
             0       2       3       4       5       3       4       5       4       5       5
-         >> print(np.asarray(oiii_omij_data.strength)[0])
+         >> print(oiii_omij_data['strength'][0])
             100.00000       125.89254       158.48932       199.52623       251.18864       ...
 
      :return:  This function returns the omij_data: { level1:0, level2:0, strength:array(temp_steps)}.
@@ -524,14 +556,14 @@ def read_omij(atom_omij_file, atom, ion, reference=None, level_num=None):
     element_data_list = read_omij_list(atom_omij_file)
     if (reference is not None) == 1:
         atom_ion_name = atom.lower() + '_' + ion.lower() + '_omij_' + reference.upper()
-        omij_list = np.asarray(element_data_list.omij_data)
+        omij_list = element_data_list['omij_data']
         ii = np.where(omij_list== atom_ion_name)[0]  #
         if len(ii)== 0:
             print ('could not find the given element or ion')
             return 0
     else:
         atom_ion_name = atom.lower() + '_' + ion.lower() + '_omij'
-        omij_list=np.asarray(element_data_list.omij_data)
+        omij_list=element_data_list['omij_data']
         #omij_res = [x for x in omij_list if re.search(atom_ion_name, x)]
         omij_res = [x for x in omij_list if atom_ion_name in x]
         iii = np.where(omij_list == omij_res[0])[0]  #
@@ -539,35 +571,37 @@ def read_omij(atom_omij_file, atom, ion, reference=None, level_num=None):
             print('could not find the given element or ion')
             return 0
         ii = min(iii)
-    extension = np.asarray(element_data_list.extension)[ii]
+    extension = element_data_list['extension'][ii]
 
     data, header1 = getdata(atom_omij_file, int(extension), header=True)
     level1=data.LEVEL1
     level2=data.LEVEL2
     strength=data.STRENGTH
     n_line = len(level1)
-    temp_steps=len(strength)
+    temp_steps=len(strength[0])
     n_level = max([max(level1), max(level2)])
     # omij_template={level1:0, level2:0, strength:dblarr(temp_steps)}
-    strength_temp = np.zeros(temp_steps)
-    omij_template = {'level1':0, 'level2':0, 'strength': [strength_temp] }
+    #strength_temp = np.zeros(temp_steps)
+    #omij_template = {'level1':0, 'level2':0, 'strength': [strength_temp] }
+    omij_template = [('level1', np.int), ('level2', np.int), ('strength', np.dtype(str(temp_steps)+'f8'))]
     if (level_num is not None) == 1:
         if level_num <= n_level:
             level_length = level_num
     else:
         level_length = n_level
     #omij_data = pd.concat([pd.DataFrame(v) for k, v in omij_template.items()], axis=3, keys=list(omij_template.keys()))
-    omij_data = pd.DataFrame(data=omij_template, index=np.arange(n_line))
+    #omij_data = pd.DataFrame(data=omij_template, index=np.arange(n_line))
+    omij_data = np.zeros((np.int(n_line)), dtype=omij_template)
     #for i in range(0, n_line):
     #    omij_data.loc[i, 'level1'] = level1[i]
     #    omij_data.loc[i, 'level2'] = level2[i]
     #    omij_data.loc[i, 'strength'] = strength[:,i]
     for i in range(0, n_line):
-        omij_data.loc[i, 'level1'] = level1[i]
-        omij_data.loc[i, 'level2'] = level2[i]
+        omij_data['level1'][i] = level1[i]
+        omij_data['level2'][i] = level2[i]
         #print(strength[i,:])
         #omij_data.strength[i] = strength[i,:]
-        omij_data['strength'][:][i] = strength[i,:]
+        omij_data['strength'][i,:] = strength[i,:]
         #omij_data['strength'][i] = strength[i, :]
         #omij_data.loc[i, 'strength'] = strength[i,:]
     #omij_data.level1 = level1
@@ -588,17 +622,19 @@ def read_omij_list(atom_omij_file):
      :type atom_omij_file: str
      
     """
-    element_template = {'omij_data': '', 'extension': 0 }
+    #element_template = {'omij_data': '', 'extension': 0 }
+    element_template = [('omij_data', '<U20'), ('extension', np.int)]
     data, hdr = getdata(atom_omij_file, 1, header=True)
     omij_data=data.OMIJ_DATA
     extension = data.EXTENSION
     element_length = len(omij_data)
 
-    element_data = pd.DataFrame(data=element_template, index=np.arange(element_length))
+    #element_data = pd.DataFrame(data=element_template, index=np.arange(element_length))
+    element_data = np.zeros((np.int(element_length)), dtype=element_template)
     #omij_data=omij_data.strip
     omij_data=np.char.strip(omij_data)
-    element_data.omij_data=omij_data
-    element_data.extension = extension
+    element_data['omij_data']=omij_data
+    element_data['extension'] = extension
     return element_data
 
 def search_omij(atom_omij_file, atom, ion):
@@ -635,7 +671,7 @@ def search_omij(atom_omij_file, atom, ion):
     """
     element_data_list = read_omij_list(atom_omij_file)
     atom_ion_name = atom.lower() + '_' + ion.lower() + '_omij_'
-    omij_list = np.asarray(element_data_list.omij_data)
+    omij_list = element_data_list['omij_data']
     #omij_res = [x for x in omij_list if re.search(atom_ion_name, x)]
     omij_res = [x for x in omij_list if atom_ion_name in x]
     if len(omij_res) == 0:
@@ -656,18 +692,24 @@ def read_omij_references(atom_omij_file):
      :type atom_omij_file: str
 
     """
-    reference_template = {'reference': '', 'citation': 0}
+    #reference_template = {'reference': '', 'citation': 0}
+    reference_template = [('reference', '<U20'), ('citation', '<U128')]
     data, hdr = getdata(atom_omij_file, 2, header=True)
     reference = data.ATOMICDATA
     citation = data.REFERENCE
     reference_length = len(reference)
 
-    reference_data = pd.DataFrame(data=reference_template, index=np.arange(reference_length))
+    #reference_data = pd.DataFrame(data=reference_template, index=np.arange(reference_length))
+    reference_data = np.zeros((np.int(reference_length)), dtype=reference_template)
     # aij_data=aij_data.strip
     reference = np.char.strip(reference)
     citation = np.char.strip(citation)
-    reference_data.reference = reference
-    reference_data.citation = citation
+    reference_data['reference'] = reference
+    for i in range(0,np.int(reference_length)):
+        if isinstance(citation[i], np.bytes_):
+            reference_data['citation'][i] = citation[i].decode('cp1252') #.encode('utf-8')
+        else:
+            reference_data['citation'][i] = citation[i]
     return reference_data
 
 def list_omij_references(atom_omij_file, atom, ion):
@@ -704,7 +746,7 @@ def list_omij_references(atom_omij_file, atom, ion):
     """
     element_data_list = read_omij_list(atom_omij_file)
     atom_ion_name = atom.lower() + '_' + ion.lower() + '_omij_'
-    omij_list = np.asarray(element_data_list.omij_data)
+    omij_list = element_data_list['omij_data']
     #omij_res = [x for x in omij_list if re.search(atom_ion_name, x)]
     omij_res = [x for x in omij_list if atom_ion_name in x]
     ii_length = len(omij_res)
@@ -755,13 +797,13 @@ def get_omij_reference_citation(atom_omij_file, atom, ion, reference):
 
     """
     element_data_reference = read_omij_references(atom_omij_file)
-    reference_list = np.asarray(element_data_reference.reference)
+    reference_list = element_data_reference['reference']
     atom_ion_name = atom.lower() + '_' + ion.lower() + '_omij_' + reference.upper()
     ii = np.where(reference_list == atom_ion_name)[0]  #
     if len(ii) == 0:
         print('could not find the given reference')
         return 0
-    citation = np.asarray(element_data_reference.citation[ii])
+    citation = element_data_reference['citation'][ii]
 
     return citation
 
@@ -781,11 +823,11 @@ def read_aeff_collection(atom_rc_file, atom, ion, br=None, reference=None):
          >> atom='c'
          >> ion='iii' # C III
          >> cii_rc_data = atomneb.read_aeff_collection(atom_rc_file, atom, ion)
-         >> n_line = len(cii_rc_data.wavelength)
+         >> n_line = len(cii_rc_data['wavelength'])
          >> for i in range(0, n_line):
-         >>       print(cii_rc_data.wavelength[i], cii_rc_data.a[i],
-         >>             cii_rc_data.b[i], cii_rc_data.c[i],
-         >>             cii_rc_data.d[i], cii_rc_data.f[i])
+         >>       print(cii_rc_data['wavelength'][i], cii_rc_data['a'][i],
+         >>             cii_rc_data['b'][i], cii_rc_data['c'][i],
+         >>             cii_rc_data['d'][i], cii_rc_data['f'][i])
             914.00000      0.69280000     0.021400000    -0.016300000     -0.24310000     -0.88000000
             962.00000       1.0998000   -0.0042000000    -0.027900000     -0.22940000     -0.96560000
             ...
@@ -817,14 +859,14 @@ def read_aeff_collection(atom_rc_file, atom, ion, br=None, reference=None):
         prefix = '_aeff'
     if (reference is not None) == 1:
         atom_ion_name = atom.lower() + '_' + ion.lower() + prefix + reference.upper()
-        aeff_list = np.asarray(element_data_list.aeff_data)
+        aeff_list = element_data_list['aeff_data']
         ii = np.where(aeff_list== atom_ion_name)[0]  #
         if len(ii) == 0:
             print ('could not find the given element or ion')
             return 0
     else:
         atom_ion_name = atom.lower() + '_' + ion.lower() + prefix
-        aeff_list=np.asarray(element_data_list.aeff_data)
+        aeff_list=element_data_list['aeff_data']
         #aeff_res = [x for x in aeff_list if re.search(atom_ion_name, x)]
         aeff_res = [x for x in aeff_list if atom_ion_name in x]
         iii = np.where(aeff_list == aeff_res[0])[0]  #
@@ -832,13 +874,16 @@ def read_aeff_collection(atom_rc_file, atom, ion, br=None, reference=None):
             print('could not find the given element or ion')
             return 0
         ii = min(iii)
-    extension = np.asarray(element_data_list.extension)[ii]
+    extension = element_data_list['extension'][ii]
     atom_ion_name = atom.lower() + '_' + ion.lower() + prefix
 
     data, header1 = getdata(atom_rc_file, extension, header=True)
 
     if atom_ion_name == 'c_iii_aeff':
-        rc_template={'wavelength': float(0.0), 'a': float(0.0), 'b':float(0.0), 'c': float(0.0), 'd':float(0.0), 'f':float(0.0)}
+        #rc_template={'wavelength': float(0.0), 'a': float(0.0), 'b':float(0.0), 
+        #            'c': float(0.0), 'd':float(0.0), 'f':float(0.0)}
+        rc_template = [('wavelength', np.double), ('a', np.double), ('b', np.double),
+                       ('c', np.double), ('d', np.double), ('f', np.double)]
         wavelength=data.WAVELENGTH
         a = data.A
         b = data.B
@@ -846,28 +891,34 @@ def read_aeff_collection(atom_rc_file, atom, ion, br=None, reference=None):
         d = data.D
         f = data.F
         n_line = len(wavelength)
-        rc_data = pd.DataFrame(data=rc_template, index=np.arange(n_line))
-        rc_data.wavelength = wavelength
-        rc_data.a = a
-        rc_data.b = b
-        rc_data.c = c
-        rc_data.d = d
-        rc_data.f = f
+        #rc_data = pd.DataFrame(data=rc_template, index=np.arange(n_line))
+        rc_data = np.zeros((np.int(n_line)), dtype=rc_template)
+        rc_data['wavelength'] = wavelength
+        rc_data['a'] = a
+        rc_data['b'] = b
+        rc_data['c'] = c
+        rc_data['d'] = d
+        rc_data['f'] = f
     elif atom_ion_name == 'n_iii_aeff':
-        rc_template={'a': float(0.0), 'b':float(0.0), 'c': float(0.0)}
+        #rc_template={'a': float(0.0), 'b':float(0.0), 'c': float(0.0)}
+        #            'c': float(0.0), 'd':float(0.0), 'f':float(0.0)}
+        rc_template = [('a', np.double), ('b', np.double), ('c', np.double)]
         a = data.A
         b = data.B
         c = data.C
         n_line = len(a)
-        rc_data = pd.DataFrame(data=rc_template, index=np.arange(n_line))
-        rc_data.a = a
-        rc_data.b = b
-        rc_data.c = c
+        #rc_data = pd.DataFrame(data=rc_template, index=np.arange(n_line))
+        rc_data = np.zeros((np.int(n_line)), dtype=rc_template)
+        rc_data['a'] = a
+        rc_data['b'] = b
+        rc_data['c'] = c
     elif atom_ion_name == 'n_iii_br':
-        rc_template={'wavelength':float(0.0), 'br':float(0.0),
-                      'g1':int(0), 'g2':int(0),
-                      'mult1':'', 'lowerterm':'', 'upperterm':''
-                      }
+        #rc_template={'wavelength':float(0.0), 'br':float(0.0),
+        #              'g1':int(0), 'g2':int(0),
+        #              'mult1':'', 'lowerterm':'', 'upperterm':''}
+        rc_template = [('wavelength', np.double), ('br', np.double), 
+                       ('g1', np.int), ('g2', np.int), 
+                       ('mult1', '<U10'), ('lowerterm', '<U9'), ('upperterm', '<U9')]
         wavelength=data.WAVELENGTH
         br = data.BR
         g1 = data.G1
@@ -879,18 +930,22 @@ def read_aeff_collection(atom_rc_file, atom, ion, br=None, reference=None):
         lowerterm = np.char.strip(lowerterm)
         upperterm = np.char.strip(upperterm)
         n_line = len(wavelength)
-        rc_data = pd.DataFrame(data=rc_template, index=np.arange(n_line))
-        rc_data.wavelength = wavelength
-        rc_data.br = br
-        rc_data.g1 = g1
-        rc_data.g2 = g2
-        rc_data.mult1 = mult1
-        rc_data.lowerterm = lowerterm
-        rc_data.upperterm = upperterm
+        #rc_data = pd.DataFrame(data=rc_template, index=np.arange(n_line))
+        rc_data = np.zeros((np.int(n_line)), dtype=rc_template)
+        rc_data['wavelength'] = wavelength
+        rc_data['br'] = br
+        rc_data['g1'] = g1
+        rc_data['g2'] = g2
+        rc_data['mult1'] = mult1
+        rc_data['lowerterm'] = lowerterm
+        rc_data['upperterm'] = upperterm
     elif atom_ion_name == 'o_iii_aeff':
-        rc_template={'term':'', 'case1': '',
-                     'a2':float(0.0), 'a4':float(0.0), 'a5':float(0.0), 'a6':float(0.0),
-                     'b':float(0.0), 'c':float(0.0), 'd':float(0.0)}
+        #rc_template={'term':'', 'case1': '',
+        #             'a2':float(0.0), 'a4':float(0.0), 'a5':float(0.0), 'a6':float(0.0),
+        #             'b':float(0.0), 'c':float(0.0), 'd':float(0.0)}
+        rc_template = [('term', '<U6'), ('case1', '<U1'), 
+                       ('a2', np.double), ('a4', np.double), ('a5', np.double), ('a6', np.double), 
+                       ('b', np.double), ('c', np.double), ('d', np.double)]
         term=data.TERM
         case1 = data.CASE1
         a2 = data.A2
@@ -903,21 +958,26 @@ def read_aeff_collection(atom_rc_file, atom, ion, br=None, reference=None):
         term = np.char.strip(term)
         case1 = np.char.strip(case1)
         n_line = len(a2)
-        rc_data = pd.DataFrame(data=rc_template, index=np.arange(n_line))
-        rc_data.term = term
-        rc_data.case1 = case1
-        rc_data.a2 = a2
-        rc_data.a4 = a4
-        rc_data.a5 = a5
-        rc_data.a6 = a6
-        rc_data.b = b
-        rc_data.c = c
-        rc_data.d = d
+        #rc_data = pd.DataFrame(data=rc_template, index=np.arange(n_line))
+        rc_data = np.zeros((np.int(n_line)), dtype=rc_template)
+        rc_data['term'] = term
+        rc_data['case1'] = case1
+        rc_data['a2'] = a2
+        rc_data['a4'] = a4
+        rc_data['a5'] = a5
+        rc_data['a6'] = a6
+        rc_data['b'] = b
+        rc_data['c'] = c
+        rc_data['d'] = d
     elif atom_ion_name == 'o_iii_br':
-        rc_template={'wavelength':float(0.0),
-                     'br_a':float(0.0), 'br_b':float(0.0), 'br_c':float(0.0),
-                     'g1':int(0), 'g2':int(0),
-                     'mult1':'', 'lowerterm':'', 'upperterm':'' }
+        #rc_template={'wavelength':float(0.0),
+        #             'br_a':float(0.0), 'br_b':float(0.0), 'br_c':float(0.0),
+        #             'g1':int(0), 'g2':int(0),
+        #             'mult1':'', 'lowerterm':'', 'upperterm':'' }
+        rc_template = [('wavelength', np.double), 
+                       ('br_a', np.double), ('br_b', np.double), ('br_c', np.double),
+                       ('g1', np.int), ('g2', np.int), 
+                       ('mult1', '<U10'), ('lowerterm', '<U9'), ('upperterm', '<U9')] 
         wavelength=data.WAVELENGTH
         br_a = data.BR_A
         br_b = data.BR_B
@@ -931,18 +991,22 @@ def read_aeff_collection(atom_rc_file, atom, ion, br=None, reference=None):
         lowerterm = np.char.strip(lowerterm)
         upperterm = np.char.strip(upperterm)
         n_line = len(br_a)
-        rc_data = pd.DataFrame(data=rc_template, index=np.arange(n_line))
-        rc_data.wavelength = wavelength
-        rc_data.br_a = br_a
-        rc_data.br_b = br_b
-        rc_data.br_c = br_c
-        rc_data.g1 = g1
-        rc_data.g2 = g2
-        rc_data.mult1 = mult1
-        rc_data.lowerterm = lowerterm
-        rc_data.upperterm = upperterm
+        #rc_data = pd.DataFrame(data=rc_template, index=np.arange(n_line))
+        rc_data = np.zeros((np.int(n_line)), dtype=rc_template)
+        rc_data['wavelength'] = wavelength
+        rc_data['br_a'] = br_a
+        rc_data['br_b'] = br_b
+        rc_data['br_c'] = br_c
+        rc_data['g1'] = g1
+        rc_data['g2'] = g2
+        rc_data['mult1'] = mult1
+        rc_data['lowerterm'] = lowerterm
+        rc_data['upperterm'] = upperterm
     elif atom_ion_name == 'ne_iii_aeff':
-        rc_template={'wavelength': float(0.0), 'a': float(0.0), 'b':float(0.0), 'c': float(0.0), 'd':float(0.0), 'f':float(0.0), 'br':float(0.0)}
+        #rc_template={'wavelength': float(0.0), 'a': float(0.0), 'b':float(0.0), 'c': float(0.0), 
+        #             'd':float(0.0), 'f':float(0.0), 'br':float(0.0)}
+        rc_template = [('wavelength', np.double), ('a', np.double), ('b', np.double),
+                       ('c', np.double), ('d', np.double), ('f', np.double), ('br', np.double)]
         wavelength=data.WAVELENGTH
         a = data.A
         b = data.B
@@ -951,14 +1015,15 @@ def read_aeff_collection(atom_rc_file, atom, ion, br=None, reference=None):
         f = data.F
         br = data.BR
         n_line = len(wavelength)
-        rc_data = pd.DataFrame(data=rc_template, index=np.arange(n_line))
-        rc_data.wavelength = wavelength
-        rc_data.a = a
-        rc_data.b = b
-        rc_data.c = c
-        rc_data.d = d
-        rc_data.f = f
-        rc_data.br = br
+        #rc_data = pd.DataFrame(data=rc_template, index=np.arange(n_line))
+        rc_data = np.zeros((np.int(n_line)), dtype=rc_template)
+        rc_data['wavelength'] = wavelength
+        rc_data['a'] = a
+        rc_data['b'] = b
+        rc_data['c'] = c
+        rc_data['d'] = d
+        rc_data['f'] = f
+        rc_data['br'] = br
     else:
         raise RuntimeError('no match found for expression')
     # endfor
@@ -976,17 +1041,19 @@ def read_aeff_collection_list(atom_rc_file):
      :type atom_rc_file: str
      
     """
-    element_template = {'aeff_data': '', 'extension': 0 }
+    #element_template = {'aeff_data': '', 'extension': 0 }
+    element_template = [('aeff_data', '<U20'), ('extension', np.int)]
     data, hdr = getdata(atom_rc_file, 1, header=True)
     aeff_data=data.AEFF_DATA
     extension = data.EXTENSION
     element_length = len(aeff_data)
 
-    element_data = pd.DataFrame(data=element_template, index=np.arange(element_length))
+    #element_data = pd.DataFrame(data=element_template, index=np.arange(element_length))
+    element_data = np.zeros((np.int(element_length)), dtype=element_template)
     #aij_data=aij_data.strip
     aeff_data=np.char.strip(aeff_data)
-    element_data.aeff_data=aeff_data
-    element_data.extension = extension
+    element_data['aeff_data']=aeff_data
+    element_data['extension'] = extension
 
     return element_data
 
@@ -1032,7 +1099,7 @@ def search_aeff_collection(atom_rc_file, atom, ion, br=None):
 
     element_data_list = read_aeff_collection_list(atom_rc_file)
     atom_ion_name = atom.lower() + '_' + ion.lower() + prefix
-    aeff_list = np.asarray(element_data_list.aeff_data)
+    aeff_list = element_data_list['aeff_data']
     #aeff_res = [x for x in aeff_list if re.search(atom_ion_name, x)]
     aeff_res = [x for x in aeff_list if atom_ion_name in x]
     if len(aeff_res) == 0:
@@ -1053,18 +1120,20 @@ def read_aeff_collection_references(atom_rc_file):
      :type atom_rc_file: str
 
     """
-    reference_template = {'reference': '', 'citation': 0}
+    #reference_template = {'reference': '', 'citation': 0}
+    reference_template = [('reference', '<U20'), ('citation', '<U128')]
     data, hdr = getdata(atom_rc_file, 2, header=True)
     reference = data.ATOMICDATA
     citation = data.REFERENCE
     reference_length = len(reference)
 
-    reference_data = pd.DataFrame(data=reference_template, index=np.arange(reference_length))
+    #reference_data = pd.DataFrame(data=reference_template, index=np.arange(reference_length))
+    reference_data = np.zeros((np.int(reference_length)), dtype=reference_template)
     # aij_data=aij_data.strip
     reference = np.char.strip(reference)
     citation = np.char.strip(citation)
-    reference_data.reference = reference
-    reference_data.citation = citation
+    reference_data['reference'] = reference
+    reference_data['citation'] = citation
     return reference_data
 
 def list_aeff_collection_references(atom_rc_file, atom, ion, br=None):
@@ -1107,7 +1176,7 @@ def list_aeff_collection_references(atom_rc_file, atom, ion, br=None):
     else:
         prefix = '_aeff'
     atom_ion_name = atom.lower() + '_' + ion.lower() + prefix
-    aeff_list = np.asarray(element_data_list.aeff_data)
+    aeff_list = element_data_list['aeff_data']
     #aeff_res = [x for x in aeff_list if re.search(atom_ion_name, x)]
     aeff_res = [x for x in aeff_list if atom_ion_name in x]
     ii_length = len(aeff_res)
@@ -1168,7 +1237,7 @@ def get_aeff_collection_reference_citation(atom_rc_file, atom, ion, br=None, ref
         prefix = '_br'
     else:
         prefix = '_aeff'
-    reference_list = np.asarray(element_data_reference.reference)
+    reference_list = element_data_reference['reference']
     if (reference is not None) == 1:
         atom_ion_name = atom.lower() + '_' + ion.lower() + prefix + '_' + reference.upper()
     else:
@@ -1177,7 +1246,7 @@ def get_aeff_collection_reference_citation(atom_rc_file, atom, ion, br=None, ref
     if len(ii) == 0:
         print('could not find the given reference')
         return 0
-    citation = np.asarray(element_data_reference.citation[ii])
+    citation = element_data_reference['citation'][ii]
 
     return citation
 
@@ -1197,7 +1266,7 @@ def read_aeff_sh95(atom_rc_file, atom, ion, reference=None, case1=None):
          >> atom='h'
          >> ion='ii' # H I
          >> hi_rc_data = atomneb.read_aeff_sh95(atom_rc_file, atom, ion)
-         >> print(hi_rc_data.aeff[0])
+         >> print(hi_rc_data['aeff'][0])
             100.00000       500.00000       0.0000000   4.2140000e-27    1.7560000e-27  ...
             ...
                     
@@ -1228,7 +1297,7 @@ def read_aeff_sh95(atom_rc_file, atom, ion, reference=None, case1=None):
         else:
             atom_ion_name = atom_ion_name + '_b'
         atom_ion_name = atom_ion_name + '_' + reference.upper()
-        aeff_list = np.asarray(element_data_list.aeff_data)
+        aeff_list = element_data_list['aeff_data']
         ii = np.where(aeff_list == atom_ion_name)[0]
         if len(ii) == 0:
             print ('could not find the given element or ion')
@@ -1239,7 +1308,7 @@ def read_aeff_sh95(atom_rc_file, atom, ion, reference=None, case1=None):
             atom_ion_name = atom_ion_name + '_' + case1
         else:
             atom_ion_name = atom_ion_name + '_b'
-        aeff_list = np.asarray(element_data_list.aeff_data)
+        aeff_list = element_data_list['aeff_data']
         #aeff_res = [x for x in aeff_list if re.search(atom_ion_name, x)]
         aeff_res = [x for x in aeff_list if atom_ion_name in x]
         iii = np.where(aeff_list == aeff_res[0])[0]  #
@@ -1247,14 +1316,16 @@ def read_aeff_sh95(atom_rc_file, atom, ion, reference=None, case1=None):
             print('could not find the given element or ion')
             return 0
         ii = min(iii)
-    extension = np.asarray(element_data_list.extension)[ii]
+    extension = element_data_list['extension'][ii]
     rc_aeff, header1 = getdata(atom_rc_file, extension, header=True)
     col1 = len(rc_aeff[0])
     row1 = len(rc_aeff)
 
-    aeff_template={'aeff':np.zeros((row1,col1))}
-    rc_data = pd.concat([pd.DataFrame(v) for k, v in aeff_template.items()], axis=1, keys=list(aeff_template.keys()))
-    rc_data.aeff = rc_aeff
+    #aeff_template={'aeff':np.zeros((row1,col1))}
+    aeff_template = [('aeff', np.dtype('('+str(row1)+','+str(col1)+')f8'))]
+    #rc_data = pd.concat([pd.DataFrame(v) for k, v in aeff_template.items()], axis=1, keys=list(aeff_template.keys()))
+    rc_data = np.zeros((np.int(1)), dtype=aeff_template)
+    rc_data['aeff'][0] = rc_aeff
 
     return rc_data
 
@@ -1270,17 +1341,20 @@ def read_aeff_sh95_list(atom_rc_file):
      :type atom_rc_file: str
                          
     """
-    element_template = {'aeff_data': '', 'extension': 0 }
+    #element_template = {'aeff_data': '', 'extension': 0 }
+    element_template = [('aeff_data', '<U20'), ('extension', np.int)]
+
     data, hdr = getdata(atom_rc_file, 1, header=True)
     aeff_data=data.AEFF_DATA
     extension = data.EXTENSION
     element_length = len(aeff_data)
 
-    element_data = pd.DataFrame(data=element_template, index=np.arange(element_length))
+    #element_data = pd.DataFrame(data=element_template, index=np.arange(element_length))
+    element_data = np.zeros((np.int(element_length)), dtype=element_template)
     #aij_data=aij_data.strip
     aeff_data=np.char.strip(aeff_data)
-    element_data.aeff_data=aeff_data
-    element_data.extension = extension
+    element_data['aeff_data']=aeff_data
+    element_data['extension'] = extension
 
     return element_data
 
@@ -1318,7 +1392,7 @@ def search_aeff_sh95(atom_rc_file, atom, ion):
     """
     element_data_list = read_aeff_sh95_list(atom_rc_file)
     atom_ion_name = atom.lower() + '_' + ion.lower() + '_aeff'
-    aeff_list = np.asarray(element_data_list.aeff_data)
+    aeff_list = element_data_list['aeff_data']
     #aeff_res = [x for x in aeff_list if re.search(atom_ion_name, x)]
     aeff_res = [x for x in aeff_list if atom_ion_name in x]
     if len(aeff_res) == 0:
@@ -1339,17 +1413,19 @@ def read_aeff_sh95_references(atom_rc_file):
      :type atom_rc_file: str
      
     """
-    reference_template = {'reference': '', 'citation': 0}
+    #reference_template = {'reference': '', 'citation': 0}
+    reference_template = [('reference', '<U20'), ('citation', '<U128')]
     data, hdr = getdata(atom_rc_file, 2, header=True)
     reference = data.ATOMICDATA
     citation = data.REFERENCE
     reference_length = len(reference)
 
-    reference_data = pd.DataFrame(data=reference_template, index=np.arange(reference_length))
+    #reference_data = pd.DataFrame(data=reference_template, index=np.arange(reference_length))
+    reference_data = np.zeros((np.int(reference_length)), dtype=reference_template)
     reference = np.char.strip(reference)
     citation = np.char.strip(citation)
-    reference_data.reference = reference
-    reference_data.citation = citation
+    reference_data['reference'] = reference
+    reference_data['citation'] = citation
     return reference_data
 
 def list_aeff_sh95_references(atom_rc_file, atom, ion):
@@ -1385,7 +1461,7 @@ def list_aeff_sh95_references(atom_rc_file, atom, ion):
     """
     element_data_list = read_aeff_sh95_list(atom_rc_file)
     atom_ion_name = atom.lower() + '_' + ion.lower() + '_aeff'
-    aeff_list = np.asarray(element_data_list.aeff_data)
+    aeff_list = element_data_list['aeff_data']
     #aeff_res = [x for x in aeff_list if re.search(atom_ion_name, x)]
     aeff_res = [x for x in aeff_list if atom_ion_name in x]
     ii_length = len(aeff_res)
@@ -1443,7 +1519,7 @@ def get_aeff_sh95_reference_citation(atom_rc_file, atom, ion, reference=None, ca
     """
     element_data_reference = read_aeff_sh95_references(atom_rc_file)
     atom_ion_name = atom.lower() + '_' + ion.lower() + '_aeff'
-    reference_list = np.asarray(element_data_reference.reference)
+    reference_list = element_data_reference['reference']
     if (case1 is not None) == 1:
         atom_ion_name = atom_ion_name + '_' + case1
     else:
@@ -1454,7 +1530,7 @@ def get_aeff_sh95_reference_citation(atom_rc_file, atom, ion, reference=None, ca
     if len(ii) == 0:
         print('could not find the given reference')
         return 0
-    citation = np.asarray(element_data_reference.citation[ii])
+    citation = element_data_reference['citation'][ii]
 
     return citation
 
@@ -1474,11 +1550,11 @@ def read_aeff_ppb91(atom_rc_file, atom, ion, reference=None):
          >> atom='c'
          >> ion='iii' # C II
          >> cii_rc_data = atomneb.read_aeff_ppb91(atom_rc_file, atom, ion)
-         >> n_line = len(cii_rc_data.wavelength)
+         >> n_line = len(cii_rc_data['wavelength'])
          >> for i in range(0, n_line):
-         >>           print(cii_rc_data.ion[i], cii_rc_data.case1[i], cii_rc_data.wavelength[i],
-         >>                 cii_rc_data.a[i], cii_rc_data.b[i], cii_rc_data.c[i],
-         >>                 cii_rc_data.d[i], cii_rc_data.br[i], cii_rc_data.q[i], cii_rc_data.y[i])
+         >>           print(cii_rc_data['ion'][i], cii_rc_data['case1'][i], cii_rc_data['wavelength'][i],
+         >>                 cii_rc_data['a'][i], cii_rc_data['b'][i], cii_rc_data['c'][i],
+         >>                 cii_rc_data['d'][i], cii_rc_data['br'][i], cii_rc_data['q'][i], cii_rc_data['y'][i])
             C2+A       9903.4600      0.69700000     -0.78400000      ...
             C2+A       4267.1500       1.0110000     -0.75400000      ...
             ...
@@ -1502,14 +1578,14 @@ def read_aeff_ppb91(atom_rc_file, atom, ion, reference=None):
     element_data_list = read_aeff_ppb91_list(atom_rc_file)
     if (reference is not None) == 1:
         atom_ion_name = atom.lower() + '_' + ion.lower()+ '_aeff_' + reference.upper()
-        aeff_list = np.asarray(element_data_list.aeff_data)
+        aeff_list = element_data_list['aeff_data']
         ii = np.where(aeff_list == atom_ion_name)[0]
         if len(ii) == 0:
             print ('could not find the given element or ion')
             return 0
     else:
         atom_ion_name = atom.lower() + '_' + ion.lower() + '_aeff'
-        aeff_list = np.asarray(element_data_list.aeff_data)
+        aeff_list = element_data_list['aeff_data']
         #aeff_res = [x for x in aeff_list if re.search(atom_ion_name, x)]
         aeff_res = [x for x in aeff_list if atom_ion_name in x]
         iii = np.where(aeff_list == aeff_res[0])[0]  #
@@ -1518,11 +1594,14 @@ def read_aeff_ppb91(atom_rc_file, atom, ion, reference=None):
             return 0
         ii = min(iii)
 
-    extension = np.asarray(element_data_list.extension)[ii]
+    extension = element_data_list['extension'][ii]
 
-    rc_template={'ion':'', 'case1': '', 'wavelength': float(0.0),
-                 'a': float(0.0), 'b':float(0.0), 'c': float(0.0),
-                 'd':float(0.0), 'br':float(0.0), 'q':'', 'y':float(0.0)}
+    #rc_template={'ion':'', 'case1': '', 'wavelength': float(0.0),
+    #             'a': float(0.0), 'b':float(0.0), 'c': float(0.0),
+    #             'd':float(0.0), 'br':float(0.0), 'q':'', 'y':float(0.0)}
+    rc_template = [('ion', '<U10'), ('case1', '<U1'), ('wavelength', np.double),
+                   ('a', np.double), ('b', np.double), ('c', np.double),
+                   ('d', np.double), ('br', np.double), ('q', '<U1'), ('y', np.double)]
     data, header1 = getdata(atom_rc_file, int(extension), header=True)
     ion = data.ION
     case1 = data.CASE1
@@ -1537,16 +1616,18 @@ def read_aeff_ppb91(atom_rc_file, atom, ion, reference=None):
     ion = np.char.strip(ion)
     case1 = np.char.strip(case1)
     n_line = len(wavelength)
-    rc_data = pd.DataFrame(data=rc_template, index=np.arange(n_line))
-    rc_data.ion = ion
-    rc_data.case1 = case1
-    rc_data.wavelength = wavelength
-    rc_data.a = a
-    rc_data.b = b
-    rc_data.c = c
-    rc_data.d = d
-    rc_data.br = br
-    rc_data.y = y
+    #rc_data = pd.DataFrame(data=rc_template, index=np.arange(n_line))
+    rc_data = np.zeros((np.int(n_line)), dtype=rc_template)
+    rc_data['ion'] = ion
+    rc_data['case1'] = case1
+    rc_data['wavelength'] = wavelength
+    rc_data['a'] = a
+    rc_data['b'] = b
+    rc_data['c'] = c
+    rc_data['d'] = d
+    rc_data['br'] = br
+    rc_data['q'] = q
+    rc_data['y'] = y
     return rc_data
 
 def read_aeff_ppb91_list(atom_rc_file):
@@ -1560,16 +1641,18 @@ def read_aeff_ppb91_list(atom_rc_file):
      :param atom_rc_file: the FITS data file name ('rc_PPB91.fits')
      :type atom_rc_file: str
     """
-    element_template = {'aeff_data': '', 'extension': 0}
+    #element_template = {'aeff_data': '', 'extension': 0}
+    element_template = [('aeff_data', '<U20'), ('extension', np.int)]
     data, hdr = getdata(atom_rc_file, 1, header=True)
     aeff_data=data.AEFF_DATA
     extension = data.EXTENSION
     element_length = len(aeff_data)
 
-    element_data = pd.DataFrame(data=element_template, index=np.arange(element_length))
+    #element_data = pd.DataFrame(data=element_template, index=np.arange(element_length))
+    element_data = np.zeros((np.int(element_length)), dtype=element_template)
     aeff_data=np.char.strip(aeff_data)
-    element_data.aeff_data=aeff_data
-    element_data.extension = extension
+    element_data['aeff_data']=aeff_data
+    element_data['extension'] = extension
     return element_data
 
 def search_aeff_ppb91(atom_rc_file, atom, ion):
@@ -1606,7 +1689,7 @@ def search_aeff_ppb91(atom_rc_file, atom, ion):
     """
     element_data_list = read_aeff_ppb91_list(atom_rc_file)
     atom_ion_name = atom.lower() + '_' + ion.lower()  + '_aeff'
-    aeff_list = np.asarray(element_data_list.aeff_data)
+    aeff_list = element_data_list['aeff_data']
     #aeff_res = [x for x in aeff_list if re.search(atom_ion_name, x)]
     aeff_res = [x for x in aeff_list if atom_ion_name in x]
     if len(aeff_res) == 0:
@@ -1627,17 +1710,19 @@ def read_aeff_ppb91_references(atom_rc_file):
      :type atom_rc_file: str
      
     """
-    reference_template = {'reference': '', 'citation': 0}
+    #reference_template = {'reference': '', 'citation': 0}
+    reference_template = [('reference', '<U20'), ('citation', '<U128')]
     data, hdr = getdata(atom_rc_file, 2, header=True)
     reference = data.ATOMICDATA
     citation = data.REFERENCE
     reference_length = len(reference)
 
-    reference_data = pd.DataFrame(data=reference_template, index=np.arange(reference_length))
+    #reference_data = pd.DataFrame(data=reference_template, index=np.arange(reference_length))
+    reference_data = np.zeros((np.int(reference_length)), dtype=reference_template)
     reference = np.char.strip(reference)
     citation = np.char.strip(citation)
-    reference_data.reference = reference
-    reference_data.citation = citation
+    reference_data['reference'] = reference
+    reference_data['citation'] = citation
     return reference_data
 
 def list_aeff_ppb91_references(atom_rc_file, atom, ion):
@@ -1673,7 +1758,7 @@ def list_aeff_ppb91_references(atom_rc_file, atom, ion):
     """
     element_data_list = read_aeff_ppb91_list(atom_rc_file)
     atom_ion_name = atom.lower() + '_' + ion.lower() + '_aeff'
-    aeff_list = np.asarray(element_data_list.aeff_data)
+    aeff_list = element_data_list['aeff_data']
     #aeff_res = [x for x in aeff_list if re.search(atom_ion_name, x)]
     aeff_res = [x for x in aeff_list if atom_ion_name in x]
     ii_length = len(aeff_res)
@@ -1728,7 +1813,7 @@ def get_aeff_ppb91_reference_citation(atom_rc_file, atom, ion, reference=None):
     """
 
     element_data_reference = read_aeff_ppb91_references(atom_rc_file)
-    reference_list = np.asarray(element_data_reference.reference)
+    reference_list = element_data_reference['reference']
     if (reference is not None) == 1:
         atom_ion_name = atom.lower() + '_' + ion.lower() + '_aeff_' + '_' + reference.upper()
     else:
@@ -1737,7 +1822,7 @@ def get_aeff_ppb91_reference_citation(atom_rc_file, atom, ion, reference=None):
     if len(ii) == 0:
         print('could not find the given reference')
         return 0
-    citation = np.asarray(element_data_reference.citation[ii])
+    citation = element_data_reference['citation'][ii]
 
     return citation
 
@@ -1758,12 +1843,12 @@ def read_aeff_he_i_pfsd12(atom_rc_file, atom, ion, wavelength=None, reference=No
          >> ion='ii' # He I
          >> hei_rc_data = atomneb.read_aeff_he_i_pfsd12(atom_rc_file, atom, ion)
          >> hei_rc_data_wave = atomneb.read_aeff_he_i_pfsd12(atom_rc_file, atom, ion, wavelength=True)
-         >> print(hei_rc_data.aeff[0])
+         >> print(hei_rc_data['aeff'][0])
             5000.0000       10.000000      -25.379540      -25.058970      -25.948440      ...
-         >> n_line = len(hei_rc_data_wave.wavelength)
+         >> n_line = len(hei_rc_data_wave['wavelength'])
          >> for i in range(0, n_line):
-         >>     print(hei_rc_data_wave.wavelength[i],
-         >>           hei_rc_data_wave.lowerterm[i], hei_rc_data_wave.upperterm[i])
+         >>     print(hei_rc_data_wave['wavelength'][i],
+         >>           hei_rc_data_wave['lowerterm'][i], hei_rc_data_wave['upperterm'][i])
             2945.00005p^{3}P2s^{3}S
             3188.00004p^{3}P2s^{3}S
             3614.00005p^{1}P2s^{1}S
@@ -1795,7 +1880,7 @@ def read_aeff_he_i_pfsd12(atom_rc_file, atom, ion, wavelength=None, reference=No
         prefix = '_aeff'
     if (reference is not None) == 1:
         atom_ion_name = atom.lower() + '_' + ion.lower() + prefix + '_' + reference.upper()
-        aeff_list = np.asarray(element_data_list.aeff_data)
+        aeff_list = element_data_list['aeff_data']
         ii = np.where(aeff_list == atom_ion_name)[0]  #
         if len(ii) == 0:
             print('could not find the given reference')
@@ -1806,7 +1891,7 @@ def read_aeff_he_i_pfsd12(atom_rc_file, atom, ion, wavelength=None, reference=No
             atom_ion_name = atom.lower() + '_' + ion.lower() + prefix
         else:
             atom_ion_name = atom.lower() + '_' + ion.lower() + prefix + '_' + reference.upper()
-        aeff_list=np.asarray(element_data_list.aeff_data)
+        aeff_list=element_data_list['aeff_data']
         #aeff_res = [x for x in aeff_list if re.search(atom_ion_name, x)]
         aeff_res = [x for x in aeff_list if atom_ion_name in x]
         iii = np.where(aeff_list == aeff_res[0])[0]  #
@@ -1814,19 +1899,22 @@ def read_aeff_he_i_pfsd12(atom_rc_file, atom, ion, wavelength=None, reference=No
             print('could not find the given element or ion')
             return 0
         ii = min(iii)
-    extension = np.asarray(element_data_list.extension)[ii]
+    extension = element_data_list['extension'][ii]
 
     atom_ion_name = atom.lower() + '_' + ion.lower()+ prefix
     if atom_ion_name == 'he_ii_aeff':
         rc_aeff, header1 = getdata(atom_rc_file, extension, header=True)
         col1 = len(rc_aeff[0])
         row1 = len(rc_aeff)
-        aeff_template = {'aeff': np.zeros((row1, col1))}
-        rc_data = pd.concat([pd.DataFrame(v) for k, v in aeff_template.items()], axis=1,
-                            keys=list(aeff_template.keys()))
-        rc_data.aeff = rc_aeff
+        #aeff_template = {'aeff': np.zeros((row1, col1))}
+        aeff_template = [('aeff', np.dtype('('+str(row1)+','+str(col1)+')f8'))]
+        #rc_data = pd.concat([pd.DataFrame(v) for k, v in aeff_template.items()], axis=1,
+        #                    keys=list(aeff_template.keys()))
+        rc_data = np.zeros((np.int(1)), dtype=aeff_template)
+        rc_data['aeff'][0] = rc_aeff
     elif atom_ion_name == 'he_ii_wavelength':
-        rc_template={'wavelength': float(0.0), 'lowerterm':'', 'upperterm':''}
+        #rc_template={'wavelength': float(0.0), 'lowerterm':'', 'upperterm':''}
+        rc_template = [('wavelength', np.double), ('lowerterm', '<U7'), ('upperterm', '<U7')]
         data, header1 = getdata(atom_rc_file, extension, header=True)
         wavelength = data.WAVELENGTH
         lowerterm = data.LOWERTERM
@@ -1834,10 +1922,11 @@ def read_aeff_he_i_pfsd12(atom_rc_file, atom, ion, wavelength=None, reference=No
         lowerterm = np.char.strip(lowerterm)
         upperterm = np.char.strip(upperterm)
         n_line = len(wavelength)
-        rc_data = pd.DataFrame(data=rc_template, index=np.arange(n_line))
-        rc_data.wavelength = wavelength
-        rc_data.lowerterm = lowerterm
-        rc_data.upperterm = upperterm
+        #rc_data = pd.DataFrame(data=rc_template, index=np.arange(n_line))
+        rc_data = np.zeros((np.int(n_line)), dtype=rc_template)
+        rc_data['wavelength'] = wavelength
+        rc_data['lowerterm'] = lowerterm
+        rc_data['upperterm'] = upperterm
     else:
         raise RuntimeError('no match found for expression')
     return rc_data
@@ -1854,16 +1943,18 @@ def read_aeff_he_i_pfsd12_list(atom_rc_file):
      :type atom_rc_file: str
 
     """
-    element_template = {'aeff_data': '', 'extension': 0 }
+    #element_template = {'aeff_data': '', 'extension': 0 }
+    element_template = [('aeff_data', '<U20'), ('extension', np.int)]
     data, hdr = getdata(atom_rc_file, 1, header=True)
     aeff_data=data.AEFF_DATA
     extension = data.EXTENSION
     element_length = len(aeff_data)
 
-    element_data = pd.DataFrame(data=element_template, index=np.arange(element_length))
+    #element_data = pd.DataFrame(data=element_template, index=np.arange(element_length))
+    element_data = np.zeros((np.int(element_length)), dtype=element_template)
     aeff_data=np.char.strip(aeff_data)
-    element_data.aeff_data=aeff_data
-    element_data.extension = extension
+    element_data['aeff_data']=aeff_data
+    element_data['extension'] = extension
 
     return element_data
 
@@ -1901,7 +1992,7 @@ def search_aeff_he_i_pfsd12(atom_rc_file, atom, ion):
     """
     element_data_list = read_aeff_he_i_pfsd12_list(atom_rc_file)
     atom_ion_name = atom.lower() + '_' + ion.lower() + '_aeff'
-    aeff_list = np.asarray(element_data_list.aeff_data)
+    aeff_list = element_data_list['aeff_data']
     #aeff_res = [x for x in aeff_list if re.search(atom_ion_name, x)]
     aeff_res = [x for x in aeff_list if atom_ion_name in x]
     if len(aeff_res) == 0:
@@ -1922,17 +2013,19 @@ def read_aeff_he_i_pfsd12_references(atom_rc_file):
      :type atom_rc_file: str
      
     """
-    reference_template = {'reference': '', 'citation': 0}
+    #reference_template = {'reference': '', 'citation': 0}
+    reference_template = [('reference', '<U20'), ('citation', '<U128')]
     data, hdr = getdata(atom_rc_file, 2, header=True)
     reference = data.ATOMICDATA
     citation = data.REFERENCE
     reference_length = len(reference)
 
-    reference_data = pd.DataFrame(data=reference_template, index=np.arange(reference_length))
+    #reference_data = pd.DataFrame(data=reference_template, index=np.arange(reference_length))
+    reference_data = np.zeros((np.int(reference_length)), dtype=reference_template)
     reference = np.char.strip(reference)
     citation = np.char.strip(citation)
-    reference_data.reference = reference
-    reference_data.citation = citation
+    reference_data['reference'] = reference
+    reference_data['citation'] = citation
     return reference_data
 
 def list_aeff_he_i_pfsd12_references(atom_rc_file, atom, ion):
@@ -1969,7 +2062,7 @@ def list_aeff_he_i_pfsd12_references(atom_rc_file, atom, ion):
     """
     element_data_list = read_aeff_he_i_pfsd12_list(atom_rc_file)
     atom_ion_name = atom.lower() + '_' + ion.lower()+ '_aeff'
-    aeff_list = np.asarray(element_data_list.aeff_data)
+    aeff_list = element_data_list['aeff_data']
     #aeff_res = [x for x in aeff_list if re.search(atom_ion_name, x)]
     aeff_res = [x for x in aeff_list if atom_ion_name in x]
     ii_length = len(aeff_res)
@@ -2026,7 +2119,7 @@ def get_aeff_he_i_pfsd12_reference_citation(atom_rc_file, atom, ion, reference=N
 
     #  reference_template={Reference:'', Citation: ''}
     element_data_reference = read_aeff_he_i_pfsd12_references(atom_rc_file)
-    reference_list = np.asarray(element_data_reference.reference)
+    reference_list = element_data_reference['reference']
     if (reference is not None) == 1:
         atom_ion_name = atom.lower() + '_' + ion.lower() + '_aeff_' + reference.upper()
     else:
@@ -2035,7 +2128,7 @@ def get_aeff_he_i_pfsd12_reference_citation(atom_rc_file, atom, ion, reference=N
     if len(ii) == 0:
         print('could not find the given reference')
         return 0
-    citation = np.asarray(element_data_reference.citation[ii])
+    citation = element_data_reference['citation'][ii]
 
     return citation
 
@@ -2057,11 +2150,11 @@ def read_aeff_n_ii_fsl13(atom_rc_file, atom, ion, wavelength_range, wavelength=N
          >> wavelength_range=[4400.0, 7100.0]
          >> nii_rc_data = atomneb.read_aeff_n_ii_fsl13(atom_rc_file, atom, ion, wavelength_range)
          >> nii_rc_data_wave = atomneb.read_aeff_n_ii_fsl13(atom_rc_file, atom, ion, wavelength_range, wavelength=True)
-         >> print(nii_rc_data.aeff[0])
+         >> print(nii_rc_data['aeff'][0])
             255.000      79.5000      47.3000      12.5000      ...
-         >> n_line = len(nii_rc_data_wave.wavelength)
+         >> n_line = len(nii_rc_data_wave['wavelength'])
          >> for i in range(0, n_line):
-         >>     print(nii_rc_data_wave.wavelength[i], nii_rc_data_wave.tr[i], nii_rc_data_wave.trans[i])
+         >>     print(nii_rc_data_wave['wavelength'][i], nii_rc_data_wave['tr'][i], nii_rc_data_wave['trans'][i])
             6413.236g - 4f2p6g G[9/2]o4 - 2p4f F[7/2]e3
             6556.326g - 4f2p6g G[9/2]o5 - 2p4f G[7/2]e4
             6456.976g - 4f2p6g G[9/2]o5 - 2p4f F[7/2]e4
@@ -2089,23 +2182,27 @@ def read_aeff_n_ii_fsl13(atom_rc_file, atom, ion, wavelength_range, wavelength=N
     element_data_list = read_aeff_n_ii_fsl13_list(atom_rc_file)
     wave_min = min(wavelength_range)
     wave_max = max(wavelength_range)
-    wave_loc1 = np.where((element_data_list.wavelength >= wave_min)&(element_data_list.wavelength <= wave_max))[0]
+    wave_loc1 = np.where((element_data_list['wavelength'] >= wave_min)&(element_data_list['wavelength'] <= wave_max))[0]
     wave_size = len(wave_loc1)
     if wave_size == 0:
         return 0
-    rc_element_template={'wavelength': float(0.0), 'aeff':[np.zeros((7,4))]}
-    rc_data = pd.DataFrame(data=rc_element_template, index=np.arange(wave_size))
+    #rc_element_template={'wavelength': float(0.0), 'aeff':[np.zeros((7,4))]}
+    rc_element_template = [('wavelength', np.double), ('aeff', '(4,7)f8')]
+    #rc_data = pd.DataFrame(data=rc_element_template, index=np.arange(wave_size))
+    rc_data = np.zeros((np.int(wave_size)), dtype=rc_element_template)
 
-    extension1 = np.asarray(element_data_list.extension)[wave_loc1]
-    wavelength1 = np.asarray(element_data_list.wavelength)[wave_loc1]
+    extension1 = element_data_list['extension'][wave_loc1]
+    wavelength1 = element_data_list['wavelength'][wave_loc1]
 
     if (wavelength is not None) == 1:
-        rc_wave_template={'wavelength': float(0.0), 'tr':'',  'trans': '', 't_x': ''}
-        rc_wave = pd.DataFrame(data=rc_wave_template, index=np.arange(wave_size))
-        rc_wave.wavelength = np.asarray(element_data_list.wavelength)[wave_loc1]
-        rc_wave.tr =  np.asarray(element_data_list.tr)[wave_loc1]
-        rc_wave.trans =  np.asarray(element_data_list.trans)[wave_loc1]
-        rc_wave.t_x =  np.asarray(element_data_list.t_x)[wave_loc1]
+        #rc_wave_template={'wavelength': float(0.0), 'tr':'',  'trans': '', 't_x': ''}
+        rc_wave_template = [('wavelength', np.double), ('tr', '<U21'), ('trans', '<U31'), ('t_x', '<U1')]
+        #rc_wave = pd.DataFrame(data=rc_wave_template, index=np.arange(wave_size))
+        rc_wave = np.zeros((np.int(wave_size)), dtype=rc_wave_template)
+        rc_wave['wavelength'] = element_data_list['wavelength'][wave_loc1]
+        rc_wave['tr'] =  element_data_list['tr'][wave_loc1]
+        rc_wave['trans'] =  element_data_list['trans'][wave_loc1]
+        rc_wave['t_x'] =  element_data_list['t_x'][wave_loc1]
         return rc_wave
     for i in range(0, wave_size ):
         rc_aeff, header1 = getdata(atom_rc_file, int(extension1[i]), header=True)
@@ -2115,9 +2212,9 @@ def read_aeff_n_ii_fsl13(atom_rc_file, atom, ion, wavelength_range, wavelength=N
         # aeff_template={Aeff:dblarr(col1,row1)}
         # rc_data=replicate(aeff_template, 1)
         #rc_data.wavelength[i] = wavelength1[i]
-        rc_data.loc[i, 'wavelength']=wavelength1[i]
+        rc_data['wavelength'][i]=wavelength1[i]
         #rc_data.aeff[i] = rc_aeff
-        rc_data.loc[i, 'aeff']=[rc_aeff]
+        rc_data['aeff'][i]=rc_aeff
 
     return rc_data
 
@@ -2133,9 +2230,12 @@ def read_aeff_n_ii_fsl13_list(atom_rc_file):
      :type atom_rc_file: str
 
     """
-    element_template={'aeff_data':'',  'extension':0,
-                      'ind':int(0), 'wavelength': float(0.0),
-                      'tr':'',  'trans': '', 't_x': ''}
+    #element_template={'aeff_data':'',  'extension':0,
+    #                  'ind':int(0), 'wavelength': float(0.0),
+    #                  'tr':'',  'trans': '', 't_x': ''}
+    element_template = [('aeff_data', '<U20'), ('extension', np.int),
+                        ('ind', np.int), ('wavelength', np.double),
+                        ('tr', '<U21'), ('trans', '<U31'), ('t_x', '<U1'), ] 
     data, header1 = getdata(atom_rc_file, 1, header=True)
     aeff_data=data.AEFF_DATA
     extension=data.EXTENSION
@@ -2145,18 +2245,19 @@ def read_aeff_n_ii_fsl13_list(atom_rc_file):
     trans = data.TRANS
 
     element_length = len(aeff_data)
-    element_data = pd.DataFrame(data=element_template, index=np.arange(element_length))
+    #element_data = pd.DataFrame(data=element_template, index=np.arange(element_length))
+    element_data = np.zeros((np.int(element_length)), dtype=element_template)
 
     aeff_data=np.char.strip(aeff_data)
     tr = np.char.strip(tr)
     trans = np.char.strip(trans)
 
-    element_data.aeff_data = aeff_data
-    element_data.extension = extension
-    element_data.ind = ind
-    element_data.wavelength = wavelength
-    element_data.tr = tr
-    element_data.trans = trans
+    element_data['aeff_data'] = aeff_data
+    element_data['extension'] = extension
+    element_data['ind'] = ind
+    element_data['wavelength'] = wavelength
+    element_data['tr'] = tr
+    element_data['trans'] = trans
     return element_data
 
 def search_aeff_n_ii_fsl13(atom_rc_file, atom, ion, wavelength):
@@ -2176,9 +2277,9 @@ def search_aeff_n_ii_fsl13(atom_rc_file, atom, ion, wavelength):
          >> ion='iii' # N II
          >> wavelength=5679.56
          >> list_nii_aeff_data = atomneb.search_aeff_n_ii_fsl13(atom_rc_file, atom, ion, wavelength)
-         >> print(np.asarray(list_nii_aeff_data.wavelength))
+         >> print(list_nii_aeff_data['wavelength'])
             5679.56
-         >> print(np.asarray(list_nii_aeff_data.aeff))
+         >> print(list_nii_aeff_data['aeff'])
             7810.00      1780.00      850.000      151.000      74.4000      53.1000      47.4000
             7370.00      1700.00      886.000      206.000      110.000      80.1000      70.8000
             7730.00      1680.00      900.000      239.000      138.000      103.000      92.9000
@@ -2205,26 +2306,28 @@ def search_aeff_n_ii_fsl13(atom_rc_file, atom, ion, wavelength):
     """
     element_data_list = read_aeff_n_ii_fsl13_list(atom_rc_file)
 
-    ii = np.where((abs(element_data_list.wavelength - wavelength) < 0.025))[0]
+    ii = np.where((abs(element_data_list['wavelength'] - wavelength) < 0.025))[0]
     ii_length = len(ii)
     if len(ii) == 0:
         print('could not find the given wavelength')
         return 0
     if ii_length > 1:
-        value_min = min(abs(element_data_list[ii].wavelength - wavelength))
-        ii = np.where((abs(element_data_list.wavelength - wavelength) == value_min))[0]
+        value_min = min(abs(element_data_list['wavelength'][ii] - wavelength))
+        ii = np.where((abs(element_data_list['wavelength'] - wavelength) == value_min))[0]
         ii_length = 1
-    extension1 = np.asarray(element_data_list.extension)[ii]
-    wavelength1 = np.asarray(element_data_list.wavelength)[ii]
-
-    rc_element_template={'wavelength': float(0.0), 'aeff':[np.zeros((7,4))]}
-    select_aeff_data = pd.DataFrame(data=rc_element_template, index=np.arange(ii_length))
+    extension1 = element_data_list['extension'][ii]
+    wavelength1 = element_data_list['wavelength'][ii]
+    
+    #rc_element_template={'wavelength': float(0.0), 'aeff':[np.zeros((7,4))]}
+    rc_element_template = [('wavelength', np.double), ('aeff', '(4,7)f8')]
+    #select_aeff_data = pd.DataFrame(data=rc_element_template, index=np.arange(ii_length))
+    select_aeff_data = np.zeros((np.int(ii_length)), dtype=rc_element_template)
     for i in range(0, ii_length):
         rc_aeff, header1 = getdata(atom_rc_file, extension1[i], header=True)
         #select_aeff_data.wavelength[i] = wavelength1[i]
-        select_aeff_data.loc[i, 'wavelength']=wavelength1[i]
+        select_aeff_data['wavelength'][i]=wavelength1[i]
         # select_aeff_data.aeff[i] = rc_aeff
-        select_aeff_data.loc[i, 'aeff'] = [rc_aeff]
+        select_aeff_data['aeff'][i] = rc_aeff
     return select_aeff_data
 
 def read_aeff_n_ii_fsl13_references(atom_rc_file):
@@ -2239,17 +2342,19 @@ def read_aeff_n_ii_fsl13_references(atom_rc_file):
      :type atom_rc_file: str
 
     """
-    reference_template = {'reference': '', 'citation': 0}
+    #reference_template = {'reference': '', 'citation': 0}
+    reference_template = [('reference', '<U20'), ('citation', '<U128')]
     data, hdr = getdata(atom_rc_file, 2, header=True)
     reference = data.ATOMICDATA
     citation = data.REFERENCE
     reference_length = len(reference)
 
-    reference_data = pd.DataFrame(data=reference_template, index=np.arange(reference_length))
+    #reference_data = pd.DataFrame(data=reference_template, index=np.arange(reference_length))
+    reference_data = np.zeros((np.int(reference_length)), dtype=reference_template)
     reference = np.char.strip(reference)
     citation = np.char.strip(citation)
-    reference_data.reference = reference
-    reference_data.citation = citation
+    reference_data['reference'] = reference
+    reference_data['citation'] = citation
     return reference_data
 
 def list_aeff_n_ii_fsl13_references(atom_rc_file, atom, ion):
@@ -2286,7 +2391,7 @@ def list_aeff_n_ii_fsl13_references(atom_rc_file, atom, ion):
     rc_reference_data = read_aeff_n_ii_fsl13_references(atom_rc_file)
 
     atom_ion_name = atom.lower() + '_' + ion.lower() + '_aeff'
-    rc_list = np.asarray(rc_reference_data.reference)
+    rc_list = rc_reference_data['reference']
     #rc_res = [x for x in rc_list if re.search(atom_ion_name, x)]
     rc_res = [x for x in rc_list if atom_ion_name in x]
     ii_length = len(rc_res)
@@ -2341,7 +2446,7 @@ def get_aeff_n_ii_fsl13_reference_citation(atom_rc_file, atom, ion, reference=No
      
     """
     element_data_reference = read_aeff_n_ii_fsl13_references(atom_rc_file)
-    reference_list = np.asarray(element_data_reference.reference)
+    reference_list = element_data_reference['reference']
     atom_ion_name = atom.lower() + '_' + ion.lower() + '_aeff'
     if (reference is not None) == 1:
         atom_ion_name = atom_ion_name + '_' + reference.upper()
@@ -2350,7 +2455,7 @@ def get_aeff_n_ii_fsl13_reference_citation(atom_rc_file, atom, ion, reference=No
     if len(ii) == 0:
         print('could not find the given reference')
         return 0
-    citation = np.asarray(element_data_reference.citation[ii])
+    citation = element_data_reference['citation'][ii]
 
     return citation
 
@@ -2374,11 +2479,11 @@ def read_aeff_o_ii_ssb17(atom_rc_file, atom, ion, case1, wavelength_range, wavel
          >> oii_rc_data = atomneb.read_aeff_o_ii_ssb17(atom_rc_file, atom, ion, case1, wavelength_range)
          >> oii_rc_data_wave = atomneb.read_aeff_o_ii_ssb17(atom_rc_file, atom, ion,
          >>                                                 case1, wavelength_range, wavelength=True)
-         >> print(oii_rc_data.aeff[0])
+         >> print(oii_rc_data['aeff'][0])
             1.64100e-30  1.60000e-30  1.56400e-30  1.54100e-30 ...
-         >> n_line = len(oii_rc_data_wave.wavelength)
+         >> n_line = len(oii_rc_data_wave['wavelength'])
          >> for i in range(0, n_line):
-         >>      print(oii_rc_data_wave.wavelength[i], oii_rc_data_wave.lower_term[i], oii_rc_data_wave.upper_term[i])
+         >>      print(oii_rc_data_wave['wavelength'][i], oii_rc_data_wave['lower_term'][i], oii_rc_data_wave['upper_term'][i])
             5327.172s22p2(1S)3p 2Po
             5325.422s22p2(1S)3p 2Po
             5327.182s22p2(1D)3d 2Ge
@@ -2412,27 +2517,31 @@ def read_aeff_o_ii_ssb17(atom_rc_file, atom, ion, case1, wavelength_range, wavel
     element_data_list = read_aeff_o_ii_ssb17_list(atom_rc_file)
     wave_min = min(wavelength_range)
     wave_max = max(wavelength_range)
-    wave_loc1 = np.where((element_data_list.wavelength >= wave_min)&(element_data_list.wavelength <= wave_max))[0]
+    wave_loc1 = np.where((element_data_list['wavelength'] >= wave_min)&(element_data_list['wavelength'] <= wave_max))[0]
     wave_size = len(wave_loc1)
     if wave_size == 0:
         return 0
-    rc_element_template={'wavelength': float(0.0), 'aeff':[np.zeros((7,4))]}
-    rc_data = pd.DataFrame(data=rc_element_template, index=np.arange(wave_size))
-
-    extension1 = np.asarray(element_data_list.extension)[wave_loc1]
-    wavelength1 = np.asarray(element_data_list.wavelength)[wave_loc1]
+    #rc_element_template={'wavelength': float(0.0), 'aeff':[np.zeros((16,25))]}
+    rc_element_template = [('wavelength', np.double), ('aeff', '(25,16)f8')]
+    #rc_data = pd.DataFrame(data=rc_element_template, index=np.arange(wave_size))
+    rc_data = np.zeros((np.int(wave_size)), dtype=rc_element_template)
+    
+    extension1 = element_data_list['extension'][wave_loc1]
+    wavelength1 = element_data_list['wavelength'][wave_loc1]
 
     if (wavelength is not None) == 1:
-        rc_wave_template={'wavelength': float(0.0), 'lower_term':'',  'upper_term': ''}
-        rc_wave = pd.DataFrame(data=rc_wave_template, index=np.arange(wave_size))
-        rc_wave.wavelength = np.asarray(element_data_list.wavelength)[wave_loc1]
-        rc_wave.lower_term = np.asarray(element_data_list.lower_term)[wave_loc1]
-        rc_wave.upper_term = np.asarray(element_data_list.upper_term)[wave_loc1]
+        #rc_wave_template={'wavelength': float(0.0), 'lower_term':'',  'upper_term': ''}
+        rc_wave_template = [('wavelength', np.double), ('lower_term', '<U21'), ('upper_term', '<U25')]
+        #rc_wave = pd.DataFrame(data=rc_wave_template, index=np.arange(wave_size))
+        rc_wave = np.zeros((np.int(wave_size)), dtype=rc_wave_template)
+        rc_wave['wavelength'] = element_data_list['wavelength'][wave_loc1]
+        rc_wave['lower_term'] = element_data_list['lower_term'][wave_loc1]
+        rc_wave['upper_term'] = element_data_list['upper_term'][wave_loc1]
         return rc_wave
     for i in range(0, wave_size ):
         rc_aeff, header1 = getdata(atom_rc_file, extension1[i], header=True)
-        rc_data.loc[i, 'wavelength']=wavelength1[i]
-        rc_data.loc[i, 'aeff']=[rc_aeff]
+        rc_data['wavelength'][i]=wavelength1[i]
+        rc_data['aeff'][i]=rc_aeff
 
     return rc_data
 
@@ -2450,9 +2559,12 @@ def read_aeff_o_ii_ssb17_list(atom_rc_file):
      :type atom_rc_file: str
 
     """
-    element_template={'aeff_data':'',  'extension':0,
-                      'ind':int(0), 'wavelength': float(0.0),
-                      'case1': '', 'lower_term':'', 'upper_term':''}
+    #element_template={'aeff_data':'',  'extension':0,
+    #                  'ind':int(0), 'wavelength': float(0.0),
+    #                  'case1': '', 'lower_term':'', 'upper_term':''}
+    element_template = [('aeff_data', '<U20'), ('extension', np.int),
+                        ('ind', np.int), ('wavelength', np.double),
+                        ('case1', '<U1'), ('lower_term', '<U21'), ('upper_term', '<U25')] 
     data, header1 = getdata(atom_rc_file, 1, header=True)
     aeff_data=data.AEFF_DATA
     extension=data.EXTENSION
@@ -2463,20 +2575,21 @@ def read_aeff_o_ii_ssb17_list(atom_rc_file):
     upper_term = data.UPPER_TERM
 
     element_length = len(aeff_data)
-    element_data = pd.DataFrame(data=element_template, index=np.arange(element_length))
+    #element_data = pd.DataFrame(data=element_template, index=np.arange(element_length))
+    element_data = np.zeros((np.int(element_length)), dtype=element_template)
 
     aeff_data=np.char.strip(aeff_data)
     case1 = np.char.strip(case1)
     lower_term = np.char.strip(lower_term)
     upper_term = np.char.strip(upper_term)
 
-    element_data.aeff_data = aeff_data
-    element_data.extension = extension
-    element_data.ind = ind
-    element_data.wavelength = wavelength
-    element_data.case1 = case1
-    element_data.lower_term = lower_term
-    element_data.upper_term = upper_term
+    element_data['aeff_data'] = aeff_data
+    element_data['extension'] = extension
+    element_data['ind'] = ind
+    element_data['wavelength'] = wavelength
+    element_data['case1'] = case1
+    element_data['lower_term'] = lower_term
+    element_data['upper_term'] = upper_term
 
     return element_data
 
@@ -2498,9 +2611,9 @@ def search_aeff_o_ii_ssb17(atom_rc_file, atom, ion, case1, wavelength):
          >> case1='B'
          >> wavelength=5325.42
          >> list_oii_aeff_data = atomneb.search_aeff_o_ii_ssb17(atom_rc_file, atom, ion, case1, wavelength)
-         >> print(np.asarray(list_oii_aeff_data.wavelength))
+         >> print(list_oii_aeff_data['wavelength'])
             5325.42
-         >> print(np.asarray(list_oii_aeff_data.aeff))
+         >> print(list_oii_aeff_data['aeff'])
             3.41800e-32  3.33300e-32  3.25700e-32  3.20900e-32  3.16800e-32 ...
 
      :return: This function returns the Aeff_Data.
@@ -2523,27 +2636,29 @@ def search_aeff_o_ii_ssb17(atom_rc_file, atom, ion, case1, wavelength):
     """
     element_data_list = read_aeff_o_ii_ssb17_list(atom_rc_file)
 
-    ii = np.where((abs(element_data_list.wavelength - wavelength) < 0.02)&(element_data_list.case1 == case1))[0]
+    ii = np.where((abs(element_data_list['wavelength'] - wavelength) < 0.02)&(element_data_list['case1'] == case1))[0]
 
     ii_length = len(ii)
     if len(ii) == 0:
         print('could not find the given wavelength')
         return 0
     if ii_length > 1:
-        ii_min = min(abs(element_data_list[ii].wavelength - wavelength))
-        ii = np.where((abs(element_data_list.wavelength - wavelength) == ii_min)&(element_data_list.case1 == case1))[0]
+        ii_min = min(abs(element_data_list['wavelength'][ii] - wavelength))
+        ii = np.where((abs(element_data_list['wavelength'] - wavelength) == ii_min)&(element_data_list['case1'] == case1))[0]
         ii_length = 1
-    extension1 = np.asarray(element_data_list.extension)[ii]
-    wavelength1 = np.asarray(element_data_list.wavelength)[ii]
-
-    rc_element_template={'wavelength': float(0.0), 'aeff':[np.zeros((7,4))]}
-    select_aeff_data = pd.DataFrame(data=rc_element_template, index=np.arange(ii_length))
+    extension1 = element_data_list['extension'][ii]
+    wavelength1 = element_data_list['wavelength'][ii]
+    
+    #rc_element_template={'wavelength': float(0.0), 'aeff':[np.zeros((16,25))]}
+    rc_element_template = [('wavelength', np.double), ('aeff', '(25,16)f8')]
+    #select_aeff_data = pd.DataFrame(data=rc_element_template, index=np.arange(ii_length))
+    select_aeff_data = np.zeros((np.int(ii_length)), dtype=rc_element_template)
     for i in range(0, ii_length):
         rc_aeff, header1 = getdata(atom_rc_file, extension1[i], header=True)
         #select_aeff_data.wavelength[i] = wavelength1[i]
-        select_aeff_data.loc[i, 'wavelength']=wavelength1[i]
+        select_aeff_data['wavelength'][i]=wavelength1[i]
         # select_aeff_data.aeff[i] = rc_aeff
-        select_aeff_data.loc[i, 'aeff'] = [rc_aeff]
+        select_aeff_data['aeff'][i] = rc_aeff
     return select_aeff_data
 
 def read_aeff_o_ii_ssb17_references(atom_rc_file):
@@ -2558,18 +2673,20 @@ def read_aeff_o_ii_ssb17_references(atom_rc_file):
      :type atom_rc_file: str
 
     """
-    reference_template = {'reference': '', 'citation': 0}
+    #reference_template = {'reference': '', 'citation': 0}
+    reference_template = [('reference', '<U20'), ('citation', '<U128')]
     data, hdr = getdata(atom_rc_file, 2, header=True)
     reference = data.ATOMICDATA
     citation = data.REFERENCE
     reference_length = len(reference)
 
-    reference_data = pd.DataFrame(data=reference_template, index=np.arange(reference_length))
+    #reference_data = pd.DataFrame(data=reference_template, index=np.arange(reference_length))
+    reference_data = np.zeros((np.int(reference_length)), dtype=reference_template)
     # aij_data=aij_data.strip
     reference = np.char.strip(reference)
     citation = np.char.strip(citation)
-    reference_data.reference = reference
-    reference_data.citation = citation
+    reference_data['reference'] = reference
+    reference_data['citation'] = citation
     return reference_data
 
 def list_aeff_o_ii_ssb17_references(atom_rc_file, atom, ion):
@@ -2606,7 +2723,7 @@ def list_aeff_o_ii_ssb17_references(atom_rc_file, atom, ion):
     rc_reference_data = read_aeff_n_ii_fsl13_references(atom_rc_file)
 
     atom_ion_name = atom.lower() + '_' + ion.lower() + '_aeff'
-    rc_list = np.asarray(rc_reference_data.reference)
+    rc_list = rc_reference_data['reference']
     #rc_res = [x for x in rc_list if re.search(atom_ion_name, x)]
     rc_res = [x for x in rc_list if atom_ion_name in x]
     ii_length = len(rc_res)
@@ -2661,7 +2778,7 @@ def get_aeff_o_ii_ssb17_reference_citation(atom_rc_file, atom, ion, reference=No
 
     """
     element_data_reference = read_aeff_n_ii_fsl13_references(atom_rc_file)
-    reference_list = np.asarray(element_data_reference.reference)
+    reference_list = element_data_reference['reference']
     atom_ion_name = atom.lower() + '_' + ion.lower() + '_aeff'
     if (reference is not None) == 1:
         atom_ion_name = atom_ion_name + '_' + reference.upper()
@@ -2670,7 +2787,7 @@ def get_aeff_o_ii_ssb17_reference_citation(atom_rc_file, atom, ion, reference=No
     if len(ii) == 0:
         print('could not find the given reference')
         return 0
-    citation = np.asarray(element_data_reference.citation[ii])
+    citation = element_data_reference['citation'][ii]
 
     return citation
 

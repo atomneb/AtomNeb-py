@@ -28,10 +28,10 @@ wavelength_range = [5320.0, 5330.0]
 oii_rc_data = atomneb.read_aeff_o_ii_ssb17(atom_rc_file, atom, ion, case1, wavelength_range)
 oii_rc_data_wave = atomneb.read_aeff_o_ii_ssb17(atom_rc_file, atom, ion, case1, wavelength_range, wavelength=True)
 # print information needed for Recombination Coefficients (Aeff) of O II
-print(oii_rc_data.aeff[0])
-n_line = len(oii_rc_data_wave.wavelength)
+print(oii_rc_data['aeff'][0])
+n_line = len(oii_rc_data_wave['wavelength'])
 for i in range(0, n_line):
-   print(oii_rc_data_wave.wavelength[i], oii_rc_data_wave.lower_term[i], oii_rc_data_wave.upper_term[i])
+   print(oii_rc_data_wave['wavelength'][i], oii_rc_data_wave['lower_term'][i], oii_rc_data_wave['upper_term'][i])
 
 atom = 'o'
 ion = 'iii' # O II
@@ -40,8 +40,8 @@ case1 = 'B'
 wavelength = 5325.42
 list_oii_aeff_data = atomneb.search_aeff_o_ii_ssb17(atom_rc_file, atom, ion, case1, wavelength)
 # print all Recombination Coefficients (Aeff) of O II
-print(np.asarray(list_oii_aeff_data.wavelength))
-print(np.asarray(list_oii_aeff_data.aeff))
+print(list_oii_aeff_data['wavelength'])
+print(list_oii_aeff_data['aeff'])
 
 atom = 'o'
 ion = 'iii' # O II

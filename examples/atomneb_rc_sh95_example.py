@@ -16,7 +16,7 @@ ion = 'ii' # H I
 # read Recombination Coefficients (Aeff) of H I
 hi_rc_data = atomneb.read_aeff_sh95(atom_rc_file, atom, ion)
 # print information needed for Recombination Coefficients (Aeff) of He I
-print(hi_rc_data.aeff[0])
+print(hi_rc_data['aeff'][0])
 
 atom = 'h'
 ion = 'ii' # H I

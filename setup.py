@@ -28,6 +28,6 @@ with codecs.open('README.rst', 'r', 'utf-8') as fd:
           packages=['atomneb'],
           #package_data={'atomneb': ['*.txt', 'text/*.readme']},
           data_files = [("", ["LICENSE"])],
-          install_requires=['numpy','pandas','astropy'],
+          install_requires=['numpy','astropy'],
          )
 

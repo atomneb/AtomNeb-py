@@ -32,9 +32,9 @@ ion = 'iii'
 # read Energy Levels (Ej) of O III upto level number 6
 oiii_elj_data = atomneb.read_elj(atom_elj_file, atom, ion, level_num=6)
 # print Levels of O III
-print(np.asarray(oiii_elj_data.j_v))
+print(oiii_elj_data['j_v'])
 # print Energy Levels (cm-1) of O III
-print(np.asarray(oiii_elj_data.ej))
+print(oiii_elj_data['ej'])
 
 # get citations for Energy Levels (Ej) Reference o_iii_elj
 citation = atomneb.get_elj_reference_citation(atom_elj_file, 'o_iii_elj')
@@ -46,11 +46,11 @@ ion = 'iii'
 # read Collision Strengths (Omegaij) of O III
 oiii_omij_data = atomneb.read_omij(atom_omij_file, atom, ion)
 # print Level 1 of Collision Strengths (Omegaij) of O III
-print(np.asarray(oiii_omij_data.level1))
+print(oiii_omij_data['level1'])
 # print Level 2 of Collision Strengths (Omegaij) of O III
-print(np.asarray(oiii_omij_data.level2))
+print(oiii_omij_data['level2'])
 # print Strength[1] of Collision Strengths (Omegaij) of O III
-print(np.asarray(oiii_omij_data.strength)[0])
+print(oiii_omij_data['strength'][0])
 
 atom = 'o'
 ion = 'iii'
@@ -80,7 +80,7 @@ reference = 'CHI52'
 # read Transition Probabilities (Aij) of O III with reference CHI52
 oiii_aij_data = atomneb.read_aij(atom_aij_file, atom, ion)
 # print Transition Probabilities (Aij) of O III with reference CHI52
-print(oiii_aij_data.aij)
+print(oiii_aij_data['aij'][0])
 
 atom = 'o'
 ion = 'iii'
@@ -132,9 +132,9 @@ ion = 'iii'
 # read Energy Levels (Ej) of O III upto level number 6
 oiii_elj_data = atomneb.read_elj(atom_elj_file, atom, ion, level_num=6)
 # print Levels of O III
-print(np.asarray(oiii_elj_data.j_v))
+print(oiii_elj_data['j_v'])
 # print Energy Levels (cm-1) of O III
-print(np.asarray(oiii_elj_data.ej))
+print(oiii_elj_data['ej'])
 
 # get citations for Energy Levels (Ej) Reference o_iii_elj
 citation = atomneb.get_elj_reference_citation(atom_elj_file, 'o_iii_elj')
@@ -146,11 +146,11 @@ ion = 'iii'
 # read Collision Strengths (Omegaij) of O III
 oiii_omij_data = atomneb.read_omij(atom_omij_file, atom, ion)
 # print Level 1 of Collision Strengths (Omegaij) of O III
-print(np.asarray(oiii_omij_data.level1))
+print(oiii_omij_data['level1'])
 # print Level 2 of Collision Strengths (Omegaij) of O III
-print(np.asarray(oiii_omij_data.level2))
+print(oiii_omij_data['level2'])
 # print Strength[1] of Collision Strengths (Omegaij) of O III
-print(np.asarray(oiii_omij_data.strength)[0])
+print(oiii_omij_data['strength'][0])
 
 atom = 'o'
 ion = 'iii'
@@ -180,7 +180,7 @@ reference = 'CHI60'
 # read Transition Probabilities (Aij) of O III with reference CHI60
 oiii_aij_data = atomneb.read_aij(atom_aij_file, atom, ion)
 # print Transition Probabilities (Aij) of O III with reference CHI60
-print(oiii_aij_data.aij)
+print(oiii_aij_data['aij'][0])
 
 atom = 'o'
 ion = 'iii'
@@ -232,9 +232,9 @@ ion = 'iii'
 # read Energy Levels (Ej) of O III upto level number 6
 oiii_elj_data = atomneb.read_elj(atom_elj_file, atom, ion, level_num=6)
 # print Levels of O III
-print(np.asarray(oiii_elj_data.j_v))
+print(oiii_elj_data['j_v'])
 # print Energy Levels (cm-1) of O III
-print(np.asarray(oiii_elj_data.ej))
+print(oiii_elj_data['ej'])
 
 # get citations for Energy Levels (Ej) Reference o_iii_elj
 citation = atomneb.get_elj_reference_citation(atom_elj_file, 'o_iii_elj')
@@ -246,11 +246,11 @@ ion = 'iii'
 # read Collision Strengths (Omegaij) of O III
 oiii_omij_data = atomneb.read_omij(atom_omij_file, atom, ion)
 # print Level 1 of Collision Strengths (Omegaij) of O III
-print(np.asarray(oiii_omij_data.level1))
+print(oiii_omij_data['level1'])
 # print Level 2 of Collision Strengths (Omegaij) of O III
-print(np.asarray(oiii_omij_data.level2))
+print(oiii_omij_data['level2'])
 # print Strength[1] of Collision Strengths (Omegaij) of O III
-print(np.asarray(oiii_omij_data.strength)[0])
+print(oiii_omij_data['strength'][0])
 
 atom = 'o'
 ion = 'iii'
@@ -280,11 +280,111 @@ reference = 'CHI70'
 # read Transition Probabilities (Aij) of O III with reference CHI70
 oiii_aij_data = atomneb.read_aij(atom_aij_file, atom, ion)
 # print Transition Probabilities (Aij) of O III with reference CHI70
-print(oiii_aij_data.aij)
+print(oiii_aij_data['aij'][0])
 
 atom = 'o'
 ion = 'iii'
 reference = 'CHI70'
+# get citations for Transition Probabilities (Aij) of O III with reference CHI70
+citation = atomneb.get_aij_reference_citation(atom_aij_file, atom, ion, reference)
+# print citations for Transition Probabilities (Aij) of O III with reference CHI70
+print(citation)
+
+atom = 'o'
+ion = 'iii'
+# list all Transition Probabilities (Aij) data for O III
+list_oiii_aij_data = atomneb.search_aij(atom_aij_file, atom, ion)
+# print all Transition Probabilities (Aij) data for O III
+print(list_oiii_aij_data)
+
+atom = 'o'
+ion = 'iii'
+# list all Transition Probabilities (Aij) references for O III
+list_oiii_aij_reference = atomneb.list_aij_references(atom_aij_file, atom, ion)
+# print all Transition Probabilities (Aij) references for O III
+print(list_oiii_aij_reference)
+
+
+# Locate datasets
+base_dir = os.getcwd()
+data_dir = os.path.join('atomic-data', 'chianti90')
+atom_elj_file = os.path.join(base_dir,data_dir, 'AtomElj.fits')
+atom_omij_file = os.path.join(base_dir,data_dir, 'AtomOmij.fits')
+atom_aij_file = os.path.join(base_dir,data_dir, 'AtomAij.fits')
+
+
+# read Energy Levels (Ej) list
+elj_data_list = atomneb.read_elj_list(atom_elj_file)
+# read Collision Strengths (Omegaij) list
+omij_data_list = atomneb.read_omij_list(atom_omij_file)
+# read Transition Probabilities (Aij) list
+aij_data_list = atomneb.read_aij_list(atom_aij_file)
+
+# read Energy Levels (Ej) references
+elj_data_reference = atomneb.read_elj_references(atom_elj_file)
+# read Collision Strengths (Omegaij) references
+omij_data_reference = atomneb.read_omij_references(atom_omij_file)
+# read Transition Probabilities (Aij) references
+aij_data_reference = atomneb.read_aij_references(atom_aij_file)
+
+atom = 'o'
+ion = 'iii'
+# read Energy Levels (Ej) of O III upto level number 6
+oiii_elj_data = atomneb.read_elj(atom_elj_file, atom, ion, level_num=6)
+# print Levels of O III
+print(oiii_elj_data['j_v'])
+# print Energy Levels (cm-1) of O III
+print(oiii_elj_data['ej'])
+
+# get citations for Energy Levels (Ej) Reference o_iii_elj
+citation = atomneb.get_elj_reference_citation(atom_elj_file, 'o_iii_elj')
+# print citations for Energy Levels (Ej) Reference o_iii_elj
+print(citation)
+
+atom = 'o'
+ion = 'iii'
+# read Collision Strengths (Omegaij) of O III
+oiii_omij_data = atomneb.read_omij(atom_omij_file, atom, ion)
+# print Level 1 of Collision Strengths (Omegaij) of O III
+print(oiii_omij_data['level1'])
+# print Level 2 of Collision Strengths (Omegaij) of O III
+print(oiii_omij_data['level2'])
+# print Strength[1] of Collision Strengths (Omegaij) of O III
+print(oiii_omij_data['strength'][0])
+
+atom = 'o'
+ion = 'iii'
+# list all Collision Strengths (Omegaij) data for O III
+list_oiii_omij_data = atomneb.search_omij(atom_omij_file, atom, ion)
+# print all Collision Strengths (Omegaij) of O III
+print(list_oiii_omij_data)
+
+atom = 'o'
+ion = 'iii'
+# list all Collision Strengths (Omegaij) references for O III
+list_oiii_omij_reference = atomneb.list_omij_references(atom_omij_file, atom, ion)
+# print all Collision Strengths (Omegaij) References for O III
+print(list_oiii_omij_reference)
+
+atom = 'o'
+ion = 'iii'
+reference = 'CHI90'
+# get citations for Collision Strengths (Omegaij) of O III with reference CHI70
+citation = atomneb.get_omij_reference_citation(atom_omij_file, atom, ion, reference)
+# print citations for Collision Strengths (Omegaij) of O III with reference CHI70
+print(citation)
+
+atom = 'o'
+ion = 'iii'
+reference = 'CHI90'
+# read Transition Probabilities (Aij) of O III with reference CHI70
+oiii_aij_data = atomneb.read_aij(atom_aij_file, atom, ion)
+# print Transition Probabilities (Aij) of O III with reference CHI70
+print(oiii_aij_data['aij'][0])
+
+atom = 'o'
+ion = 'iii'
+reference = 'CHI90'
 # get citations for Transition Probabilities (Aij) of O III with reference CHI70
 citation = atomneb.get_aij_reference_citation(atom_aij_file, atom, ion, reference)
 # print citations for Transition Probabilities (Aij) of O III with reference CHI70
@@ -332,9 +432,9 @@ ion = 'iii'
 # read Energy Levels (Ej) of O III upto level number 6
 oiii_elj_data = atomneb.read_elj(atom_elj_file, atom, ion, level_num=6)
 # print Levels of O III
-print(np.asarray(oiii_elj_data.j_v))
+print(oiii_elj_data['j_v'])
 # print Energy Levels (cm-1) of O III
-print(np.asarray(oiii_elj_data.ej))
+print(oiii_elj_data['ej'])
 
 # get citations for Energy Levels (Ej) Reference L7288
 citation = atomneb.get_elj_reference_citation(atom_elj_file, 'L7288')
@@ -347,11 +447,11 @@ reference = 'SSB14'
 # read Collision Strengths (Omegaij) of O III from Reference SSB14
 oiii_omij_data = atomneb.read_omij(atom_omij_file, atom, ion, reference=reference)
 # print Level 1 of Collision Strengths (Omegaij) of O III
-print(np.asarray(oiii_omij_data.level1))
+print(oiii_omij_data['level1'])
 # print Level 2 of Collision Strengths (Omegaij) of O III
-print(np.asarray(oiii_omij_data.level2))
+print(oiii_omij_data['level2'])
 # print Strength[1] of Collision Strengths (Omegaij) of O III
-print(np.asarray(oiii_omij_data.strength)[0])
+print(oiii_omij_data['strength'][0])
 
 atom = 'o'
 ion = 'iii'
@@ -381,7 +481,7 @@ reference = 'FFT04'
 # read Transition Probabilities (Aij) of O III with reference FFT04
 oiii_aij_data = atomneb.read_aij(atom_aij_file, atom, ion, reference)
 # print Transition Probabilities (Aij) of O III with reference FFT04
-print(oiii_aij_data.aij)
+print(oiii_aij_data['aij'][0])
 
 atom = 'o'
 ion = 'iii'
@@ -415,54 +515,54 @@ atom = 'c'
 ion = 'iii' # C II
 # read Recombination Coefficients (Aeff) of C II
 cii_rc_data = atomneb.read_aeff_collection(atom_rc_file, atom, ion)
-n_line = len(cii_rc_data.wavelength)
+n_line = len(cii_rc_data['wavelength'])
 # print information needed for Recombination Coefficients (Aeff) of C II
 for i in range(0, n_line):
-  print(cii_rc_data.wavelength[i], cii_rc_data.a[i], cii_rc_data.b[i], cii_rc_data.c[i], cii_rc_data.d[i], cii_rc_data.f[i])
+  print(cii_rc_data['wavelength'][i], cii_rc_data['a'][i], cii_rc_data['b'][i], cii_rc_data['c'][i], cii_rc_data['d'][i], cii_rc_data['f'][i])
 
 atom = 'n'
 ion = 'iii' # N II
 # read Recombination Coefficients (Aeff) of N II
 nii_rc_data = atomneb.read_aeff_collection(atom_rc_file, atom, ion)
 nii_rc_data_br = atomneb.read_aeff_collection(atom_rc_file, atom, ion, br=True)
-n_line = len(nii_rc_data.a)
+n_line = len(nii_rc_data['a'])
 # print information needed for Recombination Coefficients (Aeff) of N II
 for i in range(0, n_line):
-  print(nii_rc_data.a[i], nii_rc_data.b[i], nii_rc_data.c[i])
-n_line = len(nii_rc_data_br.wavelength)
+  print(nii_rc_data['a'][i], nii_rc_data['b'][i], nii_rc_data['c'][i])
+n_line = len(nii_rc_data_br['wavelength'])
 # print forBranching ratios (Br) of N II
 for i in range(0, n_line):
-  print(nii_rc_data_br.wavelength[i], nii_rc_data_br.br[i],
-        nii_rc_data_br.g1[i], nii_rc_data_br.g2[i],
-        nii_rc_data_br.mult1[i], nii_rc_data_br.lowerterm[i], nii_rc_data_br.upperterm[i])
+  print(nii_rc_data_br['wavelength'][i], nii_rc_data_br['br'][i],
+        nii_rc_data_br['g1'][i], nii_rc_data_br['g2'][i],
+        nii_rc_data_br['mult1'][i], nii_rc_data_br['lowerterm'][i], nii_rc_data_br['upperterm'][i])
 
 atom = 'o'
 ion = 'iii' # O II
 # read Recombination Coefficients (Aeff) of O II
 oii_rc_data = atomneb.read_aeff_collection(atom_rc_file, atom, ion)
 oii_rc_data_br = atomneb.read_aeff_collection(atom_rc_file, atom, ion, br=True)
-n_line = len(oii_rc_data.a2)
+n_line = len(oii_rc_data['a2'])
 # print information needed for Recombination Coefficients (Aeff) of O II
 for i in range(0, n_line):
-  print(oii_rc_data.term[i], oii_rc_data.case1[i],
-        oii_rc_data.a2[i], oii_rc_data.a4[i], oii_rc_data.a5[i], oii_rc_data.a6[i],
-        oii_rc_data.b[i], oii_rc_data.c[i], oii_rc_data.d[i])
-n_line = len(oii_rc_data_br.wavelength)
+  print(oii_rc_data['term'][i], oii_rc_data['case1'][i],
+        oii_rc_data['a2'][i], oii_rc_data['a4'][i], oii_rc_data['a5'][i], oii_rc_data['a6'][i],
+        oii_rc_data['b'][i], oii_rc_data['c'][i], oii_rc_data['d'][i])
+n_line = len(oii_rc_data_br['wavelength'])
 # print forBranching ratios (Br) of O II
 for i in range(0, n_line):
-  print(oii_rc_data_br.wavelength[i], oii_rc_data_br.br_a[i], oii_rc_data_br.br_b[i], oii_rc_data_br.br_c[i],
-        oii_rc_data_br.g1[i], oii_rc_data_br.g2[i], oii_rc_data_br.mult1[i],
-        oii_rc_data_br.lowerterm[i], oii_rc_data_br.upperterm[i])
+  print(oii_rc_data_br['wavelength'][i], oii_rc_data_br['br_a'][i], oii_rc_data_br['br_b'][i], oii_rc_data_br['br_c'][i],
+        oii_rc_data_br['g1'][i], oii_rc_data_br['g2'][i], oii_rc_data_br['mult1'][i],
+        oii_rc_data_br['lowerterm'][i], oii_rc_data_br['upperterm'][i])
 
 atom = 'ne'
 ion = 'iii' # Ne II
 # read Recombination Coefficients (Aeff) of Ne II
 neii_rc_data = atomneb.read_aeff_collection(atom_rc_file, atom, ion)
-n_line = len(neii_rc_data.wavelength)
+n_line = len(neii_rc_data['wavelength'])
 # print information needed for Recombination Coefficients (Aeff) of Ne II
 for i in range(0, n_line):
-  print(neii_rc_data.wavelength[i],
-        neii_rc_data.a[i], neii_rc_data.b[i], neii_rc_data.c[i], neii_rc_data.d[i], neii_rc_data.f[i], neii_rc_data.br[i])
+  print(neii_rc_data['wavelength'][i],
+        neii_rc_data['a'][i], neii_rc_data['b'][i], neii_rc_data['c'][i], neii_rc_data['d'][i], neii_rc_data['f'][i], neii_rc_data['br'][i])
 
 atom = 'c'
 ion = 'iii' # C III
@@ -486,7 +586,6 @@ citation = atomneb.get_aeff_collection_reference_citation(atom_rc_file, atom, io
 print(citation)
 
 
-
 # Locate datasets
 base_dir = os.getcwd()
 data_dir = os.path.join('atomic-data-rc')
@@ -496,12 +595,12 @@ atom = 'c'
 ion = 'iii' # C II
 # read Recombination Coefficients (Aeff) of C II
 cii_rc_data = atomneb.read_aeff_ppb91(atom_rc_file, atom, ion)
-n_line = len(cii_rc_data.wavelength)
+n_line = len(cii_rc_data['wavelength'])
 # print information needed for Recombination Coefficients (Aeff) of C II
 for i in range(0, n_line):
-   print(cii_rc_data.ion[i], cii_rc_data.case1[i], cii_rc_data.wavelength[i],
-         cii_rc_data.a[i], cii_rc_data.b[i], cii_rc_data.c[i],
-         cii_rc_data.d[i], cii_rc_data.br[i], cii_rc_data.q[i], cii_rc_data.y[i])
+   print(cii_rc_data['ion'][i], cii_rc_data['case1'][i], cii_rc_data['wavelength'][i],
+         cii_rc_data['a'][i], cii_rc_data['b'][i], cii_rc_data['c'][i],
+         cii_rc_data['d'][i], cii_rc_data['br'][i], cii_rc_data['q'][i], cii_rc_data['y'][i])
 
 atom = 'c'
 ion = 'iii'
@@ -536,7 +635,7 @@ ion = 'ii' # H I
 # read Recombination Coefficients (Aeff) of H I
 hi_rc_data = atomneb.read_aeff_sh95(atom_rc_file, atom, ion)
 # print information needed for Recombination Coefficients (Aeff) of He I
-print(hi_rc_data.aeff[0])
+print(hi_rc_data['aeff'][0])
 
 atom = 'h'
 ion = 'ii' # H I
@@ -561,6 +660,7 @@ citation = atomneb.get_aeff_sh95_reference_citation(atom_rc_file, atom, ion)
 print(citation)
 
 
+
 # Locate datasets
 base_dir = os.getcwd()
 data_dir = os.path.join('atomic-data-rc')
@@ -572,10 +672,10 @@ ion = 'ii' # He I
 hei_rc_data = atomneb.read_aeff_he_i_pfsd12(atom_rc_file, atom, ion)
 hei_rc_data_wave = atomneb.read_aeff_he_i_pfsd12(atom_rc_file, atom, ion, wavelength=True)
 # print information needed for Recombination Coefficients (Aeff) of He I
-print(hei_rc_data.aeff[0])
-n_line = len(hei_rc_data_wave.wavelength)
+print(hei_rc_data['aeff'][0])
+n_line = len(hei_rc_data_wave['wavelength'])
 for i in range(0, n_line):
-   print(hei_rc_data_wave.wavelength[i], hei_rc_data_wave.lowerterm[i], hei_rc_data_wave.upperterm[i])
+   print(hei_rc_data_wave['wavelength'][i], hei_rc_data_wave['lowerterm'][i], hei_rc_data_wave['upperterm'][i])
 
 atom = 'he'
 ion = 'ii' # He I
@@ -613,10 +713,10 @@ wavelength_range = [4400.0, 7100.0]
 nii_rc_data = atomneb.read_aeff_n_ii_fsl13(atom_rc_file, atom, ion, wavelength_range) # it takes a while!
 nii_rc_data_wave = atomneb.read_aeff_n_ii_fsl13(atom_rc_file, atom, ion, wavelength_range, wavelength=True)
 # print information needed for Recombination Coefficients (Aeff) of N II
-print(nii_rc_data.aeff[0])
-n_line = len(nii_rc_data_wave.wavelength)
+print(nii_rc_data['aeff'][0])
+n_line = len(nii_rc_data_wave['wavelength'])
 for i in range(0, n_line):
-   print(nii_rc_data_wave.wavelength[i], nii_rc_data_wave.tr[i], nii_rc_data_wave.trans[i])
+   print(nii_rc_data_wave['wavelength'][i], nii_rc_data_wave['tr'][i], nii_rc_data_wave['trans'][i])
 
 atom = 'n'
 ion = 'iii' # N II
@@ -624,8 +724,8 @@ ion = 'iii' # N II
 wavelength = 5679.56
 list_nii_aeff_data = atomneb.search_aeff_n_ii_fsl13(atom_rc_file, atom, ion, wavelength)
 # print all Recombination Coefficients (Aeff) of N II
-print(np.asarray(list_nii_aeff_data.wavelength))
-print(np.asarray(list_nii_aeff_data.aeff))
+print(list_nii_aeff_data['wavelength'])
+print(list_nii_aeff_data['aeff'])
 
 atom = 'n'
 ion = 'iii' # N II
@@ -664,10 +764,10 @@ wavelength_range = [5320.0, 5330.0]
 oii_rc_data = atomneb.read_aeff_o_ii_ssb17(atom_rc_file, atom, ion, case1, wavelength_range)
 oii_rc_data_wave = atomneb.read_aeff_o_ii_ssb17(atom_rc_file, atom, ion, case1, wavelength_range, wavelength=True)
 # print information needed for Recombination Coefficients (Aeff) of O II
-print(oii_rc_data.aeff[0])
-n_line = len(oii_rc_data_wave.wavelength)
+print(oii_rc_data['aeff'][0])
+n_line = len(oii_rc_data_wave['wavelength'])
 for i in range(0, n_line):
-   print(oii_rc_data_wave.wavelength[i], oii_rc_data_wave.lower_term[i], oii_rc_data_wave.upper_term[i])
+   print(oii_rc_data_wave['wavelength'][i], oii_rc_data_wave['lower_term'][i], oii_rc_data_wave['upper_term'][i])
 
 atom = 'o'
 ion = 'iii' # O II
@@ -676,8 +776,8 @@ case1 = 'B'
 wavelength = 5325.42
 list_oii_aeff_data = atomneb.search_aeff_o_ii_ssb17(atom_rc_file, atom, ion, case1, wavelength)
 # print all Recombination Coefficients (Aeff) of O II
-print(np.asarray(list_oii_aeff_data.wavelength))
-print(np.asarray(list_oii_aeff_data.aeff))
+print(list_oii_aeff_data['wavelength'])
+print(list_oii_aeff_data['aeff'])
 
 atom = 'o'
 ion = 'iii' # O II
@@ -693,3 +793,4 @@ reference = 'SSB17'
 citation = atomneb.get_aeff_o_ii_ssb17_reference_citation(atom_rc_file, atom, ion)
 # print citations for Recombination Coefficients (Aeff) of O II
 print(citation)
+

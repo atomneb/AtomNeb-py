@@ -33,9 +33,9 @@ ion = 'iii'
 # read Energy Levels (Ej) of O III upto level number 6
 oiii_elj_data = atomneb.read_elj(atom_elj_file, atom, ion, level_num=6)
 # print Levels of O III
-print(np.asarray(oiii_elj_data.j_v))
+print(oiii_elj_data['j_v'])
 # print Energy Levels (cm-1) of O III
-print(np.asarray(oiii_elj_data.ej))
+print(oiii_elj_data['ej'])
 
 # get citations for Energy Levels (Ej) Reference o_iii_elj
 citation = atomneb.get_elj_reference_citation(atom_elj_file, 'o_iii_elj')
@@ -47,11 +47,11 @@ ion = 'iii'
 # read Collision Strengths (Omegaij) of O III
 oiii_omij_data = atomneb.read_omij(atom_omij_file, atom, ion)
 # print Level 1 of Collision Strengths (Omegaij) of O III
-print(np.asarray(oiii_omij_data.level1))
+print(oiii_omij_data['level1'])
 # print Level 2 of Collision Strengths (Omegaij) of O III
-print(np.asarray(oiii_omij_data.level2))
+print(oiii_omij_data['level2'])
 # print Strength[1] of Collision Strengths (Omegaij) of O III
-print(np.asarray(oiii_omij_data.strength)[0])
+print(oiii_omij_data['strength'][0])
 
 atom = 'o'
 ion = 'iii'
@@ -81,7 +81,7 @@ reference = 'CHI60'
 # read Transition Probabilities (Aij) of O III with reference CHI60
 oiii_aij_data = atomneb.read_aij(atom_aij_file, atom, ion)
 # print Transition Probabilities (Aij) of O III with reference CHI60
-print(oiii_aij_data.aij)
+print(oiii_aij_data['aij'][0])
 
 atom = 'o'
 ion = 'iii'

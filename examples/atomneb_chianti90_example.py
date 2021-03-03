@@ -1,14 +1,14 @@
 # --- Begin $MAIN$ program. ---------------
 #
 
-# Use Atomic Data from the CHIANTI atomic database version 5.2
+# Use Atomic Data from the CHIANTI atomic database version 7.0
 import atomneb
 import numpy as np
 import os
 
 # Locate datasets
 base_dir = os.getcwd()
-data_dir = os.path.join('..','atomic-data', 'chianti52')
+data_dir = os.path.join('..','atomic-data', 'chianti90')
 atom_elj_file = os.path.join(base_dir,data_dir, 'AtomElj.fits')
 atom_omij_file = os.path.join(base_dir,data_dir, 'AtomOmij.fits')
 atom_aij_file = os.path.join(base_dir,data_dir, 'AtomAij.fits')
@@ -69,26 +69,26 @@ print(list_oiii_omij_reference)
 
 atom = 'o'
 ion = 'iii'
-reference = 'CHI52'
-# get citations for Collision Strengths (Omegaij) of O III with reference CHI52
+reference = 'CHI90'
+# get citations for Collision Strengths (Omegaij) of O III with reference CHI70
 citation = atomneb.get_omij_reference_citation(atom_omij_file, atom, ion, reference)
-# print citations for Collision Strengths (Omegaij) of O III with reference CHI52
+# print citations for Collision Strengths (Omegaij) of O III with reference CHI70
 print(citation)
 
 atom = 'o'
 ion = 'iii'
-reference = 'CHI52'
-# read Transition Probabilities (Aij) of O III with reference CHI52
+reference = 'CHI90'
+# read Transition Probabilities (Aij) of O III with reference CHI70
 oiii_aij_data = atomneb.read_aij(atom_aij_file, atom, ion)
-# print Transition Probabilities (Aij) of O III with reference CHI52
+# print Transition Probabilities (Aij) of O III with reference CHI70
 print(oiii_aij_data['aij'][0])
 
 atom = 'o'
 ion = 'iii'
-reference = 'CHI52'
-# get citations for Transition Probabilities (Aij) of O III with reference CHI52
+reference = 'CHI90'
+# get citations for Transition Probabilities (Aij) of O III with reference CHI70
 citation = atomneb.get_aij_reference_citation(atom_aij_file, atom, ion, reference)
-# print citations for Transition Probabilities (Aij) of O III with reference CHI52
+# print citations for Transition Probabilities (Aij) of O III with reference CHI70
 print(citation)
 
 atom = 'o'
@@ -104,5 +104,4 @@ ion = 'iii'
 list_oiii_aij_reference = atomneb.list_aij_references(atom_aij_file, atom, ion)
 # print all Transition Probabilities (Aij) references for O III
 print(list_oiii_aij_reference)
-
 

@@ -17,12 +17,12 @@ atom = 'c'
 ion = 'iii' # C II
 # read Recombination Coefficients (Aeff) of C II
 cii_rc_data = atomneb.read_aeff_ppb91(atom_rc_file, atom, ion)
-n_line = len(cii_rc_data.wavelength)
+n_line = len(cii_rc_data['wavelength'])
 # print information needed for Recombination Coefficients (Aeff) of C II
 for i in range(0, n_line):
-   print(cii_rc_data.ion[i], cii_rc_data.case1[i], cii_rc_data.wavelength[i],
-         cii_rc_data.a[i], cii_rc_data.b[i], cii_rc_data.c[i],
-         cii_rc_data.d[i], cii_rc_data.br[i], cii_rc_data.q[i], cii_rc_data.y[i])
+   print(cii_rc_data['ion'][i], cii_rc_data['case1'][i], cii_rc_data['wavelength'][i],
+         cii_rc_data['a'][i], cii_rc_data['b'][i], cii_rc_data['c'][i],
+         cii_rc_data['d'][i], cii_rc_data['br'][i], cii_rc_data['q'][i], cii_rc_data['y'][i])
 
 atom = 'c'
 ion = 'iii'
