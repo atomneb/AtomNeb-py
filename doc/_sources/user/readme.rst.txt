@@ -19,6 +19,7 @@ The atomic datasets for collisionally excited lines are as follows:
 
 * `Chianti70 <https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data/chianti70>`_ from the `CHIANTI atomic database <http://www.chiantidatabase.org/>`_ version 7.0. This dataset was compiled according to the atomic data used in `MOCASSIN <https://github.com/mocassin/MOCASSIN-2.0>`_.
 
+* `Chianti90 <https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data/chianti90>`_ from the `CHIANTI atomic database <http://www.chiantidatabase.org/>`_ version 9.0. This dataset was compiled according to the atomic data used in `NEAT <https://github.com/rwesson/NEAT>`_.
 
 Each dataset contains the following `atomic data FITS files <https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data/chianti70>`_: ``AtomElj.fits`` for *Energy Levels* (Ej), ``AtomOmij.fits`` for *Collision Strengths* (Ωij), and ``AtomAij.fits`` for *Transition Probabilities* (Aij).
 

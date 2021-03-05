@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Usage &mdash; AtomNeb 0.2.0 documentation</title>
+  <title>Usage &mdash; AtomNeb 0.3.3 documentation</title>
   
 
   
@@ -173,6 +173,10 @@
 </pre></div>
 </div>
 <p>Also:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">atomneb</span>
+</pre></div>
+</div>
+<p>Also:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">os</span>
 
@@ -190,8 +194,8 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">atom</span><span class="o">=</span><span class="s1">&#39;o&#39;</span>
 <span class="n">ion</span><span class="o">=</span><span class="s1">&#39;iii&#39;</span>
 <span class="n">oiii_elj_data</span> <span class="o">=</span> <span class="n">atomneb</span><span class="o">.</span><span class="n">read_elj</span><span class="p">(</span><span class="n">atom_elj_file</span><span class="p">,</span> <span class="n">atom</span><span class="p">,</span> <span class="n">ion</span><span class="p">,</span> <span class="n">level_num</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">oiii_elj_data</span><span class="o">.</span><span class="n">j_v</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">oiii_elj_data</span><span class="o">.</span><span class="n">ej</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">oiii_elj_data</span><span class="p">[</span><span class="s1">&#39;j_v&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">oiii_elj_data</span><span class="p">[</span><span class="s1">&#39;ej&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>which gives:</p>
@@ -200,13 +204,15 @@
 </pre></div>
 </div>
 </li>
+</ul>
+<ul>
 <li><p><em>Collision Strengths</em> (Ωij):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">atom</span><span class="o">=</span><span class="s1">&#39;o&#39;</span>
 <span class="n">ion</span><span class="o">=</span><span class="s1">&#39;iii&#39;</span>
 <span class="n">oiii_omij_data</span> <span class="o">=</span> <span class="n">atomneb</span><span class="o">.</span><span class="n">read_omij</span><span class="p">(</span><span class="n">atom_omij_file</span><span class="p">,</span> <span class="n">atom</span><span class="p">,</span> <span class="n">ion</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">oiii_omij_data</span><span class="o">.</span><span class="n">level1</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">oiii_omij_data</span><span class="o">.</span><span class="n">level2</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">oiii_omij_data</span><span class="o">.</span><span class="n">strength</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">oiii_omij_data</span><span class="p">[</span><span class="s1">&#39;level1&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">oiii_omij_data</span><span class="p">[</span><span class="s1">&#39;level2&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">oiii_omij_data</span><span class="p">[</span><span class="s1">&#39;strength&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>which gives:</p>
@@ -220,7 +226,7 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">atom</span><span class="o">=</span><span class="s1">&#39;o&#39;</span>
 <span class="n">ion</span><span class="o">=</span><span class="s1">&#39;iii&#39;</span>
 <span class="n">oiii_aij_data</span> <span class="o">=</span> <span class="n">atomneb</span><span class="o">.</span><span class="n">read_aij</span><span class="p">(</span><span class="n">atom_aij_file</span><span class="p">,</span> <span class="n">atom</span><span class="p">,</span> <span class="n">ion</span><span class="p">)</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">oiii_aij_data</span><span class="o">.</span><span class="n">aij</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">oiii_aij_data</span><span class="p">[</span><span class="s1">&#39;aij&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>which gives:</p>
@@ -251,11 +257,11 @@
 <span class="n">atom</span><span class="o">=</span><span class="s1">&#39;c&#39;</span>
 <span class="n">ion</span><span class="o">=</span><span class="s1">&#39;iii&#39;</span>
 <span class="n">cii_rc_data</span> <span class="o">=</span> <span class="n">atomneb</span><span class="o">.</span><span class="n">read_aeff_collection</span><span class="p">(</span><span class="n">atom_rc_file</span><span class="p">,</span> <span class="n">atom</span><span class="p">,</span> <span class="n">ion</span><span class="p">)</span>
-<span class="n">n_line</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cii_rc_data</span><span class="o">.</span><span class="n">wavelength</span><span class="p">)</span>
+<span class="n">n_line</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cii_rc_data</span><span class="p">[</span><span class="s1">&#39;wavelength&#39;</span><span class="p">])</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_line</span><span class="p">):</span>
-     <span class="nb">print</span><span class="p">(</span><span class="n">cii_rc_data</span><span class="o">.</span><span class="n">wavelength</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">cii_rc_data</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
-           <span class="n">cii_rc_data</span><span class="o">.</span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">cii_rc_data</span><span class="o">.</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
-           <span class="n">cii_rc_data</span><span class="o">.</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">cii_rc_data</span><span class="o">.</span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+     <span class="nb">print</span><span class="p">(</span><span class="n">cii_rc_data</span><span class="p">[</span><span class="s1">&#39;wavelength&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">cii_rc_data</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span>
+           <span class="n">cii_rc_data</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">cii_rc_data</span><span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span>
+           <span class="n">cii_rc_data</span><span class="p">[</span><span class="s1">&#39;d&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">cii_rc_data</span><span class="p">[</span><span class="s1">&#39;f&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>which gives:</p>
@@ -271,7 +277,7 @@
 <span class="n">atom</span><span class="o">=</span><span class="s1">&#39;h&#39;</span>
 <span class="n">ion</span><span class="o">=</span><span class="s1">&#39;ii&#39;</span>
 <span class="n">hi_rc_data</span> <span class="o">=</span> <span class="n">atomneb</span><span class="o">.</span><span class="n">read_aeff_sh95</span><span class="p">(</span><span class="n">atom_rc_file</span><span class="p">,</span> <span class="n">atom</span><span class="p">,</span> <span class="n">ion</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">hi_rc_data</span><span class="o">.</span><span class="n">aeff</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">hi_rc_data</span><span class="p">[</span><span class="s1">&#39;aeff&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>which gives:</p>
@@ -285,11 +291,11 @@
 <span class="n">atom</span><span class="o">=</span><span class="s1">&#39;c&#39;</span>
 <span class="n">ion</span><span class="o">=</span><span class="s1">&#39;iii&#39;</span>
 <span class="n">cii_rc_data</span> <span class="o">=</span> <span class="n">atomneb</span><span class="o">.</span><span class="n">read_aeff_ppb91</span><span class="p">(</span><span class="n">atom_rc_file</span><span class="p">,</span> <span class="n">atom</span><span class="p">,</span> <span class="n">ion</span><span class="p">)</span>
-<span class="n">n_line</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cii_rc_data</span><span class="o">.</span><span class="n">wavelength</span><span class="p">)</span>
+<span class="n">n_line</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cii_rc_data</span><span class="p">[</span><span class="s1">&#39;wavelength&#39;</span><span class="p">])</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_line</span><span class="p">):</span>
-   <span class="nb">print</span><span class="p">(</span><span class="n">cii_rc_data</span><span class="o">.</span><span class="n">ion</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">cii_rc_data</span><span class="o">.</span><span class="n">case1</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">cii_rc_data</span><span class="o">.</span><span class="n">wavelength</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
-         <span class="n">cii_rc_data</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">cii_rc_data</span><span class="o">.</span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">cii_rc_data</span><span class="o">.</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
-         <span class="n">cii_rc_data</span><span class="o">.</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">cii_rc_data</span><span class="o">.</span><span class="n">br</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">cii_rc_data</span><span class="o">.</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">cii_rc_data</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+   <span class="nb">print</span><span class="p">(</span><span class="n">cii_rc_data</span><span class="p">[</span><span class="s1">&#39;ion&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">cii_rc_data</span><span class="p">[</span><span class="s1">&#39;case1&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">cii_rc_data</span><span class="p">[</span><span class="s1">&#39;wavelength&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span>
+         <span class="n">cii_rc_data</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">cii_rc_data</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">cii_rc_data</span><span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span>
+         <span class="n">cii_rc_data</span><span class="p">[</span><span class="s1">&#39;d&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">cii_rc_data</span><span class="p">[</span><span class="s1">&#39;br&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">cii_rc_data</span><span class="p">[</span><span class="s1">&#39;q&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">cii_rc_data</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>which gives:</p>
@@ -305,7 +311,7 @@
 <span class="n">ion</span><span class="o">=</span><span class="s1">&#39;ii&#39;</span>
 <span class="n">hei_rc_data</span> <span class="o">=</span> <span class="n">atomneb</span><span class="o">.</span><span class="n">read_aeff_he_i_pfsd12</span><span class="p">(</span><span class="n">atom_rc_file</span><span class="p">,</span> <span class="n">atom</span><span class="p">,</span> <span class="n">ion</span><span class="p">)</span>
 <span class="n">hei_rc_data_wave</span> <span class="o">=</span> <span class="n">atomneb</span><span class="o">.</span><span class="n">read_aeff_he_i_pfsd12</span><span class="p">(</span><span class="n">atom_rc_file</span><span class="p">,</span> <span class="n">atom</span><span class="p">,</span> <span class="n">ion</span><span class="p">,</span> <span class="n">wavelength</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">hei_rc_data</span><span class="o">.</span><span class="n">aeff</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">hei_rc_data</span><span class="p">[</span><span class="s1">&#39;aeff&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>which gives:</p>
@@ -322,9 +328,9 @@
 <span class="n">nii_rc_data</span> <span class="o">=</span> <span class="n">atomneb</span><span class="o">.</span><span class="n">read_aeff_n_ii_fsl13</span><span class="p">(</span><span class="n">atom_rc_file</span><span class="p">,</span> <span class="n">atom</span><span class="p">,</span> <span class="n">ion</span><span class="p">,</span> <span class="n">wavelength_range</span><span class="p">)</span>
 <span class="n">nii_rc_data_wave</span> <span class="o">=</span> <span class="n">atomneb</span><span class="o">.</span><span class="n">read_aeff_n_ii_fsl13</span><span class="p">(</span><span class="n">atom_rc_file</span><span class="p">,</span> <span class="n">atom</span><span class="p">,</span> <span class="n">ion</span><span class="p">,</span> <span class="n">wavelength_range</span><span class="p">,</span> <span class="n">wavelength</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">nii_rc_data</span><span class="o">.</span><span class="n">aeff</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">n_line</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nii_rc_data_wave</span><span class="o">.</span><span class="n">wavelength</span><span class="p">)</span>
+<span class="n">n_line</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">hei_rc_data_wave</span><span class="p">[</span><span class="s1">&#39;wavelength&#39;</span><span class="p">])</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_line</span><span class="p">):</span>
-   <span class="nb">print</span><span class="p">(</span><span class="n">nii_rc_data_wave</span><span class="o">.</span><span class="n">wavelength</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nii_rc_data_wave</span><span class="o">.</span><span class="n">tr</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nii_rc_data_wave</span><span class="o">.</span><span class="n">trans</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+   <span class="nb">print</span><span class="p">(</span><span class="n">nii_rc_data_wave</span><span class="p">[</span><span class="s1">&#39;wavelength&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">nii_rc_data_wave</span><span class="p">[</span><span class="s1">&#39;tr&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">nii_rc_data_wave</span><span class="p">[</span><span class="s1">&#39;trans&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>which gives:</p>
@@ -358,10 +364,10 @@
 <span class="n">wavelength_range</span><span class="o">=</span><span class="p">[</span><span class="mf">5320.0</span><span class="p">,</span> <span class="mf">5330.0</span><span class="p">]</span>
 <span class="n">oii_rc_data</span> <span class="o">=</span> <span class="n">atomneb</span><span class="o">.</span><span class="n">read_aeff_o_ii_ssb17</span><span class="p">(</span><span class="n">atom_rc_file</span><span class="p">,</span> <span class="n">atom</span><span class="p">,</span> <span class="n">ion</span><span class="p">,</span> <span class="n">case1</span><span class="p">,</span> <span class="n">wavelength_range</span><span class="p">)</span>
 <span class="n">oii_rc_data_wave</span> <span class="o">=</span> <span class="n">atomneb</span><span class="o">.</span><span class="n">read_aeff_o_ii_ssb17</span><span class="p">(</span><span class="n">atom_rc_file</span><span class="p">,</span> <span class="n">atom</span><span class="p">,</span> <span class="n">ion</span><span class="p">,</span> <span class="n">case1</span><span class="p">,</span> <span class="n">wavelength_range</span><span class="p">,</span> <span class="n">wavelength</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">oii_rc_data</span><span class="o">.</span><span class="n">aeff</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">n_line</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">oii_rc_data_wave</span><span class="o">.</span><span class="n">wavelength</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">oii_rc_data</span><span class="p">[</span><span class="s1">&#39;aeff&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">n_line</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">oii_rc_data_wave</span><span class="p">[</span><span class="s1">&#39;wavelength&#39;</span><span class="p">])</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_line</span><span class="p">):</span>
-   <span class="nb">print</span><span class="p">(</span><span class="n">oii_rc_data_wave</span><span class="o">.</span><span class="n">wavelength</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">oii_rc_data_wave</span><span class="o">.</span><span class="n">lower_term</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">oii_rc_data_wave</span><span class="o">.</span><span class="n">upper_term</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+   <span class="nb">print</span><span class="p">(</span><span class="n">oii_rc_data_wave</span><span class="p">[</span><span class="s1">&#39;wavelength&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">oii_rc_data_wave</span><span class="p">[</span><span class="s1">&#39;lower_term&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">oii_rc_data_wave</span><span class="p">[</span><span class="s1">&#39;upper_term&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>which gives:</p>

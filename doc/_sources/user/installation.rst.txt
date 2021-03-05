@@ -1,24 +1,17 @@
 Installation
 ============
 
-To install the last version, all you should need to do is
+To install the last version, all you should need to do is::
 
-.. code-block::
+        python setup.py install
 
-    $ python setup.py install
+To install the stable version, you can use the preferred installer program (pip)::
 
-To install the stable version, you can use the preferred installer program (pip):
+        pip install atomneb
 
-.. code-block::
+or you can install it from the cross-platform package manager *conda*::
 
-    $ pip install atomneb
-
-or you can install it from the cross-platform package manager *conda*:
-
-.. code-block::
-
-    $ conda install -c conda-forge atomneb
-
+        conda install -c conda-forge atomneb
 
 To get this package with all the FITS file, you can simply use ``git`` command as follows::
 
@@ -32,5 +25,4 @@ If you plan to use the recent O II recombination coefficients (`Storey, Sochi an
 This package requires the following packages:
 
     - `NumPy <https://numpy.org/>`_
-    - `pandas <https://pandas.pydata.org/>`_
     - `Astropy <https://www.astropy.org/>`_
