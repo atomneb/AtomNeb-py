@@ -317,9 +317,9 @@ The Documentation of the functions provides in detail in the *API Documentation*
         oii_rc_data = atomneb.read_aeff_o_ii_ssb17(atom_rc_file, atom, ion, case1, wavelength_range)
         oii_rc_data_wave = atomneb.read_aeff_o_ii_ssb17(atom_rc_file, atom, ion, case1, wavelength_range, wavelength=True)
         print(oii_rc_data['aeff'][0])
-        n_line = len(oii_rc_data_wave.wavelength)
+        n_line = len(oii_rc_data_wave['wavelength'])
         for i in range(0, n_line):
-           print(oii_rc_data_wave.wavelength[i], oii_rc_data_wave.lower_term[i], oii_rc_data_wave.upper_term[i])
+           print(oii_rc_data_wave['wavelength'][i], oii_rc_data_wave['lower_term'][i], oii_rc_data_wave['upper_term'][i])
         
       which gives::
     
