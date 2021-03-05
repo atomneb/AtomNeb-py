@@ -25,5 +25,4 @@ If you plan to use the recent O II recombination coefficients (`Storey, Sochi an
 This package requires the following packages:
 
     - `NumPy <https://numpy.org/>`_
-    - `pandas <https://pandas.pydata.org/>`_
     - `Astropy <https://www.astropy.org/>`_

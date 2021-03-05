@@ -17,6 +17,10 @@ The atomic data for **collisional excitation unit (CEL)** contain Energy Levels 
      
     Also::
 
+        import atomneb
+     
+    Also::
+
         import numpy as np
         import os
         
@@ -29,13 +33,13 @@ The atomic data for **collisional excitation unit (CEL)** contain Energy Levels 
    
     Now you have access to:
      
-    * *Energy Levels* (Ej)::
+    - *Energy Levels* (Ej)::
     
         atom='o'
         ion='iii'
         oiii_elj_data = atomneb.read_elj(atom_elj_file, atom, ion, level_num=6)
-        print(np.asarray(oiii_elj_data.j_v))
-        print(np.asarray(oiii_elj_data.ej))
+        print(oiii_elj_data['j_v'])
+        print(oiii_elj_data['ej'])
     
       which gives::
     
@@ -47,9 +51,9 @@ The atomic data for **collisional excitation unit (CEL)** contain Energy Levels 
         atom='o'
         ion='iii'
         oiii_omij_data = atomneb.read_omij(atom_omij_file, atom, ion)
-        print(np.asarray(oiii_omij_data.level1))
-        print(np.asarray(oiii_omij_data.level2))
-        print(np.asarray(oiii_omij_data.strength)[0])
+        print(oiii_omij_data['level1'])
+        print(oiii_omij_data['level2'])
+        print(oiii_omij_data['strength'][0])
     
       which gives::
         
@@ -62,7 +66,7 @@ The atomic data for **collisional excitation unit (CEL)** contain Energy Levels 
         atom='o'
         ion='iii'
         oiii_aij_data = atomneb.read_aij(atom_aij_file, atom, ion)
-        pprint(oiii_aij_data.aij)
+        print(oiii_aij_data['aij'][0])
     
       which gives::
         
@@ -91,11 +95,11 @@ The atomic data for **recombination unit (RC)** contain effective recombination 
         atom='c'
         ion='iii'
         cii_rc_data = atomneb.read_aeff_collection(atom_rc_file, atom, ion)
-        n_line = len(cii_rc_data.wavelength)
+        n_line = len(cii_rc_data['wavelength'])
         for i in range(0, n_line):
-             print(cii_rc_data.wavelength[i], cii_rc_data.a[i], 
-                   cii_rc_data.b[i], cii_rc_data.c[i], 
-                   cii_rc_data.d[i], cii_rc_data.f[i])
+             print(cii_rc_data['wavelength'][i], cii_rc_data['a'][i], 
+                   cii_rc_data['b'][i], cii_rc_data['c'][i], 
+                   cii_rc_data['d'][i], cii_rc_data['f'][i])
         
       which gives::
     
@@ -110,7 +114,7 @@ The atomic data for **recombination unit (RC)** contain effective recombination 
         atom='h'
         ion='ii'
         hi_rc_data = atomneb.read_aeff_sh95(atom_rc_file, atom, ion)
-        print(hi_rc_data.aeff[0])
+        print(hi_rc_data['aeff'][0])
         
       which gives::
     
@@ -123,11 +127,11 @@ The atomic data for **recombination unit (RC)** contain effective recombination 
         atom='c'
         ion='iii'
         cii_rc_data = atomneb.read_aeff_ppb91(atom_rc_file, atom, ion)
-        n_line = len(cii_rc_data.wavelength)
+        n_line = len(cii_rc_data['wavelength'])
         for i in range(0, n_line):
-           print(cii_rc_data.ion[i], cii_rc_data.case1[i], cii_rc_data.wavelength[i],
-                 cii_rc_data.a[i], cii_rc_data.b[i], cii_rc_data.c[i],
-                 cii_rc_data.d[i], cii_rc_data.br[i], cii_rc_data.q[i], cii_rc_data.y[i])
+           print(cii_rc_data['ion'][i], cii_rc_data['case1'][i], cii_rc_data['wavelength'][i],
+                 cii_rc_data['a'][i], cii_rc_data['b'][i], cii_rc_data['c'][i],
+                 cii_rc_data['d'][i], cii_rc_data['br'][i], cii_rc_data['q'][i], cii_rc_data['y'][i])
            
       which gives::
     
@@ -142,7 +146,7 @@ The atomic data for **recombination unit (RC)** contain effective recombination 
         ion='ii'
         hei_rc_data = atomneb.read_aeff_he_i_pfsd12(atom_rc_file, atom, ion)
         hei_rc_data_wave = atomneb.read_aeff_he_i_pfsd12(atom_rc_file, atom, ion, wavelength=True)
-        print(hei_rc_data.aeff[0])
+        print(hei_rc_data['aeff'][0])
            
       which gives::
     
@@ -158,9 +162,9 @@ The atomic data for **recombination unit (RC)** contain effective recombination 
         nii_rc_data = atomneb.read_aeff_n_ii_fsl13(atom_rc_file, atom, ion, wavelength_range)
         nii_rc_data_wave = atomneb.read_aeff_n_ii_fsl13(atom_rc_file, atom, ion, wavelength_range, wavelength=True)
         print(nii_rc_data.aeff[0])
-        n_line = len(nii_rc_data_wave.wavelength)
+        n_line = len(hei_rc_data_wave['wavelength'])
         for i in range(0, n_line):
-           print(nii_rc_data_wave.wavelength[i], nii_rc_data_wave.tr[i], nii_rc_data_wave.trans[i])
+           print(nii_rc_data_wave['wavelength'][i], nii_rc_data_wave['tr'][i], nii_rc_data_wave['trans'][i])
         
       which gives::
     
@@ -194,10 +198,10 @@ The atomic data for **recombination unit (RC)** contain effective recombination 
         wavelength_range=[5320.0, 5330.0] 
         oii_rc_data = atomneb.read_aeff_o_ii_ssb17(atom_rc_file, atom, ion, case1, wavelength_range)
         oii_rc_data_wave = atomneb.read_aeff_o_ii_ssb17(atom_rc_file, atom, ion, case1, wavelength_range, wavelength=True)
-        print(oii_rc_data.aeff[0])
-        n_line = len(oii_rc_data_wave.wavelength)
+        print(oii_rc_data['aeff'][0])
+        n_line = len(oii_rc_data_wave['wavelength'])
         for i in range(0, n_line):
-           print(oii_rc_data_wave.wavelength[i], oii_rc_data_wave.lower_term[i], oii_rc_data_wave.upper_term[i])
+           print(oii_rc_data_wave['wavelength'][i], oii_rc_data_wave['lower_term'][i], oii_rc_data_wave['upper_term'][i])
         
       which gives::
     
