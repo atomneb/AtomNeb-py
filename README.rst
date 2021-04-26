@@ -6,8 +6,8 @@ AtomNeb Python Package
     :target: https://pypi.python.org/pypi/atomneb/
     :alt: PyPI Version
     
-.. image:: https://travis-ci.org/atomneb/AtomNeb-py.svg?branch=master
-    :target: https://travis-ci.org/atomneb/AtomNeb-py
+.. image:: https://travis-ci.com/atomneb/AtomNeb-py.svg?branch=master
+    :target: https://travis-ci.com/atomneb/AtomNeb-py
     :alt: Build Status
     
 .. image:: https://ci.appveyor.com/api/projects/status/gi4ok3wy7jjn1ekb?svg=true
