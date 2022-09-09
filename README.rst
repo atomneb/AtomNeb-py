@@ -33,8 +33,8 @@ AtomNeb Python Package
 .. image:: https://img.shields.io/badge/python-2.7%2C%203.8-blue.svg
     :alt: Support Python versions 2.7 and 3.8
     
-.. image:: https://img.shields.io/badge/DOI-10.5281/zenodo.4287566-blue.svg
-    :target: https://doi.org/10.5281/zenodo.4287566
+.. image:: https://img.shields.io/badge/DOI-10.5281/zenodo.4287565-blue.svg
+    :target: https://doi.org/10.5281/zenodo.4287565
     :alt: Zenodo
 
 .. image:: http://joss.theoj.org/papers/10.21105/joss.02797/status.svg
@@ -386,5 +386,5 @@ Learn More
 **Conda-Forge**     https://anaconda.org/conda-forge/atomneb
 **PyPI**            https://pypi.org/project/atomneb/
 **DOI**             `10.21105/joss.02797 <https://doi.org/10.21105/joss.02797>`_
-**Archive**         `10.5281/zenodo.4287566 <https://doi.org/10.5281/zenodo.4287566>`_
+**Archive**         `10.5281/zenodo.4287565 <https://doi.org/10.5281/zenodo.4287565>`_
 ==================  =============================================
