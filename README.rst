@@ -278,7 +278,7 @@ The Documentation of the functions provides in detail in the *API Documentation*
         wavelength_range=[4400.0, 7100.0] 
         nii_rc_data = atomneb.read_aeff_n_ii_fsl13(atom_rc_file, atom, ion, wavelength_range)
         nii_rc_data_wave = atomneb.read_aeff_n_ii_fsl13(atom_rc_file, atom, ion, wavelength_range, wavelength=True)
-        print(nii_rc_data.aeff[0])
+        print(nii_rc_data['aeff'][0])
         n_line = len(hei_rc_data_wave['wavelength'])
         for i in range(0, n_line):
            print(nii_rc_data_wave['wavelength'][i], nii_rc_data_wave['tr'][i], nii_rc_data_wave['trans'][i])
