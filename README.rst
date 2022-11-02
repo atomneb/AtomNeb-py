@@ -139,11 +139,11 @@ The Documentation of the functions provides in detail in the *API Documentation*
     You need to load the **atomneb** library as follows::
     
         import atomneb
-     
-    Also::
-
         import numpy as np
         import os
+        
+        base_dir = '.'
+        data_dir = os.path.join('atomic-data', 'chianti70')
         
         atom_elj_file = os.path.join(base_dir,data_dir, 'AtomElj.fits')
         atom_omij_file = os.path.join(base_dir,data_dir, 'AtomOmij.fits')
