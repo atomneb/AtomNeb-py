@@ -305,14 +305,27 @@ The Documentation of the functions provides in detail in the *API Documentation*
 
         tar -xvf rc_o_iii_SSB17.fits.tar.gz
 
+      Please note that using the entire atomic data will make your program very slow and you may need to have a higher memory on your system. Without the above comment, as default, the cose uses rc_o_iii_SSB17_orl_case_b.fits. You can also unpack them using tarfile shown below::
 
-      Please note that using the entire atomic data will make your program very slow and you may need to have a higher memory on your system. Without the above comment, as default, the cose uses rc_o_iii_SSB17_orl_case_b.fits::
+        import atomneb
+        import numpy as np
+        import os
+        import tarfile
+        
+        base_dir = '.'
+        data_rc_dir = os.path.join('atomic-data-rc')
+        atom_rc_file = os.path.join(base_dir,data_rc_dir, 'rc_o_iii_SSB17_orl_case_b.fits')
 
-        aatom_rc_file = os.path.join(base_dir,data_rc_dir, 'rc_o_iii_SSB17_orl_case_b.fits')
-        atom='o'
-        ion='iii'
-        case1='B'
-        wavelength_range=[5320.0, 5330.0] 
+        atom_rc_file_tar_gz = os.path.join(base_dir,data_rc_dir, 'rc_o_iii_SSB17_orl_case_b.fits.tar.gz')
+        atom_rc_path = os.path.join(base_dir,data_rc_dir)
+        tar = tarfile.open(atom_rc_file_tar_gz, "r:gz")
+        tar.extractall(path=atom_rc_path)
+        tar.close()
+        
+        atom = 'o'
+        ion = 'iii' # O II
+        case1 = 'B'
+        wavelength_range=[5320.0, 5330.0]
         oii_rc_data = atomneb.read_aeff_o_ii_ssb17(atom_rc_file, atom, ion, case1, wavelength_range)
         oii_rc_data_wave = atomneb.read_aeff_o_ii_ssb17(atom_rc_file, atom, ion, case1, wavelength_range, wavelength=True)
         print(oii_rc_data['aeff'][0])
