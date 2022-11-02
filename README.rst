@@ -197,19 +197,18 @@ The Documentation of the functions provides in detail in the *API Documentation*
     
     You need to load the **atomneb** libary::
     
-    
         import atomneb
-     
-    Also:
-
         import numpy as np
         import os
+        
+        base_dir = '.'
+        data_rc_dir = os.path.join('atomic-data-rc')
     
     Now you have access to effective recombination coefficients (αeff) of the following collections:
      
     - *RC Collection*::
 
-        atom_rc_file = os.path.join(base_dir,data_dir, 'rc_collection.fits')
+        atom_rc_file = os.path.join(base_dir,data_rc_dir, 'rc_collection.fits')
         atom='c'
         ion='iii'
         cii_rc_data = atomneb.read_aeff_collection(atom_rc_file, atom, ion)
@@ -228,7 +227,7 @@ The Documentation of the functions provides in detail in the *API Documentation*
         
     - *SH95 Collection*::
     
-        atom_rc_file = os.path.join(base_dir,data_dir, 'rc_SH95.fits')
+        atom_rc_file = os.path.join(base_dir,data_rc_dir, 'rc_SH95.fits')
         atom='h'
         ion='ii'
         hi_rc_data = atomneb.read_aeff_sh95(atom_rc_file, atom, ion)
@@ -241,7 +240,7 @@ The Documentation of the functions provides in detail in the *API Documentation*
         
     - *PPB91 Collection*::
     
-        atom_rc_file = os.path.join(base_dir,data_dir, 'rc_PPB91.fits')
+        atom_rc_file = os.path.join(base_dir,data_rc_dir, 'rc_PPB91.fits')
         atom='c'
         ion='iii'
         cii_rc_data = atomneb.read_aeff_ppb91(atom_rc_file, atom, ion)
@@ -259,7 +258,7 @@ The Documentation of the functions provides in detail in the *API Documentation*
           
     - *PFSD12 He I data*::
 
-        atom_rc_file = os.path.join(base_dir,data_dir, 'rc_he_ii_PFSD12.fits')
+        atom_rc_file = os.path.join(base_dir,data_rc_dir, 'rc_he_ii_PFSD12.fits')
         atom='he'
         ion='ii'
         hei_rc_data = atomneb.read_aeff_he_i_pfsd12(atom_rc_file, atom, ion)
@@ -273,7 +272,7 @@ The Documentation of the functions provides in detail in the *API Documentation*
         
     - *FSL13 N II data*::
     
-        atom_rc_file = os.path.join(base_dir,data_dir, 'rc_n_iii_FSL13.fits')
+        atom_rc_file = os.path.join(base_dir,data_rc_dir, 'rc_n_iii_FSL13.fits')
         atom='n'
         ion='iii'
         wavelength_range=[4400.0, 7100.0] 
@@ -309,7 +308,7 @@ The Documentation of the functions provides in detail in the *API Documentation*
 
       Please note that using the entire atomic data will make your program very slow and you may need to have a higher memory on your system. Without the above comment, as default, the cose uses rc_o_iii_SSB17_orl_case_b.fits::
 
-        aatom_rc_file = os.path.join(base_dir,data_dir, 'rc_o_iii_SSB17_orl_case_b.fits')
+        aatom_rc_file = os.path.join(base_dir,data_rc_dir, 'rc_o_iii_SSB17_orl_case_b.fits')
         atom='o'
         ion='iii'
         case1='B'
