@@ -41,6 +41,9 @@ AtomNeb Python Package
     :target: https://doi.org/10.21105/joss.02797
     :alt: JOSS
 
+.. image:: https://mybinder.org/badge_logo.svg
+ :target: https://mybinder.org/v2/gh/atomneb/AtomNeb-py/HEAD?labpath=Notebooks.ipynb
+
 Description
 ===========
 
@@ -134,6 +137,14 @@ How to Use
 
 The Documentation of the functions provides in detail in the *API Documentation* (`atomneb.github.io/AtomNeb-py/doc <https://atomneb.github.io/AtomNeb-py/doc>`_). There are two main categories: *collisionally excited lines (CEL)* and *recombination lines (RC)*.
 
+
+See *Jupyter Notebooks*: `Notebooks.ipynb <https://github.com/atomneb/AtomNeb-py/blob/master/Notebooks.ipynb>`_
+
+Run *Jupyter Notebooks* on `Binder <https://mybinder.org/v2/gh/atomneb/AtomNeb-py/HEAD?labpath=Notebooks.ipynb>`_:
+
+.. image:: https://mybinder.org/badge_logo.svg
+ :target: https://mybinder.org/v2/gh/atomneb/AtomNeb-py/HEAD?labpath=Notebooks.ipynb
+ 
 * The atomic data for **collisionally excited lines (CEL)** contain Energy Levels (Ej), Collision Strengths (Ωij), and Transition Probabilities (Aij). We have four atomic datasets for them: `collection <https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data/collection>`_, `chianti52 <https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data/chianti52>`_, `chianti60 <https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data/chianti60>`_, and `chianti70 <https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data/chianti70>`_. 
     
     You need to load the **atomneb** library as follows::
