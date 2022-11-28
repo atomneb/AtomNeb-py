@@ -151,7 +151,7 @@ Run *Jupyter Notebooks* on `Binder <https://mybinder.org/v2/gh/atomneb/AtomNeb-p
  
 * The atomic data for **collisionally excited lines (CEL)** contain Energy Levels (Ej), Collision Strengths (Ωij), and Transition Probabilities (Aij). We have four atomic datasets for them: `collection <https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data/collection>`_, `chianti52 <https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data/chianti52>`_, `chianti60 <https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data/chianti60>`_, and `chianti70 <https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data/chianti70>`_. 
     
-You need to load the **atomneb** library as follows:
+    You need to load the **atomneb** library as follows:
 
     .. code-block:: python
 
@@ -173,7 +173,7 @@ You need to load the **atomneb** library as follows:
      
     - *Energy Levels* (Ej):
     
-    .. code-block:: python
+      .. code-block:: python
  
         atom='o'
         ion='iii'
@@ -181,14 +181,14 @@ You need to load the **atomneb** library as follows:
         print(oiii_elj_data['j_v'])
         print(oiii_elj_data['ej'])
     
-    which gives::
+      which gives::
     
         0.00000      1.00000      2.00000      2.00000      0.00000      2.00000
         0.00000      113.200      306.200      20273.30     43185.69     60324.80
     
     - *Collision Strengths* (Ωij):
 
-    .. code-block:: python
+      .. code-block:: python
  
         atom='o'
         ion='iii'
@@ -197,7 +197,7 @@ You need to load the **atomneb** library as follows:
         print(oiii_omij_data['level2'])
         print(oiii_omij_data['strength'][0])
     
-    which gives::
+      which gives::
         
         0       1       1       1       1       ...
         0       2       3       4       5       ...
@@ -205,14 +205,14 @@ You need to load the **atomneb** library as follows:
     
     - *Transition Probabilities* (Aij):
 
-    .. code-block:: python
+      .. code-block:: python
  
         atom='o'
         ion='iii'
         oiii_aij_data = atomneb.read_aij(atom_aij_file, atom, ion)
         print(oiii_aij_data['aij'][0])
     
-    which gives::
+      which gives::
         
          0.0000   2.5969e-05       0.0000   2.3220e-06      ...
     
@@ -233,7 +233,7 @@ You need to load the **atomneb** library as follows:
      
     - *RC Collection*:
 
-    .. code-block:: python
+      .. code-block:: python
     
         atom_rc_file = os.path.join(base_dir,data_rc_dir, 'rc_collection.fits')
         atom='c'
@@ -245,7 +245,7 @@ You need to load the **atomneb** library as follows:
                    cii_rc_data['b'][i], cii_rc_data['c'][i], 
                    cii_rc_data['d'][i], cii_rc_data['f'][i])
         
-    which gives::
+      which gives::
     
         914.00000      0.69280000     0.021400000    -0.016300000     -0.24310000     -0.88000000
         962.00000       1.0998000   -0.0042000000    -0.027900000     -0.22940000     -0.96560000
@@ -254,7 +254,7 @@ You need to load the **atomneb** library as follows:
         
     - *SH95 Collection*:
     
-    .. code-block:: python
+      .. code-block:: python
         
         atom_rc_file = os.path.join(base_dir,data_rc_dir, 'rc_SH95.fits')
         atom='h'
@@ -262,14 +262,14 @@ You need to load the **atomneb** library as follows:
         hi_rc_data = atomneb.read_aeff_sh95(atom_rc_file, atom, ion)
         print(hi_rc_data['aeff'][0])
         
-    which gives::
+      which gives::
     
         100.00000       500.00000       0.0000000   4.2140000e-27   1.7560000e-27   1.0350000e-27
         ...
         
     - *PPB91 Collection*:
     
-    .. code-block:: python
+      .. code-block:: python
     
         atom_rc_file = os.path.join(base_dir,data_rc_dir, 'rc_PPB91.fits')
         atom='c'
@@ -281,7 +281,7 @@ You need to load the **atomneb** library as follows:
                  cii_rc_data['a'][i], cii_rc_data['b'][i], cii_rc_data['c'][i],
                  cii_rc_data['d'][i], cii_rc_data['br'][i], cii_rc_data['q'][i], cii_rc_data['y'][i])
            
-    which gives::
+      which gives::
     
         C2+A       9903.4600      0.69700000     -0.78400000       4.2050000      0.72000000       1.0000000       1.6210000
         C2+A       4267.1500       1.0110000     -0.75400000       2.5870000      0.71900000      0.95000000       2.7950000
@@ -289,7 +289,7 @@ You need to load the **atomneb** library as follows:
           
     - *PFSD12 He I data*:
 
-    .. code-block:: python
+      .. code-block:: python
     
         atom_rc_file = os.path.join(base_dir,data_rc_dir, 'rc_he_ii_PFSD12.fits')
         atom='he'
@@ -298,14 +298,14 @@ You need to load the **atomneb** library as follows:
         hei_rc_data_wave = atomneb.read_aeff_he_i_pfsd12(atom_rc_file, atom, ion, wavelength=True)
         print(hei_rc_data['aeff'][0])
            
-    which gives::
+      which gives::
     
         5000.0000       10.000000      -25.379540      -25.058970      -25.948440      -24.651820      -25.637660     
         ...
         
     - *FSL13 N II data*:
     
-    .. code-block:: python
+      .. code-block:: python
     
         atom_rc_file = os.path.join(base_dir,data_rc_dir, 'rc_n_iii_FSL13.fits')
         atom='n'
@@ -318,7 +318,7 @@ You need to load the **atomneb** library as follows:
         for i in range(0, n_line):
            print(nii_rc_data_wave['wavelength'][i], nii_rc_data_wave['tr'][i], nii_rc_data_wave['trans'][i])
         
-    which gives::
+      which gives::
     
         255.000      79.5000      47.3000      12.5000      6.20000      4.00000      2.86000
         258.000      54.4000      29.7000      7.92000      4.11000      2.72000      2.00000
@@ -342,7 +342,7 @@ You need to load the **atomneb** library as follows:
 
       Please note that using the entire atomic data will make your program very slow and you may need to have a higher memory on your system. Without the above comment, as default, the cose uses rc_o_iii_SSB17_orl_case_b.fits. You can also unpack them using tarfile shown below:
 
-    .. code-block:: python
+      .. code-block:: python
     
         import atomneb
         import numpy as np
@@ -370,7 +370,7 @@ You need to load the **atomneb** library as follows:
         for i in range(0, n_line):
            print(oii_rc_data_wave['wavelength'][i], oii_rc_data_wave['lower_term'][i], oii_rc_data_wave['upper_term'][i])
         
-    which gives::
+      which gives::
     
         1.64100e-30  1.60000e-30  1.56400e-30  1.54100e-30  1.52100e-30  1.50900e-30
         ...
