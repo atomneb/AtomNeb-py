@@ -104,11 +104,15 @@ Dependent Python Packages
 
 The previous version relied on `pandas <https://pandas.pydata.org/>`_, but all the data structures were changed from pandas.DataFrame to those defined by `NumPy <https://numpy.org/>`_ that speed up the computations and reduce the memory usage.
     
-* To get this package with all the FITS file, you can simply use ``git`` command as follows::
+* To get this package with all the FITS file, you can simply use ``git`` command as follows:
+
+.. code-block::
 
         git clone https://github.com/atomneb/AtomNeb-py
 
-* If you plan to use the recent O II recombination coefficients (`Storey, Sochi and Bastin 2017 <http://adsabs.harvard.edu/abs/2017MNRAS.470..379S>`_), you need to unpack them::
+* If you plan to use the recent O II recombination coefficients (`Storey, Sochi and Bastin 2017 <http://adsabs.harvard.edu/abs/2017MNRAS.470..379S>`_), you need to unpack them:
+
+.. code-block::
 
         cd AtomNeb-py/atomic-data-rc/
         tar -xvf *.fits.tar.gz
@@ -147,8 +151,10 @@ Run *Jupyter Notebooks* on `Binder <https://mybinder.org/v2/gh/atomneb/AtomNeb-p
  
 * The atomic data for **collisionally excited lines (CEL)** contain Energy Levels (Ej), Collision Strengths (Ωij), and Transition Probabilities (Aij). We have four atomic datasets for them: `collection <https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data/collection>`_, `chianti52 <https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data/chianti52>`_, `chianti60 <https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data/chianti60>`_, and `chianti70 <https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data/chianti70>`_. 
     
-    You need to load the **atomneb** library as follows::
-    
+You need to load the **atomneb** library as follows:
+
+    .. code-block:: python
+
         import atomneb
         import numpy as np
         import os
@@ -165,21 +171,25 @@ Run *Jupyter Notebooks* on `Binder <https://mybinder.org/v2/gh/atomneb/AtomNeb-p
    
     Now you have access to:
      
-    - *Energy Levels* (Ej)::
+    - *Energy Levels* (Ej):
     
+    .. code-block:: python
+ 
         atom='o'
         ion='iii'
         oiii_elj_data = atomneb.read_elj(atom_elj_file, atom, ion, level_num=6)
         print(oiii_elj_data['j_v'])
         print(oiii_elj_data['ej'])
     
-      which gives::
+    which gives::
     
         0.00000      1.00000      2.00000      2.00000      0.00000      2.00000
         0.00000      113.200      306.200      20273.30     43185.69     60324.80
     
-    - *Collision Strengths* (Ωij)::
-    
+    - *Collision Strengths* (Ωij):
+
+    .. code-block:: python
+ 
         atom='o'
         ion='iii'
         oiii_omij_data = atomneb.read_omij(atom_omij_file, atom, ion)
@@ -187,26 +197,30 @@ Run *Jupyter Notebooks* on `Binder <https://mybinder.org/v2/gh/atomneb/AtomNeb-p
         print(oiii_omij_data['level2'])
         print(oiii_omij_data['strength'][0])
     
-      which gives::
+    which gives::
         
         0       1       1       1       1       ...
         0       2       3       4       5       ...
         100.0      158.50       251.20       398.10       631.0       ...
     
-    - *Transition Probabilities* (Aij)::
-    
+    - *Transition Probabilities* (Aij):
+
+    .. code-block:: python
+ 
         atom='o'
         ion='iii'
         oiii_aij_data = atomneb.read_aij(atom_aij_file, atom, ion)
         print(oiii_aij_data['aij'][0])
     
-      which gives::
+    which gives::
         
          0.0000   2.5969e-05       0.0000   2.3220e-06      ...
     
 * The atomic data for **recombination lines (RC)** contain effective recombination coefficients (αeff) of emission lines from different collections: `RC Collection <https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data-rc>`_, `SH95 Collection <https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data-rc>`_, `PPB91 Collection <https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data-rc>`_, `PFSD12 He I data <https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data-rc>`_, `FSL13 N II data <https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data-rc>`_, and `SSB17 O II data <https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data-rc>`_.
     
-    You need to load the **atomneb** libary::
+    You need to load the **atomneb** libary:
+    
+    .. code-block:: python
     
         import atomneb
         import numpy as np
@@ -217,8 +231,10 @@ Run *Jupyter Notebooks* on `Binder <https://mybinder.org/v2/gh/atomneb/AtomNeb-p
     
     Now you have access to effective recombination coefficients (αeff) of the following collections:
      
-    - *RC Collection*::
+    - *RC Collection*:
 
+    .. code-block:: python
+    
         atom_rc_file = os.path.join(base_dir,data_rc_dir, 'rc_collection.fits')
         atom='c'
         ion='iii'
@@ -229,27 +245,31 @@ Run *Jupyter Notebooks* on `Binder <https://mybinder.org/v2/gh/atomneb/AtomNeb-p
                    cii_rc_data['b'][i], cii_rc_data['c'][i], 
                    cii_rc_data['d'][i], cii_rc_data['f'][i])
         
-      which gives::
+    which gives::
     
         914.00000      0.69280000     0.021400000    -0.016300000     -0.24310000     -0.88000000
         962.00000       1.0998000   -0.0042000000    -0.027900000     -0.22940000     -0.96560000
         997.00000      0.78210000     -0.36840000   0.00030000000     -0.12170000     -0.78740000
         ...
         
-    - *SH95 Collection*::
+    - *SH95 Collection*:
     
+    .. code-block:: python
+        
         atom_rc_file = os.path.join(base_dir,data_rc_dir, 'rc_SH95.fits')
         atom='h'
         ion='ii'
         hi_rc_data = atomneb.read_aeff_sh95(atom_rc_file, atom, ion)
         print(hi_rc_data['aeff'][0])
         
-      which gives::
+    which gives::
     
         100.00000       500.00000       0.0000000   4.2140000e-27   1.7560000e-27   1.0350000e-27
         ...
         
-    - *PPB91 Collection*::
+    - *PPB91 Collection*:
+    
+    .. code-block:: python
     
         atom_rc_file = os.path.join(base_dir,data_rc_dir, 'rc_PPB91.fits')
         atom='c'
@@ -261,14 +281,16 @@ Run *Jupyter Notebooks* on `Binder <https://mybinder.org/v2/gh/atomneb/AtomNeb-p
                  cii_rc_data['a'][i], cii_rc_data['b'][i], cii_rc_data['c'][i],
                  cii_rc_data['d'][i], cii_rc_data['br'][i], cii_rc_data['q'][i], cii_rc_data['y'][i])
            
-      which gives::
+    which gives::
     
         C2+A       9903.4600      0.69700000     -0.78400000       4.2050000      0.72000000       1.0000000       1.6210000
         C2+A       4267.1500       1.0110000     -0.75400000       2.5870000      0.71900000      0.95000000       2.7950000
         ...
           
-    - *PFSD12 He I data*::
+    - *PFSD12 He I data*:
 
+    .. code-block:: python
+    
         atom_rc_file = os.path.join(base_dir,data_rc_dir, 'rc_he_ii_PFSD12.fits')
         atom='he'
         ion='ii'
@@ -276,12 +298,14 @@ Run *Jupyter Notebooks* on `Binder <https://mybinder.org/v2/gh/atomneb/AtomNeb-p
         hei_rc_data_wave = atomneb.read_aeff_he_i_pfsd12(atom_rc_file, atom, ion, wavelength=True)
         print(hei_rc_data['aeff'][0])
            
-      which gives::
+    which gives::
     
         5000.0000       10.000000      -25.379540      -25.058970      -25.948440      -24.651820      -25.637660     
         ...
         
-    - *FSL13 N II data*::
+    - *FSL13 N II data*:
+    
+    .. code-block:: python
     
         atom_rc_file = os.path.join(base_dir,data_rc_dir, 'rc_n_iii_FSL13.fits')
         atom='n'
@@ -294,7 +318,7 @@ Run *Jupyter Notebooks* on `Binder <https://mybinder.org/v2/gh/atomneb/AtomNeb-p
         for i in range(0, n_line):
            print(nii_rc_data_wave['wavelength'][i], nii_rc_data_wave['tr'][i], nii_rc_data_wave['trans'][i])
         
-      which gives::
+    which gives::
     
         255.000      79.5000      47.3000      12.5000      6.20000      4.00000      2.86000
         258.000      54.4000      29.7000      7.92000      4.11000      2.72000      2.00000
@@ -316,8 +340,10 @@ Run *Jupyter Notebooks* on `Binder <https://mybinder.org/v2/gh/atomneb/AtomNeb-p
 
         tar -xvf rc_o_iii_SSB17.fits.tar.gz
 
-      Please note that using the entire atomic data will make your program very slow and you may need to have a higher memory on your system. Without the above comment, as default, the cose uses rc_o_iii_SSB17_orl_case_b.fits. You can also unpack them using tarfile shown below::
+      Please note that using the entire atomic data will make your program very slow and you may need to have a higher memory on your system. Without the above comment, as default, the cose uses rc_o_iii_SSB17_orl_case_b.fits. You can also unpack them using tarfile shown below:
 
+    .. code-block:: python
+    
         import atomneb
         import numpy as np
         import os
@@ -344,7 +370,7 @@ Run *Jupyter Notebooks* on `Binder <https://mybinder.org/v2/gh/atomneb/AtomNeb-p
         for i in range(0, n_line):
            print(oii_rc_data_wave['wavelength'][i], oii_rc_data_wave['lower_term'][i], oii_rc_data_wave['upper_term'][i])
         
-      which gives::
+    which gives::
     
         1.64100e-30  1.60000e-30  1.56400e-30  1.54100e-30  1.52100e-30  1.50900e-30
         ...
