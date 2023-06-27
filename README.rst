@@ -399,13 +399,14 @@ References
 Citation
 ========
 
-Using **AtomNeb** in a scholarly publication? Please cite these papers:
+Using the **AtomNeb** Python package in a scholarly publication? Please cite these papers:
 
 .. code-block:: bibtex
 
    @article{Danehkar2020,
      author = {{Danehkar}, Ashkbiz},
-     title = {AtomNeb Python Package, an addendum to AtomNeb: IDL Library for Atomic Data of Ionized Nebulae},
+     title = {AtomNeb Python Package, an addendum to AtomNeb: IDL Library 
+              for Atomic Data of Ionized Nebulae},
      journal = {Journal of Open Source Software},
      volume = {5},
      number = {55},
@@ -413,6 +414,10 @@ Using **AtomNeb** in a scholarly publication? Please cite these papers:
      year = {2020},
      doi = {10.21105/joss.02797}
    }
+
+and if you use the `AtomNeb <https://github.com/atomneb/AtomNeb-idl>`_ IDL library:
+
+.. code-block:: bibtex
 
    @article{Danehkar2019,
      author = {{Danehkar}, Ashkbiz},
