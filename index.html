@@ -18,8 +18,8 @@
   </head>
   <body>
     <section class="page-header">
-      <h1 class="project-name">AtomNeb-py</h1>
-      <h2 class="project-tagline">AtomNeb - Python Package for Atomic Data for Ionized Nebulae</h2>
+      <h2 class="project-name">AtomNeb-py</h2>
+      <h3 class="project-tagline">AtomNeb - Python Package for Atomic Data for Ionized Nebulae</h3>
       <a href="https://github.com/atomneb/AtomNeb-py" class="btn">View on GitHub</a>
       <a href="https://github.com/atomneb/AtomNeb-py/zipball/master" class="btn">Download .zip</a>
       <a href="https://github.com/atomneb/AtomNeb-py/tarball/master" class="btn">Download .tar.gz</a>
@@ -27,8 +27,8 @@
     </section>
 
     <section class="main-content">
-      <h1>
-<a id="atomneb" class="anchor" href="#atomneb" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>AtomNeb (Python)</h1>
+      <h2>
+<a id="atomneb" class="anchor" href="#atomneb" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>AtomNeb (Python)</h2>
 
 <p><strong>AtomNeb</strong> - Python Package for Atomic Data of Ionized Nebulae</p>
 
@@ -45,7 +45,7 @@
 Support Python versions 2.7 and 3.8</object>
 <a class="reference external image-reference" href="https://doi.org/10.5281/zenodo.4287566"><img alt="Zenodo" src="https://zenodo.org/badge/DOI/10.5281/zenodo.4287566.svg"></a>
 <a class="reference external image-reference" href="https://doi.org/10.21105/joss.02797"><img alt="JOSS" src="http://joss.theoj.org/papers/10.21105/joss.02797/status.svg"></a>
-
+<a class="reference external image-reference" href="https://mybinder.org/v2/gh/atomneb/AtomNeb-py/HEAD?labpath=Notebooks.ipynb"><object data="https://mybinder.org/badge_logo.svg" type="image/svg+xml">https://mybinder.org/badge_logo.svg</object></a>
 <div class="section" id="description">
 <h2>Description</h2>
 <p><strong>AtomNeb-py</strong> is a library written in Python for reading atomic data from <em>AtomNeb</em>, which is a database containing atomic data stored in the Flexible Image Transport System (FITS) file format for <em>collisionally excited lines</em> and <em>recombination lines</em> typically observed in spectra of ionized gaseous nebulae. The AtomNeb database were generated for use in <a class="reference external" href="https://github.com/equib/pyEQUIB">pyEQUIB</a>, <a class="reference external" href="https://github.com/equib/proEQUIB">proEQUIB</a>, and other nebular spectral analysis tools.</p>
@@ -90,19 +90,19 @@ Support Python versions 2.7 and 3.8</object>
 </blockquote>
 </blockquote>
 <p>The previous version relied on <a class="reference external" href="https://pandas.pydata.org/">pandas</a>, but all the data structures were changed from pandas.DataFrame to those defined by <a class="reference external" href="https://numpy.org/">NumPy</a> that speed up the computations and reduce the memory usage.</p>
-<ul>
-<li><p class="first">To get this package with all the FITS file, you can simply use <tt class="docutils literal">git</tt> command as follows:</p>
-<pre class="literal-block">
+<ul class="simple">
+<li>To get this package with all the FITS file, you can simply use <tt class="docutils literal">git</tt> command as follows:</li>
+</ul>
+<pre class="code literal-block">
 git clone https://github.com/atomneb/AtomNeb-py
 </pre>
-</li>
-<li><p class="first">If you plan to use the recent O II recombination coefficients (<a class="reference external" href="http://adsabs.harvard.edu/abs/2017MNRAS.470..379S">Storey, Sochi and Bastin 2017</a>), you need to unpack them:</p>
-<pre class="literal-block">
+<ul class="simple">
+<li>If you plan to use the recent O II recombination coefficients (<a class="reference external" href="http://adsabs.harvard.edu/abs/2017MNRAS.470..379S">Storey, Sochi and Bastin 2017</a>), you need to unpack them:</li>
+</ul>
+<pre class="code literal-block">
 cd AtomNeb-py/atomic-data-rc/
 tar -xvf *.fits.tar.gz
 </pre>
-</li>
-</ul>
 <p>To install the last version, all you should need to do is</p>
 <pre class="code literal-block">
 $ python setup.py install
@@ -120,34 +120,37 @@ $ conda install -c conda-forge atomneb
 <div class="section" id="how-to-use">
 <h2>How to Use</h2>
 <p>The Documentation of the functions provides in detail in the <em>API Documentation</em> (<a class="reference external" href="https://atomneb.github.io/AtomNeb-py/doc">atomneb.github.io/AtomNeb-py/doc</a>). There are two main categories: <em>collisionally excited lines (CEL)</em> and <em>recombination lines (RC)</em>.</p>
+<p>See <em>Jupyter Notebooks</em>: <a class="reference external" href="https://github.com/atomneb/AtomNeb-py/blob/master/Notebooks.ipynb">Notebooks.ipynb</a></p>
+<p>Run <em>Jupyter Notebooks</em> on <a class="reference external" href="https://mybinder.org/v2/gh/atomneb/AtomNeb-py/HEAD?labpath=Notebooks.ipynb">Binder</a>:</p>
+<a class="reference external image-reference" href="https://mybinder.org/v2/gh/atomneb/AtomNeb-py/HEAD?labpath=Notebooks.ipynb"><object data="https://mybinder.org/badge_logo.svg" type="image/svg+xml">https://mybinder.org/badge_logo.svg</object></a>
 <ul>
 <li><p class="first">The atomic data for <strong>collisionally excited lines (CEL)</strong> contain Energy Levels (Ej), Collision Strengths (Ωij), and Transition Probabilities (Aij). We have four atomic datasets for them: <a class="reference external" href="https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data/collection">collection</a>, <a class="reference external" href="https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data/chianti52">chianti52</a>, <a class="reference external" href="https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data/chianti60">chianti60</a>, and <a class="reference external" href="https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data/chianti70">chianti70</a>.</p>
 <blockquote>
 <p>You need to load the <strong>atomneb</strong> library as follows:</p>
-<pre class="literal-block">
-import atomneb
-</pre>
-<p>Also:</p>
-<pre class="literal-block">
-import numpy as np
-import os
+<pre class="code python literal-block">
+<span class="keyword namespace">import</span> <span class="name namespace">atomneb</span><span class="whitespace">
+</span><span class="keyword namespace">import</span> <span class="name namespace">numpy</span> <span class="keyword">as</span> <span class="name namespace">np</span><span class="whitespace">
+</span><span class="keyword namespace">import</span> <span class="name namespace">os</span><span class="whitespace">
 
-atom_elj_file = os.path.join(base_dir,data_dir, 'AtomElj.fits')
-atom_omij_file = os.path.join(base_dir,data_dir, 'AtomOmij.fits')
-atom_aij_file = os.path.join(base_dir,data_dir, 'AtomAij.fits')
-elj_data_list = atomneb.read_elj_list(atom_elj_file)
-omij_data_list = atomneb.read_omij_list(atom_omij_file)
-aij_data_list = atomneb.read_aij_list(atom_aij_file)
+</span><span class="name">base_dir</span> <span class="operator">=</span> <span class="literal string single">'.'</span><span class="whitespace">
+</span><span class="name">data_dir</span> <span class="operator">=</span> <span class="name">os</span><span class="operator">.</span><span class="name">path</span><span class="operator">.</span><span class="name">join</span><span class="punctuation">(</span><span class="literal string single">'atomic-data'</span><span class="punctuation">,</span> <span class="literal string single">'chianti70'</span><span class="punctuation">)</span><span class="whitespace">
+
+</span><span class="name">atom_elj_file</span> <span class="operator">=</span> <span class="name">os</span><span class="operator">.</span><span class="name">path</span><span class="operator">.</span><span class="name">join</span><span class="punctuation">(</span><span class="name">base_dir</span><span class="punctuation">,</span><span class="name">data_dir</span><span class="punctuation">,</span> <span class="literal string single">'AtomElj.fits'</span><span class="punctuation">)</span><span class="whitespace">
+</span><span class="name">atom_omij_file</span> <span class="operator">=</span> <span class="name">os</span><span class="operator">.</span><span class="name">path</span><span class="operator">.</span><span class="name">join</span><span class="punctuation">(</span><span class="name">base_dir</span><span class="punctuation">,</span><span class="name">data_dir</span><span class="punctuation">,</span> <span class="literal string single">'AtomOmij.fits'</span><span class="punctuation">)</span><span class="whitespace">
+</span><span class="name">atom_aij_file</span> <span class="operator">=</span> <span class="name">os</span><span class="operator">.</span><span class="name">path</span><span class="operator">.</span><span class="name">join</span><span class="punctuation">(</span><span class="name">base_dir</span><span class="punctuation">,</span><span class="name">data_dir</span><span class="punctuation">,</span> <span class="literal string single">'AtomAij.fits'</span><span class="punctuation">)</span><span class="whitespace">
+</span><span class="name">elj_data_list</span> <span class="operator">=</span> <span class="name">atomneb</span><span class="operator">.</span><span class="name">read_elj_list</span><span class="punctuation">(</span><span class="name">atom_elj_file</span><span class="punctuation">)</span><span class="whitespace">
+</span><span class="name">omij_data_list</span> <span class="operator">=</span> <span class="name">atomneb</span><span class="operator">.</span><span class="name">read_omij_list</span><span class="punctuation">(</span><span class="name">atom_omij_file</span><span class="punctuation">)</span><span class="whitespace">
+</span><span class="name">aij_data_list</span> <span class="operator">=</span> <span class="name">atomneb</span><span class="operator">.</span><span class="name">read_aij_list</span><span class="punctuation">(</span><span class="name">atom_aij_file</span><span class="punctuation">)</span>
 </pre>
 <p>Now you have access to:</p>
 <ul>
 <li><p class="first"><em>Energy Levels</em> (Ej):</p>
-<pre class="literal-block">
-atom='o'
-ion='iii'
-oiii_elj_data = atomneb.read_elj(atom_elj_file, atom, ion, level_num=6)
-print(oiii_elj_data['j_v'])
-print(oiii_elj_data['ej'])
+<pre class="code python literal-block">
+<span class="name">atom</span><span class="operator">=</span><span class="literal string single">'o'</span><span class="whitespace">
+</span><span class="name">ion</span><span class="operator">=</span><span class="literal string single">'iii'</span><span class="whitespace">
+</span><span class="name">oiii_elj_data</span> <span class="operator">=</span> <span class="name">atomneb</span><span class="operator">.</span><span class="name">read_elj</span><span class="punctuation">(</span><span class="name">atom_elj_file</span><span class="punctuation">,</span> <span class="name">atom</span><span class="punctuation">,</span> <span class="name">ion</span><span class="punctuation">,</span> <span class="name">level_num</span><span class="operator">=</span><span class="literal number integer">6</span><span class="punctuation">)</span><span class="whitespace">
+</span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">oiii_elj_data</span><span class="punctuation">[</span><span class="literal string single">'j_v'</span><span class="punctuation">])</span><span class="whitespace">
+</span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">oiii_elj_data</span><span class="punctuation">[</span><span class="literal string single">'ej'</span><span class="punctuation">])</span>
 </pre>
 <p>which gives:</p>
 <pre class="literal-block">
@@ -156,13 +159,13 @@ print(oiii_elj_data['ej'])
 </pre>
 </li>
 <li><p class="first"><em>Collision Strengths</em> (Ωij):</p>
-<pre class="literal-block">
-atom='o'
-ion='iii'
-oiii_omij_data = atomneb.read_omij(atom_omij_file, atom, ion)
-print(oiii_omij_data['level1'])
-print(oiii_omij_data['level2'])
-print(oiii_omij_data['strength'][0])
+<pre class="code python literal-block">
+<span class="name">atom</span><span class="operator">=</span><span class="literal string single">'o'</span><span class="whitespace">
+</span><span class="name">ion</span><span class="operator">=</span><span class="literal string single">'iii'</span><span class="whitespace">
+</span><span class="name">oiii_omij_data</span> <span class="operator">=</span> <span class="name">atomneb</span><span class="operator">.</span><span class="name">read_omij</span><span class="punctuation">(</span><span class="name">atom_omij_file</span><span class="punctuation">,</span> <span class="name">atom</span><span class="punctuation">,</span> <span class="name">ion</span><span class="punctuation">)</span><span class="whitespace">
+</span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">oiii_omij_data</span><span class="punctuation">[</span><span class="literal string single">'level1'</span><span class="punctuation">])</span><span class="whitespace">
+</span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">oiii_omij_data</span><span class="punctuation">[</span><span class="literal string single">'level2'</span><span class="punctuation">])</span><span class="whitespace">
+</span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">oiii_omij_data</span><span class="punctuation">[</span><span class="literal string single">'strength'</span><span class="punctuation">][</span><span class="literal number integer">0</span><span class="punctuation">])</span>
 </pre>
 <p>which gives:</p>
 <pre class="literal-block">
@@ -172,11 +175,11 @@ print(oiii_omij_data['strength'][0])
 </pre>
 </li>
 <li><p class="first"><em>Transition Probabilities</em> (Aij):</p>
-<pre class="literal-block">
-atom='o'
-ion='iii'
-oiii_aij_data = atomneb.read_aij(atom_aij_file, atom, ion)
-print(oiii_aij_data['aij'][0])
+<pre class="code python literal-block">
+<span class="name">atom</span><span class="operator">=</span><span class="literal string single">'o'</span><span class="whitespace">
+</span><span class="name">ion</span><span class="operator">=</span><span class="literal string single">'iii'</span><span class="whitespace">
+</span><span class="name">oiii_aij_data</span> <span class="operator">=</span> <span class="name">atomneb</span><span class="operator">.</span><span class="name">read_aij</span><span class="punctuation">(</span><span class="name">atom_aij_file</span><span class="punctuation">,</span> <span class="name">atom</span><span class="punctuation">,</span> <span class="name">ion</span><span class="punctuation">)</span><span class="whitespace">
+</span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">oiii_aij_data</span><span class="punctuation">[</span><span class="literal string single">'aij'</span><span class="punctuation">][</span><span class="literal number integer">0</span><span class="punctuation">])</span>
 </pre>
 <p>which gives:</p>
 <pre class="literal-block">
@@ -189,27 +192,27 @@ print(oiii_aij_data['aij'][0])
 <li><p class="first">The atomic data for <strong>recombination lines (RC)</strong> contain effective recombination coefficients (αeff) of emission lines from different collections: <a class="reference external" href="https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data-rc">RC Collection</a>, <a class="reference external" href="https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data-rc">SH95 Collection</a>, <a class="reference external" href="https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data-rc">PPB91 Collection</a>, <a class="reference external" href="https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data-rc">PFSD12 He I data</a>, <a class="reference external" href="https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data-rc">FSL13 N II data</a>, and <a class="reference external" href="https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data-rc">SSB17 O II data</a>.</p>
 <blockquote>
 <p>You need to load the <strong>atomneb</strong> libary:</p>
-<pre class="literal-block">
-import atomneb
+<pre class="code python literal-block">
+<span class="keyword namespace">import</span> <span class="name namespace">atomneb</span><span class="whitespace">
+</span><span class="keyword namespace">import</span> <span class="name namespace">numpy</span> <span class="keyword">as</span> <span class="name namespace">np</span><span class="whitespace">
+</span><span class="keyword namespace">import</span> <span class="name namespace">os</span><span class="whitespace">
+
+</span><span class="name">base_dir</span> <span class="operator">=</span> <span class="literal string single">'.'</span><span class="whitespace">
+</span><span class="name">data_rc_dir</span> <span class="operator">=</span> <span class="name">os</span><span class="operator">.</span><span class="name">path</span><span class="operator">.</span><span class="name">join</span><span class="punctuation">(</span><span class="literal string single">'atomic-data-rc'</span><span class="punctuation">)</span>
 </pre>
-<p>Also:</p>
-<blockquote>
-<p>import numpy as np
-import os</p>
-</blockquote>
 <p>Now you have access to effective recombination coefficients (αeff) of the following collections:</p>
 <ul>
 <li><p class="first"><em>RC Collection</em>:</p>
-<pre class="literal-block">
-atom_rc_file = os.path.join(base_dir,data_dir, 'rc_collection.fits')
-atom='c'
-ion='iii'
-cii_rc_data = atomneb.read_aeff_collection(atom_rc_file, atom, ion)
-n_line = len(cii_rc_data['wavelength'])
-for i in range(0, n_line):
-     print(cii_rc_data['wavelength'][i], cii_rc_data['a'][i],
-           cii_rc_data['b'][i], cii_rc_data['c'][i],
-           cii_rc_data['d'][i], cii_rc_data['f'][i])
+<pre class="code python literal-block">
+<span class="name">atom_rc_file</span> <span class="operator">=</span> <span class="name">os</span><span class="operator">.</span><span class="name">path</span><span class="operator">.</span><span class="name">join</span><span class="punctuation">(</span><span class="name">base_dir</span><span class="punctuation">,</span><span class="name">data_rc_dir</span><span class="punctuation">,</span> <span class="literal string single">'rc_collection.fits'</span><span class="punctuation">)</span><span class="whitespace">
+</span><span class="name">atom</span><span class="operator">=</span><span class="literal string single">'c'</span><span class="whitespace">
+</span><span class="name">ion</span><span class="operator">=</span><span class="literal string single">'iii'</span><span class="whitespace">
+</span><span class="name">cii_rc_data</span> <span class="operator">=</span> <span class="name">atomneb</span><span class="operator">.</span><span class="name">read_aeff_collection</span><span class="punctuation">(</span><span class="name">atom_rc_file</span><span class="punctuation">,</span> <span class="name">atom</span><span class="punctuation">,</span> <span class="name">ion</span><span class="punctuation">)</span><span class="whitespace">
+</span><span class="name">n_line</span> <span class="operator">=</span> <span class="name builtin">len</span><span class="punctuation">(</span><span class="name">cii_rc_data</span><span class="punctuation">[</span><span class="literal string single">'wavelength'</span><span class="punctuation">])</span><span class="whitespace">
+</span><span class="keyword">for</span> <span class="name">i</span> <span class="operator word">in</span> <span class="name builtin">range</span><span class="punctuation">(</span><span class="literal number integer">0</span><span class="punctuation">,</span> <span class="name">n_line</span><span class="punctuation">):</span><span class="whitespace">
+</span>     <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">cii_rc_data</span><span class="punctuation">[</span><span class="literal string single">'wavelength'</span><span class="punctuation">][</span><span class="name">i</span><span class="punctuation">],</span> <span class="name">cii_rc_data</span><span class="punctuation">[</span><span class="literal string single">'a'</span><span class="punctuation">][</span><span class="name">i</span><span class="punctuation">],</span><span class="whitespace">
+</span>           <span class="name">cii_rc_data</span><span class="punctuation">[</span><span class="literal string single">'b'</span><span class="punctuation">][</span><span class="name">i</span><span class="punctuation">],</span> <span class="name">cii_rc_data</span><span class="punctuation">[</span><span class="literal string single">'c'</span><span class="punctuation">][</span><span class="name">i</span><span class="punctuation">],</span><span class="whitespace">
+</span>           <span class="name">cii_rc_data</span><span class="punctuation">[</span><span class="literal string single">'d'</span><span class="punctuation">][</span><span class="name">i</span><span class="punctuation">],</span> <span class="name">cii_rc_data</span><span class="punctuation">[</span><span class="literal string single">'f'</span><span class="punctuation">][</span><span class="name">i</span><span class="punctuation">])</span>
 </pre>
 <p>which gives:</p>
 <pre class="literal-block">
@@ -220,12 +223,12 @@ for i in range(0, n_line):
 </pre>
 </li>
 <li><p class="first"><em>SH95 Collection</em>:</p>
-<pre class="literal-block">
-atom_rc_file = os.path.join(base_dir,data_dir, 'rc_SH95.fits')
-atom='h'
-ion='ii'
-hi_rc_data = atomneb.read_aeff_sh95(atom_rc_file, atom, ion)
-print(hi_rc_data['aeff'][0])
+<pre class="code python literal-block">
+<span class="name">atom_rc_file</span> <span class="operator">=</span> <span class="name">os</span><span class="operator">.</span><span class="name">path</span><span class="operator">.</span><span class="name">join</span><span class="punctuation">(</span><span class="name">base_dir</span><span class="punctuation">,</span><span class="name">data_rc_dir</span><span class="punctuation">,</span> <span class="literal string single">'rc_SH95.fits'</span><span class="punctuation">)</span><span class="whitespace">
+</span><span class="name">atom</span><span class="operator">=</span><span class="literal string single">'h'</span><span class="whitespace">
+</span><span class="name">ion</span><span class="operator">=</span><span class="literal string single">'ii'</span><span class="whitespace">
+</span><span class="name">hi_rc_data</span> <span class="operator">=</span> <span class="name">atomneb</span><span class="operator">.</span><span class="name">read_aeff_sh95</span><span class="punctuation">(</span><span class="name">atom_rc_file</span><span class="punctuation">,</span> <span class="name">atom</span><span class="punctuation">,</span> <span class="name">ion</span><span class="punctuation">)</span><span class="whitespace">
+</span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">hi_rc_data</span><span class="punctuation">[</span><span class="literal string single">'aeff'</span><span class="punctuation">][</span><span class="literal number integer">0</span><span class="punctuation">])</span>
 </pre>
 <p>which gives:</p>
 <pre class="literal-block">
@@ -234,16 +237,16 @@ print(hi_rc_data['aeff'][0])
 </pre>
 </li>
 <li><p class="first"><em>PPB91 Collection</em>:</p>
-<pre class="literal-block">
-atom_rc_file = os.path.join(base_dir,data_dir, 'rc_PPB91.fits')
-atom='c'
-ion='iii'
-cii_rc_data = atomneb.read_aeff_ppb91(atom_rc_file, atom, ion)
-n_line = len(cii_rc_data['wavelength'])
-for i in range(0, n_line):
-   print(cii_rc_data['ion'][i], cii_rc_data['case1'][i], cii_rc_data['wavelength'][i],
-         cii_rc_data['a'][i], cii_rc_data['b'][i], cii_rc_data['c'][i],
-         cii_rc_data['d'][i], cii_rc_data['br'][i], cii_rc_data['q'][i], cii_rc_data['y'][i])
+<pre class="code python literal-block">
+<span class="name">atom_rc_file</span> <span class="operator">=</span> <span class="name">os</span><span class="operator">.</span><span class="name">path</span><span class="operator">.</span><span class="name">join</span><span class="punctuation">(</span><span class="name">base_dir</span><span class="punctuation">,</span><span class="name">data_rc_dir</span><span class="punctuation">,</span> <span class="literal string single">'rc_PPB91.fits'</span><span class="punctuation">)</span><span class="whitespace">
+</span><span class="name">atom</span><span class="operator">=</span><span class="literal string single">'c'</span><span class="whitespace">
+</span><span class="name">ion</span><span class="operator">=</span><span class="literal string single">'iii'</span><span class="whitespace">
+</span><span class="name">cii_rc_data</span> <span class="operator">=</span> <span class="name">atomneb</span><span class="operator">.</span><span class="name">read_aeff_ppb91</span><span class="punctuation">(</span><span class="name">atom_rc_file</span><span class="punctuation">,</span> <span class="name">atom</span><span class="punctuation">,</span> <span class="name">ion</span><span class="punctuation">)</span><span class="whitespace">
+</span><span class="name">n_line</span> <span class="operator">=</span> <span class="name builtin">len</span><span class="punctuation">(</span><span class="name">cii_rc_data</span><span class="punctuation">[</span><span class="literal string single">'wavelength'</span><span class="punctuation">])</span><span class="whitespace">
+</span><span class="keyword">for</span> <span class="name">i</span> <span class="operator word">in</span> <span class="name builtin">range</span><span class="punctuation">(</span><span class="literal number integer">0</span><span class="punctuation">,</span> <span class="name">n_line</span><span class="punctuation">):</span><span class="whitespace">
+</span>   <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">cii_rc_data</span><span class="punctuation">[</span><span class="literal string single">'ion'</span><span class="punctuation">][</span><span class="name">i</span><span class="punctuation">],</span> <span class="name">cii_rc_data</span><span class="punctuation">[</span><span class="literal string single">'case1'</span><span class="punctuation">][</span><span class="name">i</span><span class="punctuation">],</span> <span class="name">cii_rc_data</span><span class="punctuation">[</span><span class="literal string single">'wavelength'</span><span class="punctuation">][</span><span class="name">i</span><span class="punctuation">],</span><span class="whitespace">
+</span>         <span class="name">cii_rc_data</span><span class="punctuation">[</span><span class="literal string single">'a'</span><span class="punctuation">][</span><span class="name">i</span><span class="punctuation">],</span> <span class="name">cii_rc_data</span><span class="punctuation">[</span><span class="literal string single">'b'</span><span class="punctuation">][</span><span class="name">i</span><span class="punctuation">],</span> <span class="name">cii_rc_data</span><span class="punctuation">[</span><span class="literal string single">'c'</span><span class="punctuation">][</span><span class="name">i</span><span class="punctuation">],</span><span class="whitespace">
+</span>         <span class="name">cii_rc_data</span><span class="punctuation">[</span><span class="literal string single">'d'</span><span class="punctuation">][</span><span class="name">i</span><span class="punctuation">],</span> <span class="name">cii_rc_data</span><span class="punctuation">[</span><span class="literal string single">'br'</span><span class="punctuation">][</span><span class="name">i</span><span class="punctuation">],</span> <span class="name">cii_rc_data</span><span class="punctuation">[</span><span class="literal string single">'q'</span><span class="punctuation">][</span><span class="name">i</span><span class="punctuation">],</span> <span class="name">cii_rc_data</span><span class="punctuation">[</span><span class="literal string single">'y'</span><span class="punctuation">][</span><span class="name">i</span><span class="punctuation">])</span>
 </pre>
 <p>which gives:</p>
 <pre class="literal-block">
@@ -253,13 +256,13 @@ C2+A       4267.1500       1.0110000     -0.75400000       2.5870000      0.7190
 </pre>
 </li>
 <li><p class="first"><em>PFSD12 He I data</em>:</p>
-<pre class="literal-block">
-atom_rc_file = os.path.join(base_dir,data_dir, 'rc_he_ii_PFSD12.fits')
-atom='he'
-ion='ii'
-hei_rc_data = atomneb.read_aeff_he_i_pfsd12(atom_rc_file, atom, ion)
-hei_rc_data_wave = atomneb.read_aeff_he_i_pfsd12(atom_rc_file, atom, ion, wavelength=True)
-print(hei_rc_data['aeff'][0])
+<pre class="code python literal-block">
+<span class="name">atom_rc_file</span> <span class="operator">=</span> <span class="name">os</span><span class="operator">.</span><span class="name">path</span><span class="operator">.</span><span class="name">join</span><span class="punctuation">(</span><span class="name">base_dir</span><span class="punctuation">,</span><span class="name">data_rc_dir</span><span class="punctuation">,</span> <span class="literal string single">'rc_he_ii_PFSD12.fits'</span><span class="punctuation">)</span><span class="whitespace">
+</span><span class="name">atom</span><span class="operator">=</span><span class="literal string single">'he'</span><span class="whitespace">
+</span><span class="name">ion</span><span class="operator">=</span><span class="literal string single">'ii'</span><span class="whitespace">
+</span><span class="name">hei_rc_data</span> <span class="operator">=</span> <span class="name">atomneb</span><span class="operator">.</span><span class="name">read_aeff_he_i_pfsd12</span><span class="punctuation">(</span><span class="name">atom_rc_file</span><span class="punctuation">,</span> <span class="name">atom</span><span class="punctuation">,</span> <span class="name">ion</span><span class="punctuation">)</span><span class="whitespace">
+</span><span class="name">hei_rc_data_wave</span> <span class="operator">=</span> <span class="name">atomneb</span><span class="operator">.</span><span class="name">read_aeff_he_i_pfsd12</span><span class="punctuation">(</span><span class="name">atom_rc_file</span><span class="punctuation">,</span> <span class="name">atom</span><span class="punctuation">,</span> <span class="name">ion</span><span class="punctuation">,</span> <span class="name">wavelength</span><span class="operator">=</span><span class="keyword constant">True</span><span class="punctuation">)</span><span class="whitespace">
+</span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">hei_rc_data</span><span class="punctuation">[</span><span class="literal string single">'aeff'</span><span class="punctuation">][</span><span class="literal number integer">0</span><span class="punctuation">])</span>
 </pre>
 <p>which gives:</p>
 <pre class="literal-block">
@@ -268,17 +271,17 @@ print(hei_rc_data['aeff'][0])
 </pre>
 </li>
 <li><p class="first"><em>FSL13 N II data</em>:</p>
-<pre class="literal-block">
-atom_rc_file = os.path.join(base_dir,data_dir, 'rc_n_iii_FSL13.fits')
-atom='n'
-ion='iii'
-wavelength_range=[4400.0, 7100.0]
-nii_rc_data = atomneb.read_aeff_n_ii_fsl13(atom_rc_file, atom, ion, wavelength_range)
-nii_rc_data_wave = atomneb.read_aeff_n_ii_fsl13(atom_rc_file, atom, ion, wavelength_range, wavelength=True)
-print(nii_rc_data.aeff[0])
-n_line = len(hei_rc_data_wave['wavelength'])
-for i in range(0, n_line):
-   print(nii_rc_data_wave['wavelength'][i], nii_rc_data_wave['tr'][i], nii_rc_data_wave['trans'][i])
+<pre class="code python literal-block">
+<span class="name">atom_rc_file</span> <span class="operator">=</span> <span class="name">os</span><span class="operator">.</span><span class="name">path</span><span class="operator">.</span><span class="name">join</span><span class="punctuation">(</span><span class="name">base_dir</span><span class="punctuation">,</span><span class="name">data_rc_dir</span><span class="punctuation">,</span> <span class="literal string single">'rc_n_iii_FSL13.fits'</span><span class="punctuation">)</span><span class="whitespace">
+</span><span class="name">atom</span><span class="operator">=</span><span class="literal string single">'n'</span><span class="whitespace">
+</span><span class="name">ion</span><span class="operator">=</span><span class="literal string single">'iii'</span><span class="whitespace">
+</span><span class="name">wavelength_range</span><span class="operator">=</span><span class="punctuation">[</span><span class="literal number float">4400.0</span><span class="punctuation">,</span> <span class="literal number float">7100.0</span><span class="punctuation">]</span><span class="whitespace">
+</span><span class="name">nii_rc_data</span> <span class="operator">=</span> <span class="name">atomneb</span><span class="operator">.</span><span class="name">read_aeff_n_ii_fsl13</span><span class="punctuation">(</span><span class="name">atom_rc_file</span><span class="punctuation">,</span> <span class="name">atom</span><span class="punctuation">,</span> <span class="name">ion</span><span class="punctuation">,</span> <span class="name">wavelength_range</span><span class="punctuation">)</span><span class="whitespace">
+</span><span class="name">nii_rc_data_wave</span> <span class="operator">=</span> <span class="name">atomneb</span><span class="operator">.</span><span class="name">read_aeff_n_ii_fsl13</span><span class="punctuation">(</span><span class="name">atom_rc_file</span><span class="punctuation">,</span> <span class="name">atom</span><span class="punctuation">,</span> <span class="name">ion</span><span class="punctuation">,</span> <span class="name">wavelength_range</span><span class="punctuation">,</span> <span class="name">wavelength</span><span class="operator">=</span><span class="keyword constant">True</span><span class="punctuation">)</span><span class="whitespace">
+</span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">nii_rc_data</span><span class="punctuation">[</span><span class="literal string single">'aeff'</span><span class="punctuation">][</span><span class="literal number integer">0</span><span class="punctuation">])</span><span class="whitespace">
+</span><span class="name">n_line</span> <span class="operator">=</span> <span class="name builtin">len</span><span class="punctuation">(</span><span class="name">hei_rc_data_wave</span><span class="punctuation">[</span><span class="literal string single">'wavelength'</span><span class="punctuation">])</span><span class="whitespace">
+</span><span class="keyword">for</span> <span class="name">i</span> <span class="operator word">in</span> <span class="name builtin">range</span><span class="punctuation">(</span><span class="literal number integer">0</span><span class="punctuation">,</span> <span class="name">n_line</span><span class="punctuation">):</span><span class="whitespace">
+</span>   <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">nii_rc_data_wave</span><span class="punctuation">[</span><span class="literal string single">'wavelength'</span><span class="punctuation">][</span><span class="name">i</span><span class="punctuation">],</span> <span class="name">nii_rc_data_wave</span><span class="punctuation">[</span><span class="literal string single">'tr'</span><span class="punctuation">][</span><span class="name">i</span><span class="punctuation">],</span> <span class="name">nii_rc_data_wave</span><span class="punctuation">[</span><span class="literal string single">'trans'</span><span class="punctuation">][</span><span class="name">i</span><span class="punctuation">])</span>
 </pre>
 <p>which gives:</p>
 <pre class="literal-block">
@@ -303,19 +306,33 @@ tar -xvf rc_o_iii_SSB17_orl_case_b.fits.tar.gz
 <pre class="literal-block">
 tar -xvf rc_o_iii_SSB17.fits.tar.gz
 </pre>
-<p>Please note that using the entire atomic data will make your program very slow and you may need to have a higher memory on your system. Without the above comment, as default, the cose uses rc_o_iii_SSB17_orl_case_b.fits:</p>
-<pre class="literal-block">
-aatom_rc_file = os.path.join(base_dir,data_dir, 'rc_o_iii_SSB17_orl_case_b.fits')
-atom='o'
-ion='iii'
-case1='B'
-wavelength_range=[5320.0, 5330.0]
-oii_rc_data = atomneb.read_aeff_o_ii_ssb17(atom_rc_file, atom, ion, case1, wavelength_range)
-oii_rc_data_wave = atomneb.read_aeff_o_ii_ssb17(atom_rc_file, atom, ion, case1, wavelength_range, wavelength=True)
-print(oii_rc_data['aeff'][0])
-n_line = len(oii_rc_data_wave['wavelength'])
-for i in range(0, n_line):
-   print(oii_rc_data_wave['wavelength'][i], oii_rc_data_wave['lower_term'][i], oii_rc_data_wave['upper_term'][i])
+<p>Please note that using the entire atomic data will make your program very slow and you may need to have a higher memory on your system. Without the above comment, as default, the cose uses rc_o_iii_SSB17_orl_case_b.fits. You can also unpack them using tarfile shown below:</p>
+<pre class="code python literal-block">
+<span class="keyword namespace">import</span> <span class="name namespace">atomneb</span><span class="whitespace">
+</span><span class="keyword namespace">import</span> <span class="name namespace">numpy</span> <span class="keyword">as</span> <span class="name namespace">np</span><span class="whitespace">
+</span><span class="keyword namespace">import</span> <span class="name namespace">os</span><span class="whitespace">
+</span><span class="keyword namespace">import</span> <span class="name namespace">tarfile</span><span class="whitespace">
+
+</span><span class="name">base_dir</span> <span class="operator">=</span> <span class="literal string single">'.'</span><span class="whitespace">
+</span><span class="name">data_rc_dir</span> <span class="operator">=</span> <span class="name">os</span><span class="operator">.</span><span class="name">path</span><span class="operator">.</span><span class="name">join</span><span class="punctuation">(</span><span class="literal string single">'atomic-data-rc'</span><span class="punctuation">)</span><span class="whitespace">
+</span><span class="name">atom_rc_file</span> <span class="operator">=</span> <span class="name">os</span><span class="operator">.</span><span class="name">path</span><span class="operator">.</span><span class="name">join</span><span class="punctuation">(</span><span class="name">base_dir</span><span class="punctuation">,</span><span class="name">data_rc_dir</span><span class="punctuation">,</span> <span class="literal string single">'rc_o_iii_SSB17_orl_case_b.fits'</span><span class="punctuation">)</span><span class="whitespace">
+
+</span><span class="name">atom_rc_file_tar_gz</span> <span class="operator">=</span> <span class="name">os</span><span class="operator">.</span><span class="name">path</span><span class="operator">.</span><span class="name">join</span><span class="punctuation">(</span><span class="name">base_dir</span><span class="punctuation">,</span><span class="name">data_rc_dir</span><span class="punctuation">,</span> <span class="literal string single">'rc_o_iii_SSB17_orl_case_b.fits.tar.gz'</span><span class="punctuation">)</span><span class="whitespace">
+</span><span class="name">atom_rc_path</span> <span class="operator">=</span> <span class="name">os</span><span class="operator">.</span><span class="name">path</span><span class="operator">.</span><span class="name">join</span><span class="punctuation">(</span><span class="name">base_dir</span><span class="punctuation">,</span><span class="name">data_rc_dir</span><span class="punctuation">)</span><span class="whitespace">
+</span><span class="name">tar</span> <span class="operator">=</span> <span class="name">tarfile</span><span class="operator">.</span><span class="name">open</span><span class="punctuation">(</span><span class="name">atom_rc_file_tar_gz</span><span class="punctuation">,</span> <span class="literal string double">&quot;r:gz&quot;</span><span class="punctuation">)</span><span class="whitespace">
+</span><span class="name">tar</span><span class="operator">.</span><span class="name">extractall</span><span class="punctuation">(</span><span class="name">path</span><span class="operator">=</span><span class="name">atom_rc_path</span><span class="punctuation">)</span><span class="whitespace">
+</span><span class="name">tar</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span><span class="whitespace">
+
+</span><span class="name">atom</span> <span class="operator">=</span> <span class="literal string single">'o'</span><span class="whitespace">
+</span><span class="name">ion</span> <span class="operator">=</span> <span class="literal string single">'iii'</span> <span class="comment single"># O II</span><span class="whitespace">
+</span><span class="name">case1</span> <span class="operator">=</span> <span class="literal string single">'B'</span><span class="whitespace">
+</span><span class="name">wavelength_range</span><span class="operator">=</span><span class="punctuation">[</span><span class="literal number float">5320.0</span><span class="punctuation">,</span> <span class="literal number float">5330.0</span><span class="punctuation">]</span><span class="whitespace">
+</span><span class="name">oii_rc_data</span> <span class="operator">=</span> <span class="name">atomneb</span><span class="operator">.</span><span class="name">read_aeff_o_ii_ssb17</span><span class="punctuation">(</span><span class="name">atom_rc_file</span><span class="punctuation">,</span> <span class="name">atom</span><span class="punctuation">,</span> <span class="name">ion</span><span class="punctuation">,</span> <span class="name">case1</span><span class="punctuation">,</span> <span class="name">wavelength_range</span><span class="punctuation">)</span><span class="whitespace">
+</span><span class="name">oii_rc_data_wave</span> <span class="operator">=</span> <span class="name">atomneb</span><span class="operator">.</span><span class="name">read_aeff_o_ii_ssb17</span><span class="punctuation">(</span><span class="name">atom_rc_file</span><span class="punctuation">,</span> <span class="name">atom</span><span class="punctuation">,</span> <span class="name">ion</span><span class="punctuation">,</span> <span class="name">case1</span><span class="punctuation">,</span> <span class="name">wavelength_range</span><span class="punctuation">,</span> <span class="name">wavelength</span><span class="operator">=</span><span class="keyword constant">True</span><span class="punctuation">)</span><span class="whitespace">
+</span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">oii_rc_data</span><span class="punctuation">[</span><span class="literal string single">'aeff'</span><span class="punctuation">][</span><span class="literal number integer">0</span><span class="punctuation">])</span><span class="whitespace">
+</span><span class="name">n_line</span> <span class="operator">=</span> <span class="name builtin">len</span><span class="punctuation">(</span><span class="name">oii_rc_data_wave</span><span class="punctuation">[</span><span class="literal string single">'wavelength'</span><span class="punctuation">])</span><span class="whitespace">
+</span><span class="keyword">for</span> <span class="name">i</span> <span class="operator word">in</span> <span class="name builtin">range</span><span class="punctuation">(</span><span class="literal number integer">0</span><span class="punctuation">,</span> <span class="name">n_line</span><span class="punctuation">):</span><span class="whitespace">
+</span>   <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">oii_rc_data_wave</span><span class="punctuation">[</span><span class="literal string single">'wavelength'</span><span class="punctuation">][</span><span class="name">i</span><span class="punctuation">],</span> <span class="name">oii_rc_data_wave</span><span class="punctuation">[</span><span class="literal string single">'lower_term'</span><span class="punctuation">][</span><span class="name">i</span><span class="punctuation">],</span> <span class="name">oii_rc_data_wave</span><span class="punctuation">[</span><span class="literal string single">'upper_term'</span><span class="punctuation">][</span><span class="name">i</span><span class="punctuation">])</span>
 </pre>
 <p>which gives:</p>
 <pre class="literal-block">
@@ -347,29 +364,32 @@ for i in range(0, n_line):
 </div>
 <div class="section" id="citation">
 <h2>Citation</h2>
-<p>Using <strong>AtomNeb</strong> in a scholarly publication? Please cite these papers:</p>
+<p>Using the <strong>AtomNeb</strong> Python package in a scholarly publication? Please cite these papers:</p>
 <pre class="code bibtex literal-block">
-<span class="name class">&#64;article</span><span class="punctuation">{</span><span class="name label">Danehkar2020</span><span class="punctuation">,</span>
-  <span class="name attribute">author</span> <span class="punctuation">=</span> <span class="literal string">{{Danehkar}, Ashkbiz}</span><span class="punctuation">,</span>
-  <span class="name attribute">title</span> <span class="punctuation">=</span> <span class="literal string">{AtomNeb Python Package, an addendum to AtomNeb: IDL Library for Atomic Data of Ionized Nebulae}</span><span class="punctuation">,</span>
-  <span class="name attribute">journal</span> <span class="punctuation">=</span> <span class="literal string">{Journal of Open Source Software}</span><span class="punctuation">,</span>
-  <span class="name attribute">volume</span> <span class="punctuation">=</span> <span class="literal string">{5}</span><span class="punctuation">,</span>
-  <span class="name attribute">number</span> <span class="punctuation">=</span> <span class="literal string">{55}</span><span class="punctuation">,</span>
-  <span class="name attribute">pages</span> <span class="punctuation">=</span> <span class="literal string">{2797}</span><span class="punctuation">,</span>
-  <span class="name attribute">year</span> <span class="punctuation">=</span> <span class="literal string">{2020}</span><span class="punctuation">,</span>
-  <span class="name attribute">doi</span> <span class="punctuation">=</span> <span class="literal string">{10.21105/joss.02797}</span>
-<span class="punctuation">}</span>
-
-<span class="name class">&#64;article</span><span class="punctuation">{</span><span class="name label">Danehkar2019</span><span class="punctuation">,</span>
-  <span class="name attribute">author</span> <span class="punctuation">=</span> <span class="literal string">{{Danehkar}, Ashkbiz}</span><span class="punctuation">,</span>
-  <span class="name attribute">title</span> <span class="punctuation">=</span> <span class="literal string">{AtomNeb: IDL Library for Atomic Data of Ionized Nebulae}</span><span class="punctuation">,</span>
-  <span class="name attribute">journal</span> <span class="punctuation">=</span> <span class="literal string">{Journal of Open Source Software}</span><span class="punctuation">,</span>
-  <span class="name attribute">volume</span> <span class="punctuation">=</span> <span class="literal string">{4}</span><span class="punctuation">,</span>
-  <span class="name attribute">number</span> <span class="punctuation">=</span> <span class="literal string">{35}</span><span class="punctuation">,</span>
-  <span class="name attribute">pages</span> <span class="punctuation">=</span> <span class="literal string">{898}</span><span class="punctuation">,</span>
-  <span class="name attribute">year</span> <span class="punctuation">=</span> <span class="literal string">{2019}</span><span class="punctuation">,</span>
-  <span class="name attribute">doi</span> <span class="punctuation">=</span> <span class="literal string">{10.21105/joss.00898}</span>
-<span class="punctuation">}</span>
+<span class="name class">&#64;article</span><span class="punctuation">{</span><span class="name label">Danehkar2020</span><span class="punctuation">,</span><span class="whitespace">
+  </span><span class="name attribute">author</span><span class="whitespace"> </span><span class="punctuation">=</span><span class="whitespace"> </span><span class="literal string">{{Danehkar}, Ashkbiz}</span><span class="punctuation">,</span><span class="whitespace">
+  </span><span class="name attribute">title</span><span class="whitespace"> </span><span class="punctuation">=</span><span class="whitespace"> </span><span class="literal string">{AtomNeb Python Package, an addendum to AtomNeb: IDL Library
+           for Atomic Data of Ionized Nebulae}</span><span class="punctuation">,</span><span class="whitespace">
+  </span><span class="name attribute">journal</span><span class="whitespace"> </span><span class="punctuation">=</span><span class="whitespace"> </span><span class="literal string">{Journal of Open Source Software}</span><span class="punctuation">,</span><span class="whitespace">
+  </span><span class="name attribute">volume</span><span class="whitespace"> </span><span class="punctuation">=</span><span class="whitespace"> </span><span class="literal string">{5}</span><span class="punctuation">,</span><span class="whitespace">
+  </span><span class="name attribute">number</span><span class="whitespace"> </span><span class="punctuation">=</span><span class="whitespace"> </span><span class="literal string">{55}</span><span class="punctuation">,</span><span class="whitespace">
+  </span><span class="name attribute">pages</span><span class="whitespace"> </span><span class="punctuation">=</span><span class="whitespace"> </span><span class="literal string">{2797}</span><span class="punctuation">,</span><span class="whitespace">
+  </span><span class="name attribute">year</span><span class="whitespace"> </span><span class="punctuation">=</span><span class="whitespace"> </span><span class="literal string">{2020}</span><span class="punctuation">,</span><span class="whitespace">
+  </span><span class="name attribute">doi</span><span class="whitespace"> </span><span class="punctuation">=</span><span class="whitespace"> </span><span class="literal string">{10.21105/joss.02797}</span><span class="whitespace">
+</span><span class="punctuation">}</span>
+</pre>
+<p>and if you use the <a class="reference external" href="https://github.com/atomneb/AtomNeb-idl">AtomNeb</a> IDL library:</p>
+<pre class="code bibtex literal-block">
+<span class="name class">&#64;article</span><span class="punctuation">{</span><span class="name label">Danehkar2019</span><span class="punctuation">,</span><span class="whitespace">
+  </span><span class="name attribute">author</span><span class="whitespace"> </span><span class="punctuation">=</span><span class="whitespace"> </span><span class="literal string">{{Danehkar}, Ashkbiz}</span><span class="punctuation">,</span><span class="whitespace">
+  </span><span class="name attribute">title</span><span class="whitespace"> </span><span class="punctuation">=</span><span class="whitespace"> </span><span class="literal string">{AtomNeb: IDL Library for Atomic Data of Ionized Nebulae}</span><span class="punctuation">,</span><span class="whitespace">
+  </span><span class="name attribute">journal</span><span class="whitespace"> </span><span class="punctuation">=</span><span class="whitespace"> </span><span class="literal string">{Journal of Open Source Software}</span><span class="punctuation">,</span><span class="whitespace">
+  </span><span class="name attribute">volume</span><span class="whitespace"> </span><span class="punctuation">=</span><span class="whitespace"> </span><span class="literal string">{4}</span><span class="punctuation">,</span><span class="whitespace">
+  </span><span class="name attribute">number</span><span class="whitespace"> </span><span class="punctuation">=</span><span class="whitespace"> </span><span class="literal string">{35}</span><span class="punctuation">,</span><span class="whitespace">
+  </span><span class="name attribute">pages</span><span class="whitespace"> </span><span class="punctuation">=</span><span class="whitespace"> </span><span class="literal string">{898}</span><span class="punctuation">,</span><span class="whitespace">
+  </span><span class="name attribute">year</span><span class="whitespace"> </span><span class="punctuation">=</span><span class="whitespace"> </span><span class="literal string">{2019}</span><span class="punctuation">,</span><span class="whitespace">
+  </span><span class="name attribute">doi</span><span class="whitespace"> </span><span class="punctuation">=</span><span class="whitespace"> </span><span class="literal string">{10.21105/joss.00898}</span><span class="whitespace">
+</span><span class="punctuation">}</span>
 </pre>
 </div>
 <div class="section" id="learn-more">
@@ -399,7 +419,7 @@ for i in range(0, n_line):
 <td><a class="reference external" href="https://doi.org/10.21105/joss.02797">10.21105/joss.02797</a></td>
 </tr>
 <tr><td><strong>Archive</strong></td>
-<td><a class="reference external" href="https://doi.org/10.5281/zenodo.4287566">10.5281/zenodo.4287566</a></td>
+<td><a class="reference external" href="https://doi.org/10.5281/zenodo.4287565">10.5281/zenodo.4287565</a></td>
 </tr>
 </tbody>
 </table>
