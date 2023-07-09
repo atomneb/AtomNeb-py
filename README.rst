@@ -77,17 +77,17 @@ Recombination Lines
 
 The atomic datasets for recombination lines are as follows:
 
-* `RC Collection <https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data-rc>`_, effective recombination coefficients for C II (`Davey et al. 2000 <http://adsabs.harvard.edu/abs/2000A%26AS..142...85D>`_), N II (`Escalante and Victor 1990 <http://adsabs.harvard.edu/abs/1990ApJS...73..513E>`_), O II (`Storey 1994 <http://adsabs.harvard.edu/abs/1994A%26A...282..999S>`_; `Liu et al. 1995 <http://adsabs.harvard.edu/abs/1995MNRAS.272..369L>`_), and Ne II ions (`Kisielius et al. 1998 <http://adsabs.harvard.edu/abs/1998A%26AS..133..257K>`_), including Branching ratios (Br) for O II and N II ions. This collection was compiled according to the atomic data used in `MOCASSIN <https://github.com/mocassin/MOCASSIN-2.0>`_.
+* `RC Collection <https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data-rc>`_, effective recombination coefficients for C II (`Davey et al. 2000 <https://ui.adsabs.harvard.edu/abs/2000A%26AS..142...85D/abstract>`_), N II (`Escalante and Victor 1990 <https://ui.adsabs.harvard.edu/abs/1990ApJS...73..513E/abstract>`_), O II (`Storey 1994 <https://ui.adsabs.harvard.edu/abs/1994A%26A...282..999S/abstract>`_; `Liu et al. 1995 <https://ui.adsabs.harvard.edu/abs/1995MNRAS.272..369L/abstract>`_), and Ne II ions (`Kisielius et al. 1998 <https://ui.adsabs.harvard.edu/abs/1998A%26AS..133..257K/abstract>`_), including Branching ratios (Br) for O II and N II ions. This collection was compiled according to the atomic data used in `MOCASSIN <https://github.com/mocassin/MOCASSIN-2.0>`_.
 
-* `SH95 Collection <https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data-rc>`_, hydrogenic ions for Z=1 to 8, namely H I, He II, Li III, Be IV, B V, C VI, N VII, and O VIII ions from `Storey and Hummer (1995) <http://adsabs.harvard.edu/abs/1995MNRAS.272...41S>`_.
+* `SH95 Collection <https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data-rc>`_, hydrogenic ions for Z=1 to 8, namely H I, He II, Li III, Be IV, B V, C VI, N VII, and O VIII ions from `Storey and Hummer (1995) <https://ui.adsabs.harvard.edu/abs/1995MNRAS.272...41S/abstract>`_.
 
-* `PPB91 Collection <https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data-rc>`_, effective recombination coefficients for H, He, C, N, O, Ne ions from `Pequignot, Petitjean and Boisson (1991) <http://adsabs.harvard.edu/abs/1991A%26A...251..680P>`_.
+* `PPB91 Collection <https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data-rc>`_, effective recombination coefficients for H, He, C, N, O, Ne ions from `Pequignot, Petitjean and Boisson (1991) <https://ui.adsabs.harvard.edu/abs/1991A%26A...251..680P/abstract>`_.
 
-* `PFSD12 He I data <https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data-rc>`_, effective He I recombination coefficients from `Porter et al (2012) <http://adsabs.harvard.edu/abs/2012MNRAS.425L..28P>`_ and `(2013a) <http://adsabs.harvard.edu/abs/2013MNRAS.433L..89P>`_.
+* `PFSD12 He I data <https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data-rc>`_, effective He I recombination coefficients from `Porter et al (2012) <https://ui.adsabs.harvard.edu/abs/2012MNRAS.425L..28P/abstract>`_ and `(2013a) <https://ui.adsabs.harvard.edu/abs/2013MNRAS.433L..89P/abstract>`_.
 
-* `FSL13 N II data <https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data-rc>`_, effective N II recombination coefficients (corrigendum) from `Fang, Storey and Liu (2011) <http://adsabs.harvard.edu/abs/2011A%26A...530A..18F>`_ and `(2013b) <http://adsabs.harvard.edu/abs/2013A%26A...550C...2F>`_.
+* `FSL13 N II data <https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data-rc>`_, effective N II recombination coefficients (corrigendum) from `Fang, Storey and Liu (2011) <https://ui.adsabs.harvard.edu/abs/2011A%26A...530A..18F/abstract>`_ and `(2013b) <https://ui.adsabs.harvard.edu/abs/2013A%26A...550C...2F/abstract>`_.
 
-* `SSB17 O II data <https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data-rc>`_, effective O II recombination coefficients of 8889 recombination lines for Cases A, B, and C, and 2433 optical (3500-9000Å) recombination lines for Case B from `Storey, Sochi and Bastin (2017) <http://adsabs.harvard.edu/abs/2017MNRAS.470..379S>`_.
+* `SSB17 O II data <https://github.com/atomneb/AtomNeb-py/tree/master/atomic-data-rc>`_, effective O II recombination coefficients of 8889 recombination lines for Cases A, B, and C, and 2433 optical (3500-9000Å) recombination lines for Case B from `Storey, Sochi and Bastin (2017) <https://ui.adsabs.harvard.edu/abs/2017MNRAS.470..379S/abstract>`_.
 
 
 
@@ -110,7 +110,7 @@ The previous version relied on `pandas <https://pandas.pydata.org/>`_, but all t
 
         git clone https://github.com/atomneb/AtomNeb-py
 
-* If you plan to use the recent O II recombination coefficients (`Storey, Sochi and Bastin 2017 <http://adsabs.harvard.edu/abs/2017MNRAS.470..379S>`_), you need to unpack them:
+* If you plan to use the recent O II recombination coefficients (`Storey, Sochi and Bastin 2017 <https://ui.adsabs.harvard.edu/abs/2017MNRAS.470..379S/abstract>`_), you need to unpack them:
 
 .. code-block::
 
@@ -391,9 +391,9 @@ For more information on how to use the API functions from the AtomNeb Python pac
 References
 ==========
 
-* Danehkar, A. (2020). AtomNeb Python Package, an addendum to AtomNeb: IDL Library for Atomic Data of Ionized Nebulae. *J. Open Source Softw.*, **5**, 2797. doi:`10.21105/joss.02797 <https://doi.org/10.21105/joss.02797>`_ ads:`2020JOSS....5.2797D <https://ui.adsabs.harvard.edu/abs/2020JOSS....5.2797D>`_.
+* Danehkar, A. (2020). AtomNeb Python Package, an addendum to AtomNeb: IDL Library for Atomic Data of Ionized Nebulae. *J. Open Source Softw.*, **5**, 2797. doi:`10.21105/joss.02797 <https://doi.org/10.21105/joss.02797>`_ ads:`2020JOSS....5.2797D <https://ui.adsabs.harvard.edu/abs/2020JOSS....5.2797D/abstract>`_.
 
-* Danehkar, A. (2019). AtomNeb: IDL Library for Atomic Data of Ionized Nebulae. *J. Open Source Softw.*, **4**, 898. doi:`10.21105/joss.00898 <https://doi.org/10.21105/joss.00898>`_ ads:`2019JOSS....4..898D <https://ui.adsabs.harvard.edu/abs/2019JOSS....4..898D>`_.
+* Danehkar, A. (2019). AtomNeb: IDL Library for Atomic Data of Ionized Nebulae. *J. Open Source Softw.*, **4**, 898. doi:`10.21105/joss.00898 <https://doi.org/10.21105/joss.00898>`_ ads:`2019JOSS....4..898D <https://ui.adsabs.harvard.edu/abs/2019JOSS....4..898D/abstract>`_.
 
 
 Citation
