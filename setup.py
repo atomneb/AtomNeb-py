@@ -15,7 +15,7 @@ except ImportError:
 
 with codecs.open('README.rst', 'r', 'utf-8') as fd:
     setup(name='atomneb',
-          version="0.3.3", #atomneb.__version__,
+          version="0.3.4", #atomneb.__version__,
           description = 'atomneb: Python Package for Atomic Data of Ionized Nebulae',
           long_description=fd.read(),
           author='Ashkbiz Danehkar',
