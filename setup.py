@@ -13,7 +13,7 @@ except ImportError:
 
 #import atomneb
 
-with codecs.open('README.rst', 'r', 'utf-8') as fd:
+with codecs.open('README.md', 'r', 'utf-8') as fd:
     setup(name='atomneb',
           version="0.3.4", #atomneb.__version__,
           description = 'atomneb: Python Package for Atomic Data of Ionized Nebulae',
