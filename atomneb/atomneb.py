@@ -96,6 +96,7 @@ def read_aij(atom_aij_file, atom, ion, reference=None, level_num=None):
         if len(ii) == 0:
             print ('could not find the given element or ion')
             return 0
+        ii = ii[0]
     else:
         atom_ion_name = atom.lower() + '_' + ion.lower() + '_aij'
         aij_list=element_data_list['aij_data']
@@ -369,7 +370,7 @@ def read_elj(atom_elj_file, atom, ion, level_num=None):
     if len(ii) == 0:
         print('could not find the given element or ion')
         return 0
-    extension = element_data_list['extension'][ii]
+    extension = element_data_list['extension'][ii[0]]
     
     #level_template = {'configuration':'', 'term':'', 'j':'', 'j_v': float(0.0), 'ej':float(0.0), 'reference':''}
     level_template = [('configuration', '<U30'), ('term', '<U15'), ('j', '<U10'), ('j_v', np.double), ('ej', np.double), ('reference', '<U20')]
@@ -561,6 +562,7 @@ def read_omij(atom_omij_file, atom, ion, reference=None, level_num=None):
         if len(ii)== 0:
             print ('could not find the given element or ion')
             return 0
+        ii = ii[0]
     else:
         atom_ion_name = atom.lower() + '_' + ion.lower() + '_omij'
         omij_list=element_data_list['omij_data']
