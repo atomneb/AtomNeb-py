@@ -866,6 +866,7 @@ def read_aeff_collection(atom_rc_file, atom, ion, br=None, reference=None):
         if len(ii) == 0:
             print ('could not find the given element or ion')
             return 0
+        ii = ii[0]
     else:
         atom_ion_name = atom.lower() + '_' + ion.lower() + prefix
         aeff_list=element_data_list['aeff_data']
@@ -1304,6 +1305,7 @@ def read_aeff_sh95(atom_rc_file, atom, ion, reference=None, case1=None):
         if len(ii) == 0:
             print ('could not find the given element or ion')
             return 0
+        ii = ii[0]
     else:
         atom_ion_name = atom.lower() + '_' + ion.lower() + '_aeff'
         if (case1 is not None) == 1:
@@ -1585,6 +1587,7 @@ def read_aeff_ppb91(atom_rc_file, atom, ion, reference=None):
         if len(ii) == 0:
             print ('could not find the given element or ion')
             return 0
+        ii = ii[0]
     else:
         atom_ion_name = atom.lower() + '_' + ion.lower() + '_aeff'
         aeff_list = element_data_list['aeff_data']
@@ -1887,6 +1890,7 @@ def read_aeff_he_i_pfsd12(atom_rc_file, atom, ion, wavelength=None, reference=No
         if len(ii) == 0:
             print('could not find the given reference')
             return
+        ii = ii[0]
     else:
         reference = 'PFSD13'
         if (wavelength is not None) == 1:
